@@ -1,7 +1,12 @@
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('../assets/fonts/BebasNeue-Regular.otf') format('opentype');
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('../assets/img/vm_fondo.png');
+    background-image: url('../assets/img/fondof.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22,7 +27,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75); /* El color negro con opacidad 0.5 */
+    background-color: rgba(0, 0, 0, 0.75); /* El color negro con opacidad 0.75 */
     z-index: -1; /* Asegura que la capa esté detrás del contenido */
 }
 .navbar {
@@ -52,20 +57,38 @@ body::before {
 .btn-registro {
     background: rgba(255, 255, 255, 0.8);
     color: #222;
-
+    border: 1px solid #fff;
+    transition: background 0.5s, color 0.5s;
+}
+.btn-registro:hover {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 .btn-login {
-    background-color: rgba(37, 197, 14, 0.8);
+    background-color: rgba(37, 197, 14, 0.5);
     color: #fff;
+    transition: background 0.5s, color 0.5s;
+}
+.btn-login:hover {
+    background: rgba(0, 0, 0, 0.5);
+    color: #25C50E;
 }
 
 .btn-empecemos {
-    margin-top:  7em;
+    font-size: 0.7em;
+    cursor: pointer;
+    margin: 10em 0;
     color: #25C50E;
-    padding: 1em 3em;
+    padding: 1em 3.5em;
     background-color: rgba(255, 255, 255, 0);
     border: 1px solid #25C50E;
-    border-radius: 12px;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-empecemos:hover {
+    background-color: #25C50E;
+    color: #222;
 }
 
 .lema {
@@ -73,7 +96,7 @@ body::before {
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    height: 80vh; 
+    height: 100vh; 
     color: #fff; 
     text-align: center; 
 }
@@ -81,10 +104,11 @@ body::before {
 .lema h1 {
     margin: 0; /* Elimina el margen por defecto de los h1 */
     color: #25C50E; /* Color del texto, puedes ajustarlo */
-    font-size: 6em; /* Ajusta el tamaño de la fuente, puedes modificarlo */
-    font-family: 'PT Sans', sans-serif; /* Cambia la fuente */
+    font-size: 7em; /* Ajusta el tamaño de la fuente, puedes modificarlo */
+    font-family: 'Bebas Neue', sans-serif; /* Cambia la fuente */
     font-weight: 800; /* Extra Bold */
     font-style: italic; /* Cursiva */
+    line-height: 1;
 }
 .lema h1:nth-child(2) {
     color: #fff; /* Color del texto, puedes ajustarlo */
