@@ -83,7 +83,7 @@ body::before {
     background-color: rgba(255, 255, 255, 0);
     border: 1px solid #25C50E;
     border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.5s, color 0.5s;
 }
 
 .btn-empecemos:hover {
