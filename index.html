@@ -1,47 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles_index.css">
-    <link rel="stylesheet" href="css/styles_andy.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
+<html lang="es">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>VERSUS ME</title>
-</head>
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Antonio:wght@100;700&family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+    <!-- UN SOLO CSS -->
+    <link rel="stylesheet" href="css/styles_index.css" />
+    </head>
+    <body>
+        <!-- Sección INTRO -->
+        <section class="intro">
+            <div class="intro-fondo"></div>
 
-<body>
-    <!-- Sección INTRO -->
-    <section class="intro">
-        <div class="intro-fondo"></div>
-        <nav class="navbar">
+            <nav class="navbar">
             <div class="navbar-titulo">VersusMe</div>
             <div class="navbar-botones">
                 <button class="btn-registro">COMIENZA GRATIS</button>
                 <button class="btn-login">INICIAR SESIÓN</button>
             </div>
-        </nav>
-        <div class="lema">
+            </nav>
+
+            <div class="lema">
             <h1>TU DEPORTE,</h1>
             <h1>TU GENTE,</h1>
             <h1>TU APUESTA</h1>
-
             <button class="btn-empecemos" onclick="scrollToSomos()">EMPECEMOS</button>
-        </div>
-    </section>
-    <div class="transition"></div>
-    <!-- Sección SOMOS-->
-    <section id="somos" class="somos container">
-        <div>
+            </div>
+        </section>
+
+        <div class="transition"></div>
+
+        <!-- Sección SOMOS -->
+        <section id="somos" class="somos container">
+            <div class="revelar">
             <h2>SOMOS...</h2>
             <p>
                 Una plataforma que une a los amantes del deporte en Lima. Nuestra misión es crear una
@@ -54,49 +51,265 @@
                 nuestra pasión por el deporte y la comunidad. Desde Miraflores hasta San Juan de
                 Lurigancho, conectamos jugadores en toda la ciudad.
             </p>
-        </div>
-        <div>
-            <img src="assets/img/Imagenes_andy/Chicosfutbol.jpeg" alt="Jugadores felices">
-        </div>
-    </section>
+            </div>
+            <div class="revelar">
+            <img src="assets/img/img_index/chicosfutbol.png" alt="Jugadores felices">
+            </div>
+        </section>
 
-    <!--Sección POR QUÉ-->
-    <section class="porque container">
-        <h2><span>¿POR QUÉ</span> VERSUS ME <span>?</span></h2>
-        <div class="cards">
-            <div class="card">
+        <!-- Sección POR QUÉ -->
+        <section class="porque container">
+            <h2 class="revelar"><span>¿POR QUÉ</span> VERSUS ME <span>?</span></h2>
+            <div class="cards">
+            <div class="card revelar">
                 <div class="icon">
-                    <img src="assets/img/Imagenes_andy/check1.png" alt="Verificación">
+                <img src="assets/img/img_index/check1.png" alt="Verificación">
                 </div>
                 <h3>Verificación de Usuarios</h3>
                 <p>
-                    Todos nuestros usuarios pasan por un proceso de verificación para garantizar
-                    una comunidad segura.
+                Todos nuestros usuarios pasan por un proceso de verificación para garantizar
+                una comunidad segura.
                 </p>
             </div>
-            <div class="card">
+            <div class="card revelar">
                 <div class="icon">
-                    <img src="assets/img/Imagenes_andy/escudo.png" alt="Escudo">
+                <img src="assets/img/img_index/escudo.png" alt="Escudo">
                 </div>
                 <h3>Ambiente Seguro</h3>
                 <p>
-                    Promovemos el respeto y la deportividad en cada partido organizado a través
-                    de nuestra plataforma.
+                Promovemos el respeto y la deportividad en cada partido organizado a través
+                de nuestra plataforma.
                 </p>
             </div>
-            <div class="card">
+            <div class="card revelar">
                 <div class="icon">
-                    <img src="assets/img/Imagenes_andy/hombre.png" alt="Hombre fuerte">
+                <img src="assets/img/img_index/hombre.png" alt="Hombre fuerte">
                 </div>
                 <h3>Pasión por el deporte</h3>
                 <p>
-                    Creado por deportistas para deportistas, entendemos lo que necesitas para
-                    disfrutar al máximo.
+                Creado por deportistas para deportistas, entendemos lo que necesitas para
+                disfrutar al máximo.
                 </p>
             </div>
-        </div>
-    </section>
-    <script src="js/main.js"></script>
-</body>
+            </div>
+        </section>
 
+        <!-- Sección BENEFICIOS -->
+        <section id="beneficios" class="beneficios">
+            <div class="container">
+            <h2 class="beneficios-titulo revelar">BENEFICIOS DE LA PLATAFORMA</h2>
+
+            <div class="beneficios-cards">
+                <!-- 1) Comunidad local -->
+                <div class="card revelar">
+                <img src="assets/img/img_index/home_beneficio_comunidad.png" alt="Comunidad local">
+                <div class="icono">
+                    <img src="assets/img/img_index/grupo.png" alt="Ícono grupo">
+                </div>
+                <h3>Comunidad local</h3>
+                <p>Conecta con jugadores de tu distrito y forma parte de la comunidad deportiva más activa de Lima.</p>
+                </div>
+
+                <!-- 2) Ubicaciones cercanas -->
+                <div class="card revelar">
+                <img src="assets/img/img_index/home_beneficio_ubicacion.png" alt="Ubicaciones cercanas">
+                <div class="icono">
+                    <img src="assets/img/img_index/ubicaciones.png" alt="Ícono ubicaciones">
+                </div>
+                <h3>Ubicaciones Cercanas</h3>
+                <p>Encuentra partidos en canchas cerca de ti en todos los distritos de Lima Metropolitana.</p>
+                </div>
+
+                <!-- 3) Horarios flexibles -->
+                <div class="card revelar">
+                <img src="assets/img/img_index/home_beneficio_horario.png" alt="Horarios flexibles">
+                <div class="icono">
+                    <img src="assets/img/img_index/calendario.png" alt="Ícono calendario">
+                </div>
+                <h3>Horarios Flexibles</h3>
+                <p>Organiza y únete a partidos que se adapten a tu horario, desde temprano en la mañana hasta la noche.</p>
+                </div>
+
+                <!-- 4) Todos los deportes -->
+                <div class="card revelar">
+                <img src="assets/img/img_index/home_beneficio_deporte.png" alt="Todos los deportes">
+                <div class="icono">
+                    <img src="assets/img/img_index/copa.png" alt="Ícono copa">
+                </div>
+                <h3>Todos los deportes</h3>
+                <p>Fútbol, básquet, tenis, pádel, vóleibol, natación y más. Encuentra tu deporte favorito.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- ==========================
+     SECCIÓN: PRECIOS / PLANES
+     ========================== -->
+        <section id="planes" class="planes">
+        <div class="container">
+
+            <h2 class="planes-titulo">ELIGE <span>TU PLAN</span></h2>
+            <p class="planes-sub">
+            Comienza gratis y actualiza cuando estés listo para desbloquear todo el potencial de VersusMe
+            </p>
+
+            <div class="planes-grid">
+            <!-- Plan BASIC -->
+            <article class="precio basic">
+                <h3>Basic</h3>
+
+                <div class="precio-monto gratis">Gratis</div>
+                <p class="descripcion">Para siempre</p>
+
+                <p class="explicacion">Perfecto para comenzar tu aventura deportiva</p>
+
+                <h4>Incluye</h4>
+                <ul class="lista">
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        <span>Hasta 2 partidos por semana</span>
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        <span>Acceso a deportes básicos</span>
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        <span>Perfil de jugador</span>
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        <span>Notificaciones por email</span>
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        <span>Soporte por chat</span>
+                    </li>
+                </ul>
+
+                <button class="btn-cta">Comienza Gratis</button>
+            </article>
+
+            <!-- Plan PRO (destacado) -->
+            <article class="precio pro destacado">
+                <div class="badge">Más Popular</div>
+
+                <h3>Pro</h3>
+
+                <div class="precio-monto">
+                <span class="moneda">S/</span>
+                <span class="numero">5.00</span>
+                </div>
+
+                <div class="precio-detalle">
+                <div class="linea">/mes</div>
+                <div class="linea">o S/ 50/año (ahorras S/ 10)</div>
+                </div>
+
+                <p class="explicacion">Para los verdaderos amantes del deporte</p>
+
+                <h4>Incluye</h4>
+                <ul class="lista">
+                    <li><img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Partidos ilimitados
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Acceso a todos los deportes
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Prioridad en partidos populares
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Estadísticas avanzadas
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Creación de grupos privados
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Notificaciones push
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Soporte prioritario 24/7
+                    </li>
+                    <li>
+                        <img class="check" src="assets/img/img_index/check2.png" alt="check">
+                        Descuentos en canchas afiliadas
+                    </li>
+                </ul>
+
+                <button class="btn-cta">Comienza Crack</button>
+
+                <p class="nota">
+                El primer mes es gratis • Cancela en cualquier momento • Sin compromisos
+                </p>
+            </article>
+            </div>
+        </div>
+        </section>
+
+        <!-- ================== PREGUNTAS (FAQ) ================== -->
+        <section id="preguntas" class="preguntas">
+        <div class="container">
+            <h2 class="preguntas-titulo">¿PREGUNTAS?</h2>
+            <p class="preguntas-sub">Resolvemos las dudas más comunes sobre VersusMe</p>
+
+            <div class="faq-list">
+            <!-- Item 1 -->
+            <article class="faq-item">
+                <button class="faq-head" aria-expanded="false">
+                <span>¿Cómo funciona VersusMe?</span>
+                <img src="assets/img/img_index/menor_que.png" alt="" class="faq-icon" aria-hidden="true">
+                </button>
+                <div class="faq-body" hidden>
+                <p>Respuesta</p>
+                </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="faq-item">
+                <button class="faq-head" aria-expanded="false">
+                <span>¿Es seguro conocer gente nueva a través de la plataforma?</span>
+                <img src="assets/img/img_index/menor_que.png" alt="" class="faq-icon" aria-hidden="true">
+                </button>
+                <div class="faq-body" hidden>
+                <p>Respuesta</p>
+                </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="faq-item">
+                <button class="faq-head" aria-expanded="false">
+                <span>¿Qué deportes están disponibles en la plataforma?</span>
+                <img src="assets/img/img_index/menor_que.png" alt="" class="faq-icon" aria-hidden="true">
+                </button>
+                <div class="faq-body" hidden>
+                <p>Respuesta</p>
+                </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article class="faq-item">
+                <button class="faq-head" aria-expanded="false">
+                <span>¿Cuál es la diferencia entre el plan Basic y el Pro?</span>
+                <img src="assets/img/img_index/menor_que.png" alt="" class="faq-icon" aria-hidden="true">
+                </button>
+                <div class="faq-body" hidden>
+                <p>Respuesta</p>
+                </div>
+            </article>
+            </div>
+        </div>
+        </section>
+
+
+        <!-- JS -->
+        <script src="js/main.js"></script>
+    </body>
 </html>
