@@ -595,3 +595,200 @@ body {
   .preguntas-titulo{ font-size:48px; line-height:1.1; }
   .faq-head span{ font-size:18px; }
 }
+
+.contacto_y_footer {
+margin: 0;
+font-family: "Poppins", sans-serif;
+background-color: #191D19;
+color: #fff;
+}
+
+/* Sección de contacto */
+.contacto {
+text-align: center;
+padding: 50px 0 80px;
+}
+
+.contacto h1 {
+color: #29d34b;
+font-size: 60px;
+margin-bottom: 10px;
+font-weight: 800;
+}
+
+.subtitulo {
+color: #dcdcdc;
+font-size: 16px;
+margin-bottom: 50px;
+}
+
+.contenedor {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 50px;
+}
+
+.info,
+.formulario {
+background-color: #E8E8E8;
+color: #000000;
+border-radius: 12px;
+padding: 35px;
+width: 400px;
+box-shadow: 0px 0px 10px rgba(41, 211, 75, 0.4);
+border: 2px solid #29d34b;
+text-align: left;
+}
+
+/* Info de contacto */
+.item {
+display: flex;
+align-items: flex-start;
+margin: 20px 0;
+}
+
+.item img {
+width: 30px;
+height: 30px;
+margin-right: 10px;
+}
+
+.item span {
+color: #25C50E;
+font-weight: 600;
+}
+
+.horario {
+background-color: #25C50E;
+color: #ffffff;
+border-radius: 10px;
+padding: 15px;
+margin-top: 25px;
+}
+
+.horario h3 {
+margin-top: 0;
+}
+
+/* Formulario */
+.formulario label {
+display: block;
+margin: 12px 0 5px;
+font-weight: 600;
+color: #000;
+}
+
+.formulario input,
+.formulario textarea {
+width: 100%;
+padding: 10px;
+border-radius: 8px;
+border: none;
+outline: none;
+background-color: #fff;
+box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+color: #111;
+font-size: 14px;
+margin-bottom: 10px;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+box-shadow: 0px 0px 5px rgba(41, 211, 75, 0.6);
+}
+
+.formulario button {
+background-color: #29d34b;
+border: none;
+border-radius: 8px;
+color: #fff;
+padding: 15px;
+font-weight: 600;
+cursor: pointer;
+width: 100%;
+transition: 0.3s;
+}
+
+.formulario button:hover {
+background-color: #22b43f;
+}
+
+/* FOOTER */
+footer {
+background-color: #ECECEC;
+border-top: 3px solid #29d34b;
+padding: 50px 30px;
+}
+
+.footer-contenedor {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+gap: 40px;
+}
+
+.columna {
+max-width: 250px;
+}
+
+.columna h3 {
+margin-bottom: 15px;
+color: #29d34b;
+font-size: 20px;
+}
+
+.columna p {
+color: #555555;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.columna ul {
+list-style: none;
+padding: 0;
+}
+
+.columna ul li {
+color: #555555;
+margin-bottom: 8px;
+cursor: pointer;
+}
+
+.columna ul li:hover {
+color: #29d34b;
+}
+
+.redes img {
+width: 33px;
+height: 33px;
+margin-right: 1px;
+cursor: pointer;
+}
+
+.redes img:hover {
+opacity: 0.8;
+}
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.footer-item img {
+  width: 29px;
+  height: 29px;
+  filter: brightness(0) saturate(100%) invert(67%) sepia(97%) saturate(424%) hue-rotate(75deg) brightness(95%) contrast(93%);
+}
+
+.footer-item span,
+.footer-item a {
+  color: #555555;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-item a:hover {
+  color: #29d34b;
+}
