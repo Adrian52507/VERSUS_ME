@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro — VersusMe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles_registro.css">
+</head>
+<body>
+
+  <main class="login">
+    <div class="login-bg" style="background-image:url('assets/img/img_index/fondof2.png')"></div>
+    <div class="login-overlay" aria-hidden="true"></div>
+
+    <section class="login-card" role="region" aria-labelledby="titulo">
+      <div class="marca">VersusMe</div>
+
+      <h1 class="titulo" id="titulo">¡Únete a VersusMe!</h1>
+
+      <p class="desc">Crea tu cuenta y comienza a descubrir retos deportivos en Lima</p>
+      <p class="alternativa">
+        ¿Ya tienes cuenta?
+        <a class="link" href="login.html">Iniciar Sesión</a>
+      </p>
+
+      <form class="formulario" action="#" method="post" novalidate>
+        <label class="label" for="reg-nombre">Nombre completo</label>
+        <input class="input" id="reg-nombre" name="name" type="text" placeholder="Nombre y apellidos" autocomplete="name" required>
+
+        <label class="label" for="reg-correo">Correo electrónico</label>
+        <input class="input" id="reg-correo" name="email" type="email" placeholder="tu@correo.com" autocomplete="email" required>
+
+        <label class="label" for="reg-pass">Contraseña</label>
+        <div class="input-wrap">
+          <input class="input" id="reg-pass" name="password" type="password" placeholder="********" minlength="8" autocomplete="new-password" required>
+          <img class="ojo"
+               src="assets/img/img_login/ojo.png"
+               data-eye-open="assets/img/img_login/ojo.png"
+               data-eye-closed="assets/img/img_login/cerrar_ojo.png"
+               alt="Mostrar u ocultar contraseña">
+        </div>
+
+        <ul class="pw-rules" id="pw-rules">
+          <li data-rule="len">
+            <img class="check-icon" src="assets/img/img_index/check2.png" alt="">
+            Mínimo 8 caracteres
+          </li>
+          <li data-rule="upper">
+            <img class="check-icon" src="assets/img/img_index/check2.png" alt="">
+            Al menos 1 letra mayúscula (A-Z)
+          </li>
+          <li data-rule="lower">
+            <img class="check-icon" src="assets/img/img_index/check2.png" alt="">
+            Al menos 1 letra minúscula (a-z)
+          </li>
+          <li data-rule="digit">
+            <img class="check-icon" src="assets/img/img_index/check2.png" alt="">
+            Al menos 1 número (0-9)
+          </li>
+          <li data-rule="symbol">
+            <img class="check-icon" src="assets/img/img_index/check2.png" alt="">
+            Al menos 1 símbolo (!@#…)
+          </li>
+          <li data-rule="nospace">
+            <img class="check-icon" src="assets/img/img_index/check2.png" alt="">
+            Sin espacios
+          </li>
+        </ul>
+
+        <label class="label" for="reg-pass2">Confirmar contraseña</label>
+        <div class="input-wrap">
+          <input class="input" id="reg-pass2" name="confirmPassword" type="password" placeholder="********" minlength="8" autocomplete="new-password" required>
+          <img class="ojo"
+               src="assets/img/img_login/ojo.png"
+               data-eye-open="assets/img/img_login/ojo.png"
+               data-eye-closed="assets/img/img_login/cerrar_ojo.png"
+               alt="Mostrar u ocultar contraseña">
+        </div>
+
+        <button class="btn-submit" type="submit">Crear cuenta</button>
+
+        <hr class="linea">
+
+        <p class="nota">
+          Al crear una cuenta, aceptas nuestros
+          <a class="link" href="#">Términos de Servicio y Condiciones</a>
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/registro.js"></script>
+</body>
+</html>

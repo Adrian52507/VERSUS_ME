@@ -1,18 +1,14 @@
-/* Fuentes */
 @font-face {
   font-family: 'Bebas Neue';
   src: url('../assets/fonts/BebasNeue-Regular.otf') format('opentype');
 }
 
-/* Scroll */
 ::-webkit-scrollbar { display: none; }
 
-/* Vars */
 :root {
   --green: #25C50E;
 }
 
-/* Base */
 body {
   margin: 0;
   color: #fff;
@@ -20,7 +16,6 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* ========== INTRO ========== */
 .intro {
   font-family: Arial, sans-serif;
   background-color: rgba(25, 29, 25, 0.85);
@@ -98,7 +93,6 @@ body {
 
 .intro .lema h1:nth-child(2) { color: #fff; }
 
-/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -125,7 +119,6 @@ body {
   cursor: pointer;
 }
 
-/* ========== CONTENEDOR ========== */
 .container {
   line-height: 1.6;
   font-family: Inter, sans-serif;
@@ -135,7 +128,6 @@ body {
   padding: 2rem;
 }
 
-/* ========== SOMOS ========== */
 .somos {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -190,7 +182,6 @@ body {
   margin-top: 90px;
 }
 
-/* ========== POR QUÉ ========== */
 .porque {
   text-align: center;
   padding: 4rem 2rem;
@@ -211,7 +202,6 @@ body {
   margin-top: 120px;
 }
 
-/* TARJETA SOLO PARA "POR QUÉ"*/
 .porque .card {
   background: #fff;
   color: #000;
@@ -239,7 +229,6 @@ body {
   margin: 0 auto 1rem;
 }
 
-/* ========== BENEFICIOS ========== */
 .beneficios {
   background: transparent;
   padding: 4rem 0;
@@ -261,7 +250,6 @@ body {
   margin: 0 0 3rem;
 }
 
-/* Grid tarjetas beneficios */
 .beneficios-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
@@ -269,7 +257,6 @@ body {
   justify-items: center;
 }
 
-/* TARJETA SOLO PARA BENEFICIOS */
 .beneficios-cards .card {
   position: relative;
   background-color: #101410;
@@ -281,10 +268,9 @@ body {
   text-align: center;
   overflow: hidden;
   padding-bottom: 16px;
-  transition: none; /* sin hover */
+  transition: none;
 }
 
-/* Imagen superior: pegada al borde verde */
 .beneficios-cards .card > img {
   display: block;
   width: 100%;
@@ -295,11 +281,10 @@ body {
   z-index: 1;
 }
 
-/* Ícono circular */
 .icono {
   position: absolute;
   left: 50%;
-  top: 140px; /* = altura de la imagen */
+  top: 140px;
   transform: translate(-50%, -50%);
   z-index: 3;
 
@@ -331,24 +316,18 @@ body {
   color: #e8e8e8;
 }
 
-/* Efecto revelar (opcional) */
 .revelar { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
 .revelar.visible { opacity: 1; transform: none; }
 
-/* Responsive */
 @media (max-width: 768px) {
   .somos { grid-template-columns: 1fr; }
   .beneficios-titulo { font-size: 48px; }
 }
 
-/* ================================
-   PRECIOS / PLANES
-   ================================ */
-
 :root{ --green:#25C50E; }
 
 .planes{
-  background: transparent;      /* mismo fondo del body */
+  background: transparent; 
   padding: 4rem 0;
 }
 
@@ -374,13 +353,11 @@ body {
   line-height:33px;
   color:#FFFFFF;
 }
-/* Grid */
 .planes-grid{
   display:grid;
   grid-template-columns: repeat(2, minmax(320px,1fr));
   gap:2.5rem;
 }
-/* Tarjeta base */
 .precio{
   position:relative;
   background:#101410;
@@ -412,7 +389,6 @@ body {
   text-align:center;
   margin:8px 0 0;
 }
-/* Monto */
 .precio .precio-monto{
   text-align:center;
   color:var(--green);
@@ -452,31 +428,29 @@ body {
   margin:6px 0 14px;
 }
 
-/* Subtítulo lista */
 .precio h4{
   font-family:'Inter', sans-serif;
   font-weight:800;
   font-size:18px;
   margin:12px 0 6px;
 }
-/* Lista con icono de check puesto en el HTML */
 .precio .lista{
   list-style: none;
   margin: 10px 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;                     /* separación entre ítems (look Figma) */
+  gap: 14px;                   
 }
 
 .precio .lista li{
   display: flex;
-  align-items: flex-start;       /* alinea icono arriba si el texto salta de línea */
+  align-items: flex-start;
   gap: 10px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 16px;
-  line-height: 1.75;             /* interlineado amplio como en Figma */
+  line-height: 1.75;
   letter-spacing: .2px;
   color: #E8E8E8;
 }
@@ -485,10 +459,8 @@ body {
   width: 18px;
   height: 18px;
   flex: 0 0 18px;
-  margin-top: 3px;               /* pequeño ajuste vertical del icono */
+  margin-top: 3px;
 }
-
-/* CTA */
 .btn-cta{
   display:block;
   width:100%;
@@ -503,7 +475,6 @@ body {
   margin-top:22px;
   cursor:pointer;
 }
-/* Nota inferior del plan Pro */
 .precio .nota{
   text-align:center;
   font-family:'Inter', sans-serif;
@@ -517,12 +488,10 @@ body {
 }
 
 .btn-cta:hover{
-  background: rgba(0,0,0,0.5);   /* igual que los de arriba */
-  color: var(--green);            /* texto verde */
+  background: rgba(0,0,0,0.5);
+  color: var(--green);
   border: 1px solid var(--green);
 }
-
-/* Responsive */
 @media (max-width:1024px){
   .planes-titulo{ font-size:72px; line-height:1.1; }
 }
@@ -530,9 +499,8 @@ body {
   .planes-titulo{ font-size:48px; line-height:1.1; }
   .planes-grid{ grid-template-columns:1fr; }
 }
-/* ================== FAQ / PREGUNTAS ================== */
 .preguntas{
-  background: transparent;            /* mismo fondo */
+  background: transparent;
   padding: 4rem 0;
 }
 
@@ -563,18 +531,15 @@ body {
   gap: 16px;
   padding: 0 5em;
 }
-
-/* Tarjeta FAQ */
 .faq-item{
   border: 2px solid var(--green);
   border-radius: 16px;
   filter: drop-shadow(0 4px 5px rgba(0,0,0,.25));
-  background: rgba(0,0,0,.18);      /* toque sutil como en figma */
+  background: rgba(0,0,0,.18);
 }
 
-/* Cabecera clickable */
 .faq-head{
-  all: unset;                        /* resetea estilos del button */
+  all: unset;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -587,24 +552,22 @@ body {
 .faq-head span{
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 22px;                   /* en figma ~26, aquí adaptable */
+  font-size: 22px;
   line-height: 1.35;
   color: #fff;
 }
 
-/* Icono (tu imagen) */
 .faq-icon{
   width: 24px;
   height: 24px;
   transition: transform .25s ease;
-  transform: rotate(-90deg);         /* parece un “>”; rotamos a “v” */
+  transform: rotate(-90deg);
 }
 
-/* Cuerpo (respuesta) con animación */
 .faq-body{
   overflow: hidden;
   padding: 0 20px;
-  max-height: 0;                     /* colapsado */
+  max-height: 0;
   transition: max-height .28s ease;
 }
 
@@ -617,17 +580,14 @@ body {
   margin: 0 0 18px;
 }
 
-/* Estado abierto */
 .faq-item.abierto .faq-icon{
-  transform: rotate(0deg);           /* flecha apunta hacia abajo */
+  transform: rotate(0deg);
 }
 .faq-item.abierto .faq-body{
   padding-top: 0;
   padding-bottom: 14px;
-  /* max-height se maneja vía JS para animación exacta */
 }
 
-/* Responsive títulos FAQ */
 @media (max-width: 1024px){
   .preguntas-titulo{ font-size:72px; line-height:1.1; }
 }

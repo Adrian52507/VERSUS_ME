@@ -1,12 +1,9 @@
-// Scroll suave a la sección #somos (mantiene el nombre original)
+
 function scrollToSomos() {
   const section = document.getElementById("somos");
   if (section) section.scrollIntoView({ behavior: "smooth" });
 }
 
-/* Efecto "revelar" al hacer scroll (opcional)
-   - Usa class="revelar" en los bloques que quieras animar
-*/
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
@@ -21,7 +18,6 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll('.revelar').forEach((el) => observer.observe(el));
 
-/* ================== FAQ: abrir/cerrar ================== */
 (function initFAQ(){
   const items = document.querySelectorAll('.faq-item');
 
@@ -37,15 +33,14 @@ document.querySelectorAll('.revelar').forEach((el) => observer.observe(el));
 
       // Animación de altura
       if (abierto) {
-        body.hidden = false;                 // debe estar visible para medir
+        body.hidden = false;
         const h = body.scrollHeight;
         body.style.maxHeight = h + 'px';
       } else {
-        body.style.maxHeight = body.scrollHeight + 'px'; // fijar altura actual
-        requestAnimationFrame(() => {                    // y colapsar
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(() => {
           body.style.maxHeight = '0px';
         });
-        // Al terminar la transición, ocultamos para accesibilidad
         body.addEventListener('transitionend', function onEnd(){
           if (!item.classList.contains('abierto')) body.hidden = true;
           body.removeEventListener('transitionend', onEnd);
