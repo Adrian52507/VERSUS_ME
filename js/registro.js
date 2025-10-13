@@ -90,3 +90,28 @@
   pass.addEventListener('input', evaluate);
   evaluate();
 })();
+
+// BONUS: Guardar correo y redirigir a verificación
+(() => {
+  const form = document.querySelector('form');
+  const emailInput = document.getElementById('reg-email'); // asegúrate de que tu input del correo tenga este id
+
+  if (!form || !emailInput) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const correo = emailInput.value.trim();
+
+    if (correo === "") {
+      alert("Por favor, ingresa tu correo electrónico.");
+      return;
+    }
+
+    // Guardamos el correo temporalmente
+    localStorage.setItem("correoUsuario", correo);
+
+    // Redirigimos a la página de verificación
+    window.location.href = "verificacion.html";
+  });
+})();

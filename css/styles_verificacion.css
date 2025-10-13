@@ -1,0 +1,152 @@
+:root{
+  --green:#25C50E;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color:#000;
+}
+
+.login{
+  position:relative;
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+.login-bg{
+  position:absolute;
+  inset:-20px;
+  background-size:cover;
+  background-position:center;
+  z-index:-2;
+}
+
+.login-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(25,29,25,0.91);
+  z-index:-1;
+}
+
+.login-card{
+  width:min(539px, 92vw);
+  background:rgba(255,255,255,0.8);
+  border-radius:30px;
+  box-shadow:0 4px 5px rgba(0,0,0,0.25);
+  padding:38px 55px 30px;
+  text-align:center;
+}
+
+.marca{
+  font-family:"Squada One", system-ui, sans-serif;
+  font-size:48px;
+  color:var(--green);
+}
+
+.titulo{
+  font-weight:600;
+  font-size:32px;
+  margin:18px 0 8px;
+}
+
+.desc{
+  font-size:17px;
+  color:#444;
+  margin:0 0 8px;
+}
+
+.correo{
+  font-weight:700;
+  color:var(--green);
+  font-size:18px;
+  margin-bottom:25px;
+}
+
+/* Caja de inputs del código */
+.codigo-box {
+  display:flex;
+  justify-content:center;
+  gap: 16px;
+  margin-bottom:25px;
+}
+
+.codigo-input {
+  width:45px;
+  height:55px;
+  border:2px solid rgba(85,85,85,0.3);
+  border-radius:10px;
+  text-align:center;
+  font-size:24px;
+  font-weight:600;
+  background:#fff;
+  transition:all 0.2s ease;
+}
+
+.codigo-input:focus {
+  outline:none;
+  border-color:var(--green);
+  box-shadow:0 0 6px var(--green);
+}
+
+.btn-submit{
+  width:100%;
+  height:47px;
+  background:var(--green);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  font-size:20px;
+  cursor:pointer;
+  opacity:.6;
+  transition:all .2s ease;
+}
+
+.btn-submit:disabled{
+  cursor: not-allowed;
+}
+
+.nota{
+  font-size:15px;
+  color:#444;
+  margin-top:18px;
+}
+
+.reenviar{
+  color:var(--green);
+  font-weight:600;
+  text-decoration:none;
+}
+
+@media(max-width:520px){
+  .login-card{ padding:30px 20px; }
+  .titulo{ font-size:28px; }
+}
+
+/* === Estilos para los toasts === */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: rgba(34, 34, 34, 0.9);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast.success { background: #25C50E; }
+.toast.error { background: #e63946; }
+.toast.info { background: #107F60; }
