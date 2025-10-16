@@ -150,3 +150,27 @@ body{
 .toast.success { background: #25C50E; }
 .toast.error { background: #e63946; }
 .toast.info { background: #107F60; }
+
+.volver {
+  margin-top: -70px;
+  text-align: center;
+}
+
+.btn-volver {
+  display: inline-block;
+  background-color: #00c853;
+  color: #fff;
+  border: 2px solid #00c853;
+  border-radius: 8px;
+  padding: 10px 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.btn-volver:hover {
+  background-color: #00c853;
+  color: white;
+  transform: scale(1.2);
+}
