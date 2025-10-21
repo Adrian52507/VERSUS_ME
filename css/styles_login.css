@@ -1,0 +1,76 @@
+:root{
+  --green:#25C50E;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color:#000;
+}
+
+.login{
+  position:relative;
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.login-bg{
+  position:absolute;
+  inset:-20px;
+  background-size:cover;
+  background-position:center;
+  z-index:-2;
+}
+
+.login-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(25,29,25,0.91);
+  z-index:-1;
+}
+
+.login-card{
+  width:min(540px, 92vw);
+  background:rgba(255,255,255,0.8);
+  border-radius:30px;
+  box-shadow:13px 11px 21px rgba(0,0,0,0.25);
+  padding:40px 55px 32px;
+}
+
+.marca{
+  font-family:"Squada One", system-ui, sans-serif;
+  font-size:48px;
+  line-height:51px;
+  text-align:center;
+  color:var(--green);
+  margin-top:10px;
+}
+
+.titulo{
+  font-family:"Noto Sans", sans-serif;
+  font-weight:600;
+  font-size:32px;
+  line-height:44px;
+  text-align:center;
+  color:#000;
+  margin:28px 0 16px;
+  font-stretch: 90%;
+}
+
+.desc{
+  font-weight:500;
+  font-size:17px;
+  line-height:23px;
+  text-align:center;
+  color:#555;
+  margin:0 0 10px;
+}
+
+@media (max-width:480px){
+  .login-card{ padding:34px 20px 26px; }
+  .marca{ font-size:44px; }
+  .titulo{ font-size:28px; line-height:38px; }
+}
