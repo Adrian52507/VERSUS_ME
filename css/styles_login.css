@@ -68,6 +68,56 @@ body{
   color:#555;
   margin:0 0 10px;
 }
+.alternativa{
+  font-weight:700;
+  font-size:17px;
+  line-height:23px;
+  text-align:center;
+  color:#555;
+  margin:0 0 24px;
+}
+.link{ color:var(--green); text-decoration:none; }
+
+.formulario{
+  display:block;
+}
+
+.label{
+  display:block;
+  font-weight:600;
+  font-size:17px;
+  line-height:23px;
+  color:#000;
+  margin:16px 0 8px;
+}
+
+.input{
+  width:100%;
+  height:47px;
+  background:#fff;
+  border:2px solid rgba(85,85,85,0.15);
+  box-shadow: inset 0 0 20.9px -3px rgba(0,0,0,0.25);
+  border-radius:8px;
+  padding:0 14px;
+  outline:none;
+  font-size:16px;
+}
+
+.input-wrap{
+  position:relative;
+}
+.input-wrap .ojo{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:20px;
+  height:20px;
+  cursor: pointer;         
+  pointer-events: auto;     
+  opacity: 0.9;
+}
+
 
 @media (max-width:480px){
   .login-card{ padding:34px 20px 26px; }

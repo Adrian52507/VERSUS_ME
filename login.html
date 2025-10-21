@@ -26,7 +26,23 @@
 
       <p class="desc">Sigue descubriendo retos deportivos en Lima</p>
 
-      
+      <form class="formulario" action="#" method="post" novalidate>
+        <label class="label" for="email">Correo Electrónico</label>
+        <input class="input" id="email" name="email" type="email" placeholder="tu@correo.com" inputmode="email" autocomplete="username"/>
+
+        <label class="label" for="pass">Contraseña</label>
+        <div class="input-wrap">
+          <input class="input" id="pass" name="password" type="password" placeholder="********" autocomplete="current-password"/>
+          <img class="ojo" src="assets/img/img_index/ojo_abierto.png"
+          data-eye-open="assets/img/img_login/ojo.png"
+          data-eye-closed="assets/img/img_login/cerrar_ojo.png"
+          alt="Mostrar u ocultar contraseña"
+          >
+        </div>
+
+      </form>
+
+      </p>
     </div>
   </section>
   <script src="js/login.js"></script>
