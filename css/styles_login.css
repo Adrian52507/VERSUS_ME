@@ -118,6 +118,21 @@ body{
   opacity: 0.9;
 }
 
+.btn-submit {
+  width: 100%;
+  height: 47px;
+  margin-top: 24px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 27px;
+  cursor: pointer;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 
 @media (max-width:480px){
   .login-card{ padding:34px 20px 26px; }
