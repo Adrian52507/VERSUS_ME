@@ -68,6 +68,17 @@ body{
   color:#555;
   margin:0 0 10px;
 }
+
+.alternativa{
+  font-weight:700;
+  font-size:17px;
+  line-height:23px;
+  text-align:center;
+  color:#555;
+  margin:0 0 20px;
+}
+.link{ color:var(--green); text-decoration:none; }
+
 .alternativa{
   font-weight:700;
   font-size:17px;
