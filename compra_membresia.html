@@ -85,10 +85,74 @@
         </div>
       </div>
     </section>
-  </main>
+  
+  <div class="formulario-compra">
+  <h2>Información de contacto</h2>
 
+  <div class="campo-correo">
+    <div class="etiqueta">
+      <p>Correo</p>
+      <p>electrónico</p>
+    </div>
+    <div class="valor">hola@versusme.com</div>
+  </div>
 
-  <script src="js/compra_membresia.js"></script>
+  <h2>Método de pago</h2>
+  <h3>Información de la tarjeta</h3>
+
+  <div class="tarjeta">
+  <input type="text" placeholder="1234 5678 9012 3456" class="input-tarjeta">
+  <!-- <div class="logos-tarjetas">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Mastercard_logo.png" alt="Mastercard">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg" alt="AmEx">
+  </div>
+  </div>
+  -->
+
+  <div class="fila-pequena">
+    <input type="text" placeholder="MM / AA">
+    <input type="text" placeholder="CVC">
+  </div>
+
+  <h3>Nombre del titular de la tarjeta</h3>
+  <input type="text" class="input-largo" placeholder="Nombre completo">
+
+  <h3>Dirección de factura</h3>
+  <div class="direccion">
+    <div class="columna">
+      <select>
+        <option>Perú</option>
+        <option>Chile</option>
+        <option>Colombia</option>
+        <option>México</option>
+      </select>
+      <input type="text" placeholder="Línea 1 de dirección">
+      <input type="text" placeholder="Línea 2 de dirección">
+    <div class="fila-pequenna">
+      <input type="text" placeholder="Distrito">
+      <input type="text" placeholder="Código postal">
+    </div>
+        <select>
+        <option>Lima</option>
+        <option>Arequipa</option>
+        <option>Trujillo</option>
+        <option>Piura</option>
+      </select>
+    </div>
+  
+  </div>
+
+  <div class="terminos">
+    <input type="checkbox" id="check">
+    <label for="check">Se cobrará el monto mencionado, con la frecuencia establecida anteriormente, hasta que canceles la suscripción. Es posible que modifiquemos nuestros precios como se describe en nuestros Términos de uso puedes cancelar la suscripción en cualquier momento. Al suscribirte aceptas los Términos de Uso y la Política de privacidad de VersusMe, y nos autorizas a almacenar tu forma de pago para renovaciones y otras compras.</label>
+  </div>
+
+  <button class="btn-suscribir">Suscribirse</button>
+</div>
+
+</main>
+<script src="js/compra_membresia.js"></script>
 </body>
 
 </html>
