@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — VersusMe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Squada+One&family=Inter:wght@500;600;700;800;900&family=Noto+Sans:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles_dashboard_principal.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">VersusMe</div>
+      <nav class="top-actions">
+        <a class="pill pill-solid" href="#">
+          <img src="assets/img/img_dashboard_principal/casa_blanco_icono.png" alt="">
+          DASHBOARDS
+        </a>
+        <a class="pill" href="#">
+          <img src="assets/img/img_dashboard_principal/suma_negro_icono.png" alt="">
+          CREAR PARTIDO
+        </a>
+        <a class="pill" href="#">
+          <img src="assets/img/img_dashboard_principal/reloj_negro_icono.png" alt="">
+          HISTORIAL
+        </a>
+
+        <div class="profile">
+          <span class="badge">A</span>
+          <img class="caret" src="assets/img/img_dashboard_principal/menor_que_gris_icono.png" alt="">
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      <section class="panel kpis">
+        <div class="head">
+          <div>
+            <h2>¡Hola, Andy Morales!</h2>
+            <p class="sub">¿Listo para tu próximo partido?</p>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="num green">12</div>
+            <div class="label">Partidos jugados</div>
+          </div>
+          <div class="kpi">
+            <div class="num">3</div>
+            <div class="label">Partidos creados</div>
+          </div>
+          <div class="kpi">
+            <div class="num">4.8</div>
+            <div class="label">Calificación</div>
+          </div>
+        </div>
+
+        <div class="actions-grid">
+          <a class="tile" href="#">
+            <span class="tile-icon" style="--tile:#25C50E">
+              <img src="assets/img/img_dashboard_principal/suma_icono.png" alt="">
+            </span>
+            <div class="tile-title">Crear Partido</div>
+            <div class="tile-desc">Organiza un nuevo partido deportivo</div>
+          </a>
+
+          <a class="tile" href="#">
+            <span class="tile-icon" style="--tile:#72D9EB">
+              <img src="assets/img/img_dashboard_principal/reloj2_blanco_icono.png" alt="">
+            </span>
+            <div class="tile-title">Mi Historial</div>
+            <div class="tile-desc">Ver partidos anteriores</div>
+          </a>
+
+          <a class="tile" href="#">
+            <span class="tile-icon" style="--tile:#F7D41D">
+              <img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt="">
+            </span>
+            <div class="tile-title">Partidos Hoy</div>
+            <div class="tile-desc">Encuentra partidos para hoy</div>
+          </a>
+        </div>
+
+        <div class="reminder">
+          <div class="reminder-left">
+            <img src="assets/img/img_dashboard_principal/campana_amarillo_icono.png" class="alert" alt="">
+            <div>
+              <div class="rem-title">Recordatorio del día</div>
+              <div class="rem-text">
+                Tienes un partido programado para el día de hoy. ¡No olvides llevar tu equipamiento!
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-outline">
+            Ver Detalles
+            <img src="assets/img/img_dashboard_principal/ojo_abierto_blanco_icono.png" alt="">
+          </button>
+        </div>
+      </section>
+      <div class="tabs">
+        <button class="tab active">
+          <img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt="">
+          Partidos Disponibles
+        </button>
+        <button class="tab">
+          <img src="assets/img/img_dashboard_principal/check2_blanco_icono.png" alt="">
+          Partidos Aceptados
+        </button>
+      </div>
+
+    <div class="available-wrap">
+    <div class="section-title">
+    <img src="assets/img/img_dashboard_principal/calendario_verde_icono.png" alt="">
+    Partidos Disponibles
+    </div>
+
+      <section class="panel filters">
+        <h3 class="filters-title">
+          <img src="assets/img/img_dashboard_principal/filtro_verde_icono.png" alt="">
+          Filtrar Partidos
+        </h3>
+
+        <div class="filters-row">
+          <div class="search">
+            <input type="text" placeholder="Buscar por creador">
+          </div>
+
+          <div class="select">
+            
+            <select>
+              <option selected>Seleccionar deportes</option>
+              
+            </select>
+          </div>
+
+          <div class="select">
+            
+            <select>
+              <option selected>Seleccionar distrito</option>
+            </select>
+          </div>
+
+          <div class="select">
+            
+            <select>
+              <option selected>Apuesta</option>
+            </select>
+          </div>
+
+          <div class="select">
+        
+            <input type="date" class="input" placeholder="dd/mm/aaaa">
+          </div>
+        </div>
+      </section>
+
+  <section class="cards">
+
+        <article class="card" data-max="11">
+          <header class="card-head">
+            <div class="left">
+              <img class="sport" src="assets/img/img_dashboard_principal/balon_futbol_verde_icono.png" alt="">
+              <span class="sport-name">Fútbol</span>
+              <span class="chip">Apuesta</span>
+            </div>
+            <span class="estado disponible">Disponible</span>
+          </header>
+
+          <div class="meta">
+            <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""> Miraflores</span>
+            <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""> sáb, 11 ene.</span>
+            <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""> 06:00 p.m.</span>
+          </div>
+
+          <p class="desc">Partido amistoso de fútbol en el parque Kennedy. Buscamos jugadores para completar el equipo.</p>
+
+          <div class="creator">
+            <span class="avatar">M</span>
+            <div>
+              <div class="name">Miguel Torres</div>
+              <div class="muted">32 partidos</div>
+            </div>
+          </div>
+
+          <div class="cupos">
+            <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+            <span><b class="cur">9</b>/<span class="max">11</span> jugadores</span>
+          </div>
+
+          <div class="progress"><span class="bar" style="--pct: 82%"></span></div>
+
+          <button class="btn-unirse">
+            <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+            Unirse al Partido
+          </button>
+        </article>
+
+        <article class="card" data-max="6">
+          <header class="card-head">
+            <div class="left">
+              <img class="sport" src="assets/img/img_dashboard_principal/balon_basquet_verde_icono.png" alt="">
+              <span class="sport-name">Baloncesto</span>
+            </div>
+            <span class="estado completo">Completo</span>
+          </header>
+
+          <div class="meta">
+            <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""> San Isidro</span>
+            <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""> dom, 12 ene.</span>
+            <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""> 04:30 p.m.</span>
+          </div>
+
+          <p class="desc">Partido de básquet 3x3 en la cancha del parque El Olivar. Jugadores de todos los niveles.</p>
+
+          <div class="creator">
+            <span class="avatar">R</span>
+            <div>
+              <div class="name">Roberto Chen</div>
+              <div class="muted">45 partidos</div>
+            </div>
+          </div>
+
+          <div class="cupos">
+            <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+            <span><b class="cur">6</b>/<span class="max">6</span> jugadores</span>
+          </div>
+
+          <div class="progress"><span class="bar" style="--pct: 100%"></span></div>
+
+          <button class="btn-unirse outline" disabled>
+            <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+            Unirse al Partido
+          </button>
+        </article>
+
+        <article class="card" data-max="4">
+          <header class="card-head">
+            <div class="left">
+              <img class="sport" src="assets/img/img_dashboard_principal/raqueta_tenis_verde_icono.png" alt="">
+              <span class="sport-name">Tenis</span>
+            </div>
+            <span class="estado disponible">Disponible</span>
+          </header>
+
+          <div class="meta">
+            <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""> Barranco</span>
+            <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""> sáb, 11 ene.</span>
+            <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""> 08:00 a.m.</span>
+          </div>
+
+          <p class="desc">Partido de tenis dobles en el club deportivo de Barranco. Buscamos una pareja más.</p>
+
+          <div class="creator">
+            <span class="avatar">I</span>
+            <div>
+              <div class="name">Isabella Vargas</div>
+              <div class="muted">28 partidos</div>
+            </div>
+          </div>
+
+          <div class="cupos">
+            <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+            <span><b class="cur">3</b>/<span class="max">4</span> jugadores</span>
+          </div>
+
+          <div class="progress"><span class="bar" style="--pct: 75%"></span></div>
+
+          <button class="btn-unirse">
+            <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+            Unirse al Partido
+          </button>
+        </article>
+
+        <article class="card" data-max="8">
+          <header class="card-head">
+            <div class="left">
+              <img class="sport" src="assets/img/img_dashboard_principal/padel_verde_icono.png" alt="">
+              <span class="sport-name">Pádel</span>
+            </div>
+            <span class="estado disponible">Disponible</span>
+          </header>
+
+          <div class="meta">
+            <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""> Surco</span>
+            <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""> sáb, 11 ene.</span>
+            <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""> 07:00 p.m.</span>
+          </div>
+
+          <p class="desc">Torneo de pádel amateur en las canchas de Surco. Inscripciones abiertas para parejas.</p>
+
+          <div class="creator">
+            <span class="avatar">A</span>
+            <div>
+              <div class="name">Alejandro Ruiz</div>
+              <div class="muted">18 partidos</div>
+            </div>
+          </div>
+
+          <div class="cupos">
+            <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+            <span><b class="cur">6</b>/<span class="max">8</span> jugadores</span>
+          </div>
+
+          <div class="progress"><span class="bar" style="--pct: 75%"></span></div>
+
+          <button class="btn-unirse">
+            <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+            Unirse al Partido
+          </button>
+        </article>
+
+        <article class="card" data-max="12">
+          <header class="card-head">
+            <div class="left">
+              <img class="sport" src="assets/img/img_dashboard_principal/balon_veloibol_verde_icono.png" alt="">
+              <span class="sport-name">Vóleibol</span>
+              <span class="chip">Apuesta</span>
+            </div>
+            <span class="estado disponible">Disponible</span>
+          </header>
+
+          <div class="meta">
+            <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""> La Molina</span>
+            <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""> dom, 12 ene.</span>
+            <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""> 05:00 p.m.</span>
+          </div>
+
+          <p class="desc">Partido de vóley playa en las canchas de La Molina. Ambiente familiar y divertido.</p>
+
+          <div class="creator">
+            <span class="avatar">C</span>
+            <div>
+              <div class="name">Camila Espinoza</div>
+              <div class="muted">22 partidos</div>
+            </div>
+          </div>
+
+          <div class="cupos">
+            <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+            <span><b class="cur">10</b>/<span class="max">12</span> jugadores</span>
+          </div>
+
+          <div class="progress"><span class="bar" style="--pct: 83%"></span></div>
+
+          <button class="btn-unirse">
+            <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+            Unirse al Partido
+          </button>
+        </article>
+
+        <article class="card" data-max="8">
+          <header class="card-head">
+            <div class="left">
+              <img class="sport" src="assets/img/img_dashboard_principal/natacion_verde_icono.png" alt="">
+              <span class="sport-name">Natación</span>
+            </div>
+            <span class="estado disponible">Disponible</span>
+          </header>
+
+          <div class="meta">
+            <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""> San Borja</span>
+            <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""> mar, 14 ene.</span>
+            <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""> 07:00 a.m.</span>
+          </div>
+
+          <p class="desc">Sesión de natación grupal en la piscina olímpica de San Borja. Entrenamiento de resistencia.</p>
+
+          <div class="creator">
+            <span class="avatar">A</span>
+            <div>
+              <div class="name">Andrea Molina</div>
+              <div class="muted">27 partidos</div>
+            </div>
+          </div>
+
+          <div class="cupos">
+            <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+            <span><b class="cur">4</b>/<span class="max">8</span> jugadores</span>
+          </div>
+
+          <div class="progress"><span class="bar" style="--pct: 50%"></span></div>
+
+          <button class="btn-unirse">
+            <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+            Unirse al Partido
+          </button>
+        </article>
+  </section>
+</div>
+
+<div class="accepted-wrap hidden">
+  <div class="section-title">
+    <img src="assets/img/img_dashboard_principal/check3_verde_icono.png" alt="">
+    Partidos Aceptados
+  </div>
+
+  <section class="accepted-list">
+
+    <div class="accepted-item">
+      <div class="left">
+        <img class="ok" src="assets/img/img_dashboard_principal/check3_verde_icono.png" alt="">
+        <div class="info">
+          <div class="title">Futbol - Miraflores</div>
+          <div class="date">Sábado, 11 de enero de 2025</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="mini">
+          <img src="assets/img/img_dashboard_principal/ojo_abierto_negro_icono.png" alt="">
+          Detalles
+        </button>
+        <button class="mini">
+          <img src="assets/img/img_dashboard_principal/mensaje_negro_icono.png" alt="">
+          Mensajes
+        </button>
+        <button class="mini danger">
+          <img src="assets/img/img_dashboard_principal/cancelar_negro_icono.png" alt="">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <div class="accepted-item">
+      <div class="left">
+        <img class="ok" src="assets/img/img_dashboard_principal/check3_verde_icono.png" alt="">
+        <div class="info">
+          <div class="title">Basquetball - Miraflores</div>
+          <div class="date">Miércoles, 15 de enero de 2025</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="mini">
+          <img src="assets/img/img_dashboard_principal/ojo_abierto_negro_icono.png" alt="">
+          Detalles
+        </button>
+        <button class="mini">
+          <img src="assets/img/img_dashboard_principal/mensaje_negro_icono.png" alt="">
+          Mensajes
+        </button>
+        <button class="mini danger">
+          <img src="assets/img/img_dashboard_principal/cancelar_negro_icono.png" alt="">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+      </section>
+    </div>
+  </main>
+
+  <script src="js/dashboard_principal.js"></script>
+</body>
+</html>
