@@ -144,6 +144,23 @@ body{
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.linea{
+  width:100%;
+  border:none;
+  height:1px;
+  background:#E3DFDF;
+  margin:28px 0 14px;
+}
+.nota{
+  font-weight:500;
+  font-size:17px;
+  line-height:23px;
+  color:#555;
+  text-align:center;
+  margin:0;
+}
+.nota .link{ color:var(--green); text-decoration:underline; }
+
 
 @media (max-width:480px){
   .login-card{ padding:34px 20px 26px; }
