@@ -371,7 +371,7 @@ h2, h3 {
 
 .fila-pequena {
   display: flex;
-  gap: 10px;
+  
   margin-bottom: 20px;
 }
 
@@ -419,7 +419,6 @@ h2, h3 {
 
 .fila-pequenna {
   display: flex;
-  gap: 10px;
 }
 
 .fila-pequenna input {
