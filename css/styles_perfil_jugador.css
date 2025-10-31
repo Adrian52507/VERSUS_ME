@@ -1,0 +1,354 @@
+:root {
+  --green: #25C50E;
+  --gray-bg: #f6f6f6;
+  --dark: #222;
+}
+
+/* ===== BODY ===== */
+body {
+  margin: 0;
+  font-family: "Roboto", monospace;
+  background-color: #f0f0f0;
+  font-weight: 200;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  background-color: #2B2F2A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3em 2.5em;
+  position: relative;
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 5em;
+  align-items: center;
+}
+
+.nav-btn {
+  font-family: "Noto Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #d4d4d4;
+}
+
+.nav-btn img {
+  width: 1em;
+  height: 1em;
+}
+
+/* ===== PERFIL CÍRCULO ===== */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.profile-circle {
+  background-color: white;
+  color: limegreen;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.dropdown-icon {
+  color: white;
+  font-size: 18px;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* ===== MENÚ DESPLEGABLE ===== */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 3em;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* ===== IMAGEN DE PORTADA ===== */
+.portada {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #179900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Imagen que se adapta al tamaño de la portada */
+.portada img.foto-portada {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.9);
+}
+
+/* Botón para editar portada */
+.btn-editar-portada {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-editar-portada img {
+  width: 25px;
+  height: 25px;
+  filter: invert(1); /* vuelve blanco el ícono si es oscuro */
+   transition: transform 0.2s ease;
+}
+
+.btn-editar-portada:hover {
+  background: var(--green);
+  transform: scale(1.1);
+}
+
+.btn-editar-portada:hover img {
+  transform: scale(1.1);
+}
+
+
+/* ===== FOTO PERFIL ===== */
+/* Ícono de edición sobre la foto de perfil */
+.foto-perfil {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #000;
+  overflow: visible; /* permite que el ícono salga del borde */
+}
+
+.foto-perfil img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/*===ICONO EDITAR===*/
+/* botón de edición flotante */
+.icono-editar {
+  position: absolute;
+  bottom: -8px;   /* ligeramente fuera del círculo */
+  right: -8px;    /* desplazado hacia afuera */
+  background: #2B2F2A;
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.icono-editar img {
+  width: 22px;
+  height: 22px;
+  filter: invert(1); /* vuelve blanco el ícono si es negro */
+  transition: transform 0.2s ease;
+}
+
+.icono-editar:hover {
+  background: var(--green);
+  transform: scale(1.1);
+}
+
+.icono-editar:hover img {
+  transform: scale(1.1);
+}
+
+/* ===== ESTRELLAS ===== */
+.rating {
+  position: absolute;
+  bottom: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.rating .star {
+  font-size: 36px;
+  color: #e7e7e7;
+}
+
+.rating .active {
+  color: gold;
+}
+
+/* Para media estrella opcional */
+.rating .star.half {
+  background: linear-gradient(90deg, gold 50%, #777 50%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.valor-rating {
+  font-size: 18px;
+  color: white;
+  margin-left: 10px;
+}
+
+/* ===== PERFIL MAIN ===== */
+.perfil-main {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 190px 60px 60px;
+  background: #141517; /* FONDO OSCURO como pediste */
+  color: white;
+  font-family: Noto Sans;
+}
+
+/* COLUMNA IZQUIERDA */
+.perfil-info {
+  background: #1c1d1f;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  width: 400px;
+}
+
+.perfil-info form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perfil-info input {
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #2b2c2f;
+  color: white;
+}
+
+.btn-editar-info {
+  margin-top: 15px;
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* COLUMNA DERECHA */
+.perfil-insignias {
+  flex: 1;
+  background: #1c1d1f;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.insignias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.insignia {
+  text-align: center;
+}
+
+.insignia img {
+  width: 80px;
+  height: 80px;
+}
+
+.insignia p {
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .perfil-main {
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20px;
+  }
+
+  .perfil-info, .perfil-insignias {
+    width: 100%;
+  }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil del Jugador — VersusMe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles_perfil_jugador.css">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">VersusMe</div>
+
+    <div class="nav-links" id="navLinks">
+      <button class="nav-btn">
+        <img src="assets/img/img_navbar/dashboards.png" alt="home">
+        DASHBOARDS
+      </button>
+      <button class="nav-btn">
+        <img src="assets/img/img_navbar/crear_partido.png" alt="crear">
+        CREAR PARTIDO
+      </button>
+      <button class="nav-btn">
+        <img src="assets/img/img_navbar/historial.png" alt="historial">
+        HISTORIAL
+      </button>
+    </div>
+
+    <div class="profile" id="profileMenu">
+      <div class="profile-circle">A</div>
+      <span class="dropdown-icon">▾</span>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <div class="dropdown-item">Perfil</div>
+        <div class="dropdown-item">Mensajes</div>
+        <div class="dropdown-item">Cerrar Sesión</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PORTADA -->
+  <section class="portada">
+    <img src="assets/img/img_pefil_jugador/1276476.jpg" alt="Foto de portada" class="foto-portada">
+
+  <button class="btn-editar-portada">
+    <img src="assets/img/img_pefil_jugador/editarperfil1.png" alt="Editar portada">
+  </button>
+
+  <div class="foto-perfil">
+    <img src="assets/img/img_pefil_jugador/Ronaldinho.jpg" alt="Foto de perfil">
+    <div class="icono-editar">
+      <img src="assets/img/img_pefil_jugador/editarperfil1.png" alt="Editar foto-perfil">
+    </div>
+  </div>
+
+    <!-- Estrellas de desempeño -->
+    <div class="rating" data-rating="4.3">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+      <span class="valor-rating"></span>
+    </div>
+  </section>
+
+  <!-- INFORMACIÓN PRINCIPAL -->
+  <main class="perfil-main">
+    <section class="perfil-info">
+      <h2>Información del Jugador</h2>
+      <form>
+        <label>Nombre:</label>
+        <input type="text" value="Andy Morales" disabled>
+
+        <label>Correo electrónico:</label>
+        <input type="email" value="andy.morales@usil.pe" disabled>
+
+        <label>Contraseña:</label>
+        <input type="password" value="********" disabled>
+
+        <label>Distrito:</label>
+        <input type="text" value="La Molina" disabled>
+
+        <button type="button" class="btn-editar-info">Editar información</button>
+      </form>
+    </section>
+
+    <section class="perfil-insignias">
+      <h2>Insignias del Jugador</h2>
+      <div class="insignias-grid">
+        <div class="insignia"><img src="assets/img/img_pefil_jugador/isigniaNovato.png" alt="Insignia 1"><p>Novato</p></div>
+        <div class="insignia"><img src="assets/img/img_pefil_jugador/isigniaCompetidor.webp" alt="Insignia 2"><p>Competidor</p></div>
+        <div class="insignia"><img src="assets/img/img_pefil_jugador/isigniaGanador.png" alt="Insignia 3"><p>Ganador</p></div>
+        <div class="insignia"><img src="assets/img/img_pefil_jugador/isigniaVeterano.webp" alt="Insignia 4"><p>Veterano</p></div>
+        <div class="insignia"><img src="assets/img/img_pefil_jugador/porDesbloquear2.png" alt="Insignia 5"><p>Invicto</p></div>
+        <div class="insignia"><img src="assets/img/img_pefil_jugador/porDesbloquear2.png" alt="Insignia 6"><p>Leyenda</p></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/perfil_jugador.js"></script>
+</body>
+</html>
