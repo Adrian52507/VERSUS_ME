@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Compra de Membresía — VersusMe</title>
   <link rel="stylesheet" href="css/styles_compra_membresia.css">
-</head>
+    <script src="https://kit.fontawesome.com/bc80db73e6.js" crossorigin="anonymous">
+  </script> 
 
+</head>
 <body>
   <nav>
     <div class="logo">VersusMe</div>
@@ -60,8 +61,8 @@
 
       <div class="detalle-compra">
         <div class="detalle-header">
-          <h3>Suscripción a VersusMe Pro</h3>
-          <span>$5.00 USD</span>
+          <h3 class="h3">Suscripción a VersusMe Pro</h3>
+          <span>USD $5.00</span>
         </div>
         <p class="gris">Facturación mensual</p>
 
@@ -69,19 +70,19 @@
         
         <div class="linea">
           <span>Subtotal</span>
-          <span>$5.00 USD</span>
+          <span>USD $5.00</span>
         </div>
 
         <div class="linea gris">
           <span>Impuestos</span>
-          <span>$0.00 USD</span>
+          <span>USD $0.00</span>
         </div>
 
         <hr>
 
         <div class="total">
           <span>Total adeudado hoy</span>
-          <span>$5.00 USD</span>
+          <span>USD $5.00</span>
         </div>
       </div>
     </section>
@@ -101,47 +102,70 @@
   <h3>Información de la tarjeta</h3>
 
   <div class="tarjeta">
+    <i class="fa-brands fa-cc-visa"></i>
+    <i class="fa-brands fa-cc-mastercard"></i>
+    <i class="fa-brands fa-cc-diners-club"></i>
   <input type="text" placeholder="1234 5678 9012 3456" class="input-tarjeta">
-  <!-- <div class="logos-tarjetas">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Mastercard_logo.png" alt="Mastercard">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg" alt="AmEx">
   </div>
-  </div>
-  -->
-
+  
   <div class="fila-pequena">
     <input type="text" placeholder="MM / AA">
-    <input type="text" placeholder="CVC">
+    <input type="text" class="iconcvc" placeholder="CVC">
+
   </div>
 
   <h3>Nombre del titular de la tarjeta</h3>
   <input type="text" class="input-largo" placeholder="Nombre completo">
 
   <h3>Dirección de factura</h3>
-  <div class="direccion">
-    <div class="columna">
-      <select>
-        <option>Perú</option>
-        <option>Chile</option>
-        <option>Colombia</option>
-        <option>México</option>
-      </select>
-      <input type="text" placeholder="Línea 1 de dirección">
-      <input type="text" placeholder="Línea 2 de dirección">
-    <div class="fila-pequenna">
-      <input type="text" placeholder="Distrito">
-      <input type="text" placeholder="Código postal">
-    </div>
-        <select>
-        <option>Lima</option>
-        <option>Arequipa</option>
-        <option>Trujillo</option>
-        <option>Piura</option>
-      </select>
-    </div>
   
+ 
+ <div class="direccion-factura">
+
+
+  <div class="pais-fila">
+
+    <select id="pais" name="pais" class="select-superior">
+      <option value="pe" selected>Perú</option>
+      <option value="cl">Chile</option>
+      <option value="mx">México</option>
+    </select>
   </div>
+
+
+  <div class="direccion-fila">
+
+    <input type="text" id="linea1" name="linea1" placeholder="Ej. Calle Los Olivos 123">
+  </div>
+
+
+  <div class="direccion-fila">
+  
+    <input type="text" id="linea2" name="linea2" placeholder="Ej. Departamento o referencia">
+  </div>
+
+
+  <div class="direccion-fila doble-columna">
+    <div class="columna-izq">
+      
+      <input type="text" id="distrito" name="distrito" placeholder="Ej. Miraflores">
+    </div>
+    <div class="columna-der">
+      
+      <input type="text" id="postal" name="postal" placeholder="Ej. 15074">
+    </div>
+  </div>
+
+  <div class="provincia-fila">
+    <select id="provincia" name="provincia" class="select-inferior" >
+      <option value="lima">Lima</option>
+      <option value="cusco">Cusco</option>
+      <option value="arequipa">Arequipa</option>
+    </select>
+  </div>
+
+</div>
+
 
   <div class="terminos">
     <input type="checkbox" id="check">
@@ -149,6 +173,12 @@
   </div>
 
   <button class="btn-suscribir">Suscribirse</button>
+  <div class="footer-pago">
+  <p>Powered by <span class="N">N</span> &nbsp; | &nbsp; 
+    <a href="#">Condiciones</a> &nbsp; 
+    <a href="#">Privacidad</a>
+  </p>
+</div>
 </div>
 
 </main>
