@@ -1,0 +1,34 @@
+# Dependencias
+node_modules/
+
+# Archivos de entorno (¡NO subir!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Directorios de compilación o caché
+.vercel/
+.next/
+dist/
+build/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Archivos de prueba temporales
+*.log
+*.tmp
+*.swp
