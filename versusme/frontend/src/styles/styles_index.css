@@ -359,7 +359,7 @@ body {
 }
 
 .planes {
-  background: transparent;
+  background: #191d19;
   padding: 4rem 0;
 }
 
@@ -466,7 +466,8 @@ body {
   margin-bottom: 12px;
 }
 
-.precio .precio-detalle .linea+.linea {
+.precio .precio-detalle .linea {
+  background-color: #101410;
   margin-top: 0px;
 }
 

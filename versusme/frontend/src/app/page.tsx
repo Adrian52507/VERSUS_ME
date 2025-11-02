@@ -247,7 +247,9 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <button className="btn-cta">Comienza Gratis</button>
+              <Link href="/registro">
+                <button className="btn-cta">Comienza Gratis</button>
+              </Link>
             </article>
 
             <article className="precio pro destacado">
@@ -286,7 +288,9 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <button className="btn-cta">Comienza Crack</button>
+              <Link href="/registro">
+                <button className="btn-cta">Comienza Crack</button>
+              </Link>
               <p className="nota">
                 El primer mes es gratis • Cancela en cualquier momento • Sin compromisos
               </p>
@@ -319,9 +323,15 @@ export default function Home() {
             </div>
             <br />
             <div className="redes">
-              <Image src="/assets/img/contactoyfoter/facebook.png" alt="Facebook" width={24} height={24} />
-              <Image src="/assets/img/contactoyfoter/instagram.png" alt="Instagram" width={24} height={24} />
-              <Image src="/assets/img/contactoyfoter/X.png" alt="X" width={24} height={24} />
+              <Link href="/proximamente" target="_blank" rel="noopener noreferrer">
+                <Image src="/assets/img/contactoyfoter/facebook.png" alt="Facebook" width={24} height={24} />
+              </Link>
+              <Link href="/proximamente" target="_blank" rel="noopener noreferrer">
+                <Image src="/assets/img/contactoyfoter/instagram.png" alt="Instagram" width={24} height={24} />
+              </Link>
+              <Link href="/proximamente" target="_blank" rel="noopener noreferrer">
+                <Image src="/assets/img/contactoyfoter/X.png" alt="X" width={24} height={24} />
+              </Link>
             </div>
           </div>
         </div>

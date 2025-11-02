@@ -1,0 +1,30 @@
+.proximamente-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #191d19;
+  text-align: center;
+  padding: 20px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+
+  /* 🔥 Animación de movimiento */
+  animation: subirBajar 2s ease-in-out infinite;
+}
+
+/* ✨ Definición de la animación */
+@keyframes subirBajar {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
