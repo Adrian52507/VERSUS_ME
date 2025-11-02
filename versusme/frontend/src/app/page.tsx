@@ -61,7 +61,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="home">
       {/* INTRO */}
       <section className="intro">
         <div className="intro-fondo"></div>
@@ -295,7 +295,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER / CONTACTO */}
+      {/* FOOTER*/}
       <footer className="footer">
         <div className="footer-contenedor revelar">
           <div className="columna">
@@ -304,18 +304,20 @@ export default function Home() {
               La plataforma que conecta a los amantes del deporte en Lima. Únete a nuestra comunidad y
               descubre una nueva forma de mantenerte activo en la ciudad.
             </p>
+            <br />
             <div className="footer-item">
               <Image src="/assets/img/contactoyfoter/imglocation.png" alt="Ubicación" width={20} height={20} />
               <span>Lima, Perú - Todos los distritos</span>
             </div>
             <div className="footer-item">
               <Image src="/assets/img/contactoyfoter/imgemail.png" alt="Correo" width={20} height={20} />
-              <a href="mailto:hola@versusme.com">hola@versusme.com</a>
+              <a href="mailto:versusme.general@gmail.com">versusme.general@gmail.com</a>
             </div>
             <div className="footer-item">
               <Image src="/assets/img/contactoyfoter/imgphone.png" alt="Teléfono" width={20} height={20} />
-              <span>+51 1 234-5678</span>
+              <span>+51 964825187</span>
             </div>
+            <br />
             <div className="redes">
               <Image src="/assets/img/contactoyfoter/facebook.png" alt="Facebook" width={24} height={24} />
               <Image src="/assets/img/contactoyfoter/instagram.png" alt="Instagram" width={24} height={24} />
@@ -324,7 +326,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 
