@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Bebas Neue';
-  src: url('../assets/fonts/BebasNeue-Regular.otf') format('opentype');
+  src: url('../../public/assets/fonts/BebasNeue-Regular.otf') format('opentype');
 }
 
 ::-webkit-scrollbar { display: none; }
@@ -26,7 +26,7 @@ body {
 .intro .intro-fondo {
   position: absolute;
   inset: 0;
-  background-image: url('../assets/img/img_index/fondof.jpg');
+  background-image: url('../../public/assets/img/img_index/fondof.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
