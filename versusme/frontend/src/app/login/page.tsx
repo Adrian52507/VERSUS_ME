@@ -19,22 +19,26 @@ export default function LoginPage() {
     setSuccess("");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/login`, {
+      // 👇 Si tienes .env con NEXT_PUBLIC_API_BASE, úsalo. Si no, usa el localhost fijo:
+      const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+
+      const res = await fetch(`${API_BASE}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        credentials: "include", // <-- permite recibir cookie del backend
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (!res.ok) throw new Error(data?.error || "Error al iniciar sesión");
+
       setSuccess("Inicio de sesión exitoso ✅");
 
-      // Redirigir a perfil o dashboard
+      // ✅ Redirige al dashboard tras un pequeño delay
       setTimeout(() => {
-        window.location.href = "/perfil";
-      }, 1000);
+        window.location.href = "/dashboard";
+      }, 800);
     } catch (err: any) {
       setError(err.message || "Error de red");
     } finally {
@@ -57,7 +61,9 @@ export default function LoginPage() {
           <br />
           VersusMe!
         </h1>
+
         <p className="desc">Sigue descubriendo retos deportivos en Lima</p>
+
         <p className="alternativa">
           ¿No tienes cuenta?{" "}
           <Link href="/registro" className="link">
