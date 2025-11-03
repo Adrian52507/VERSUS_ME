@@ -126,13 +126,20 @@ export const dashboard = async (req, res) => {
       return res.status(401).json({ error: "No autenticado" });
     }
 
+    // 🔐 Verificamos el JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    res.json({ message: `Bienvenido al dashboard, ${decoded.name}` });
+
+    // ✅ Respondemos con ambos: mensaje y nombre
+    res.json({
+      message: `Bienvenido al dashboard, ${decoded.name}`,
+      name: decoded.name,
+    });
   } catch (err) {
     console.error("Error en dashboard:", err);
     res.status(401).json({ error: "Token inválido o expirado" });
   }
 };
+
 
 export const resendCode = async (req, res) => {
   try {
