@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import { register, login, dashboard, logout, verifyCode, resendCode } from "./auth.js";
+import { register, login, dashboard, logout, verifyCode, resendCode, forgotPassword, resetPassword } from "./auth.js";
 
 
 dotenv.config();
@@ -30,3 +30,6 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`🚀 API lista en http://localhost:${PORT}`));
 app.post("/api/verify", verifyCode);
 app.post("/api/resend", resendCode);
+
+app.post("/api/forgot-password", forgotPassword);
+app.post("/api/reset-password", resetPassword);

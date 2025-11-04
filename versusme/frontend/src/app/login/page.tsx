@@ -116,7 +116,11 @@ export default function LoginPage() {
               }}
             />
           </div>
-
+          <p className="recuperar">
+            <Link href="/recuperar" className="link">
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </p>
           {error && <p style={{ color: "red" }}>{error}</p>}
           {success && <p style={{ color: "green" }}>{success}</p>}
 

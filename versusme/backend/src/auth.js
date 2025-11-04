@@ -2,7 +2,9 @@ import bcrypt from "bcryptjs";
 import { pool } from "./db.js";
 import { sendVerificationEmail } from "./mailer.js";
 import jwt from "jsonwebtoken";
-
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const register = async (req, res) => {
   try {
@@ -164,3 +166,74 @@ export const logout = async (req, res) => {
   res.json({ message: "Sesión cerrada correctamente" });
 };
 
+
+/**
+ * Enviar enlace de recuperación de contraseña
+ */
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: "Correo requerido" });
+
+  try {
+    // Buscar usuario en la base de datos
+    const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+    if (rows.length === 0) {
+      // ⚠️ No indicamos si existe o no, para evitar revelar información
+      return res.json({ message: "Si existe una cuenta, se ha enviado un enlace de recuperación" });
+    }
+
+    const user = rows[0];
+
+    // Crear token de recuperación válido por 15 minutos
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "15m" });
+    const resetLink = `${process.env.ORIGIN_FRONTEND}/restablecer?token=${token}`;
+
+    // Configurar el transporte de correo (Gmail, Outlook, etc.)
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"VersusMe 🏆" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Recuperación de contraseña — VersusMe",
+      html: `
+        <h2>Recuperación de contraseña</h2>
+        <p>Hola ${user.name},</p>
+        <p>Haz clic en el siguiente enlace para restablecer tu contraseña (válido por 15 minutos):</p>
+        <a href="${resetLink}" style="background:#25C50E;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;">Restablecer contraseña</a>
+        <p>Si no solicitaste este cambio, ignora este mensaje.</p>
+      `,
+    });
+
+    res.json({ message: "Correo de recuperación enviado si la cuenta existe ✅" });
+  } catch (error) {
+    console.error("Error en forgotPassword:", error);
+    res.status(500).json({ error: "Error al enviar correo" });
+  }
+};
+
+
+/**
+ * Restablecer contraseña
+ */
+export const resetPassword = async (req, res) => {
+  const { token, password } = req.body;
+  if (!token || !password) return res.status(400).json({ error: "Datos incompletos" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const hashed = await bcrypt.hash(password, 10);
+    await pool.query("UPDATE users SET password_hash = ? WHERE id = ?", [hashed, decoded.id]);
+
+    res.json({ message: "Contraseña actualizada correctamente ✅" });
+  } catch (error) {
+    console.error("Error en resetPassword:", error);
+    res.status(400).json({ error: "Token inválido o expirado" });
+  }
+};

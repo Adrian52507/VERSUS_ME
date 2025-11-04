@@ -167,3 +167,21 @@ body{
   .marca{ font-size:44px; }
   .titulo{ font-size:28px; line-height:38px; }
 }
+
+.recuperar {
+  padding-top: 0.3em;
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.recuperar .link {
+  color: rgba(0, 0, 0, 0.50) ;
+  font-weight: lighter;
+  text-decoration: none;
+}
+
+.recuperar .link:hover {
+  text-decoration: underline;
+}
+  
