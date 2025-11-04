@@ -42,12 +42,6 @@ body {
   gap: 2em;
 }
 
-.brand {
-  font-family: "Squada One", system-ui, sans-serif;
-  font-size: 3em;
-  letter-spacing: .05em;
-}
-
 .top-actions {
   display: flex;
   align-items: center;

@@ -1,44 +1,149 @@
 .perfil-container {
-  color: #fff;
-  font-family: Inter, sans-serif;
-  background: #141517;
-  min-height: 100vh;
-  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Noto Sans", sans-serif;
+  color: white;
 }
 
 .perfil-portada {
   position: relative;
-  height: 200px;
-  background: var(--green);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
 }
+
+.cover-image {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.brand {
+  font-family: "Squada One", system-ui, sans-serif;
+  font-size: 3em;
+  letter-spacing: .05em;
+}
+
+.edit-cover-btn {
+  position: absolute;
+  top: 14em;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  color: black;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-cover-btn:hover {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
 
 .perfil-foto {
   position: absolute;
-  bottom: -50px;
-  border: 4px solid #fff;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.foto-hover {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.foto-img {
   border-radius: 50%;
-  overflow: hidden;
-  width: 100px;
-  height: 100px;
-  background: #fff;
+  transition: filter 0.3s ease;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.foto-hover:hover .hover-overlay {
+  opacity: 1;
+}
+
+.foto-hover:hover .foto-img {
+  filter: brightness(60%);
+}
+
+.perfil-main {
+  display: flex;
+  gap: 40px;
+  margin-top: 100px;
+  max-width: 1000px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .perfil-info {
-  text-align: center;
-  margin-top: 70px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perfil-info input,
+.perfil-info textarea {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  color: white;
+}
+
+.btn-editar, .btn-guardar {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-editar:hover, .btn-guardar:hover {
+  background-color: #45a049;
 }
 
 .perfil-insignias {
-  margin-top: 40px;
-  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
 }
 
 .insignias-grid {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.mensaje {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.15);
+  padding: 10px 20px;
+  border-radius: 10px;
 }
