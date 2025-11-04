@@ -12,6 +12,8 @@ export const pool = mysql.createPool({
   }
 });
 
+export default pool;
+
 // Verificación de conexión
 (async () => {
   try {

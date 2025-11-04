@@ -3,6 +3,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { register, login, dashboard, logout, verifyCode, resendCode, forgotPassword, resetPassword } from "./auth.js";
+import { getProfile, updateProfile } from "./profile.js";
+
 
 
 dotenv.config();
@@ -11,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.ORIGIN_FRONTEND,
+    origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
     credentials: true,
   })
 );
@@ -33,3 +35,7 @@ app.post("/api/resend", resendCode);
 
 app.post("/api/forgot-password", forgotPassword);
 app.post("/api/reset-password", resetPassword);
+
+// Perfil de usuario
+app.get("/api/profile", getProfile);
+app.put("/api/profile", updateProfile);

@@ -54,6 +54,7 @@ body {
   gap: 1em;
 }
 
+/* 🔹 Efecto hover para los botones del topbar */
 .pill {
   display: inline-flex;
   align-items: center;
@@ -65,7 +66,21 @@ body {
   border-radius: 10px;
   text-decoration: none;
   font-size: 10px;
+  transition: all 0.25s ease; /* ← transición suave */
 }
+
+.pill-solid {
+  background: rgba(37, 197, 14);
+  color: #fff;
+}
+
+/* 🔹 Hover: fondo verde y letras blancas */
+.pill:hover {
+  background: var(--green);
+  color: black;
+}
+
+
 
 .pill img {
   width: 16px;

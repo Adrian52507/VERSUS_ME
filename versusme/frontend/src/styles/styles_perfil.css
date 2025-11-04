@@ -1,0 +1,44 @@
+.perfil-container {
+  color: #fff;
+  font-family: Inter, sans-serif;
+  background: #141517;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.perfil-portada {
+  position: relative;
+  height: 200px;
+  background: var(--green);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.perfil-foto {
+  position: absolute;
+  bottom: -50px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  background: #fff;
+}
+
+.perfil-info {
+  text-align: center;
+  margin-top: 70px;
+}
+
+.perfil-insignias {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.insignias-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}

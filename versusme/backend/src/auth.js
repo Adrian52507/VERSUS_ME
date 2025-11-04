@@ -103,13 +103,18 @@ export const login = async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    console.log("✅ Generando cookie con token:", token);
+
     // Enviar cookie HTTP-only
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 24 * 60 * 60 * 1000, // 1 día
+      secure: false,     // ⚠️ true solo en producción con HTTPS
+      sameSite: "none",  // 🔥 necesario si frontend y backend usan distintos puertos
+      maxAge: 24 * 60 * 60 * 1000,
     });
+
+
+    console.log("✅ Cookie seteada correctamente");
 
     res.json({ message: "Inicio de sesión exitoso ✅" });
   } catch (err) {

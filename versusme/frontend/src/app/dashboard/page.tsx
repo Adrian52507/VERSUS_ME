@@ -59,9 +59,9 @@ export default function DashboardPage() {
           <div className="brand">VersusMe</div>
 
           <nav className="top-actions">
-            <Link className="pill pill-solid" href="#">
+            <Link className="pill" href="#">
               <Image
-                src="/assets/img/img_dashboard_principal/casa_blanco_icono.png"
+                src="/assets/img/img_dashboard_principal/casa_negro_icono.png"
                 alt=""
                 width={16}
                 height={16}
