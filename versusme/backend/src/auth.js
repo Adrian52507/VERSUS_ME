@@ -103,15 +103,19 @@ export const login = async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    // 🔐 Verificamos el JWT
+    console.log("🔑 JWT_SECRET usado para verificar:", process.env.JWT_SECRET);
+
     console.log("✅ Generando cookie con token:", token);
 
     // Enviar cookie HTTP-only
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,     // ⚠️ true solo en producción con HTTPS
-      sameSite: "none",  // 🔥 necesario si frontend y backend usan distintos puertos
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000,
     });
+
 
 
     console.log("✅ Cookie seteada correctamente");
@@ -133,7 +137,6 @@ export const dashboard = async (req, res) => {
       return res.status(401).json({ error: "No autenticado" });
     }
 
-    // 🔐 Verificamos el JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // ✅ Respondemos con ambos: mensaje y nombre
