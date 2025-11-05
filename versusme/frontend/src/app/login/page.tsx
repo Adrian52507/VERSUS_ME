@@ -11,6 +11,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPass, setShowPass] = useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,7 +97,7 @@ export default function LoginPage() {
               className="input"
               id="pass"
               name="password"
-              type="password"
+              type={showPass ? "text" : "password"}
               placeholder="********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -104,18 +106,18 @@ export default function LoginPage() {
             />
             <Image
               className="ojo"
-              src="/assets/img/img_login/ojo.png"
+              src={
+                showPass
+                  ? "/assets/img/img_login/cerrar_ojo.png"
+                  : "/assets/img/img_login/ojo.png"
+              }
               width={20}
               height={20}
               alt="Mostrar u ocultar contraseña"
-              onClick={() => {
-                const input = document.getElementById("pass") as HTMLInputElement;
-                if (input) {
-                  input.type = input.type === "password" ? "text" : "password";
-                }
-              }}
+              onClick={() => setShowPass(!showPass)}
             />
           </div>
+
           <p className="recuperar">
             <Link href="/recuperar" className="link">
               ¿Olvidaste tu contraseña?

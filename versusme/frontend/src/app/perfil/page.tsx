@@ -12,7 +12,7 @@ export default function PerfilPage() {
   const [mensaje, setMensaje] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [usuario, setUsuario] = useState("");
-  
+
   useEffect(() => {
     const fetchPerfil = async () => {
       const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
@@ -105,8 +105,9 @@ export default function PerfilPage() {
       {/* 🔹 Top Navigation */}
       <div className="topbar">
         <div className="container">
-          <h1 className="brand">VersusMe</h1>
-
+          <Link href="/">
+            <h1 className="brand">VersusMe</h1>
+          </Link>
           <nav className="top-actions">
             <Link className="pill" href="/dashboard">
               <Image
@@ -139,9 +140,29 @@ export default function PerfilPage() {
             </Link>
 
             <div className="profile" style={{ position: "relative" }}>
-              <span className="badge">
-                {usuario.charAt(0).toUpperCase()}
-              </span>
+              <div
+                className="badge"
+                style={{
+                  overflow: "hidden",
+                  padding: 0,
+                  background: "none",
+                  border: "2px solid #5F676D",
+                }}
+              >
+                <Image
+                  src={
+                    perfil?.profile_picture
+                      ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                      : "/assets/img/img_perfil/default-user.jpg"
+                  }
+                  alt="Foto de perfil"
+                  width={50}
+                  height={50}
+                  style={{ objectFit: "cover", borderRadius: "50%" }}
+                  unoptimized
+                />
+              </div>
+
 
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -229,10 +250,15 @@ export default function PerfilPage() {
       <div className="perfil-container">
         <div className="perfil-portada">
           <Image
-            src={perfil.cover_photo || "/assets/img/img_perfil/default-cover.jpg"}
+            src={
+              perfil.cover_photo
+                ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.cover_photo.replace(/^\/+/, "")}`
+                : "/assets/img/img_perfil/default-cover.jpg"
+            }
             alt="Portada"
             fill
             className="cover-image"
+            unoptimized
           />
           <label className="edit-cover-btn">
             ✏️ Editar portada
@@ -242,11 +268,16 @@ export default function PerfilPage() {
           <div className="perfil-foto">
             <label className="foto-hover">
               <Image
-                src={perfil.profile_picture || "/assets/img/img_perfil/default-user.jpg"}
+                src={
+                  perfil.profile_picture
+                    ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                    : "/assets/img/img_perfil/default-user.jpg"
+                }
                 alt="Perfil"
                 width={120}
                 height={120}
                 className="foto-img"
+                unoptimized
               />
               <div className="hover-overlay">✏️</div>
               <input type="file" accept="image/*" hidden onChange={handleChangeProfilePicture} />

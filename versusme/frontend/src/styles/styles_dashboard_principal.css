@@ -48,6 +48,11 @@ body {
   gap: 1em;
 }
 
+.brand {
+  font-family: "Squada One", system-ui, sans-serif;
+  font-size: 3em;
+  letter-spacing: .05em;
+}
 /* 🔹 Efecto hover para los botones del topbar */
 .pill {
   display: inline-flex;
@@ -73,8 +78,6 @@ body {
   background: var(--green);
   color: black;
 }
-
-
 
 .pill img {
   width: 16px;

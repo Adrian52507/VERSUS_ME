@@ -10,14 +10,16 @@ export default function DashboardPage() {
   const [mensaje, setMensaje] = useState("");
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [perfil, setPerfil] = useState<any>(null);
 
-  // 🔹 Fetch del dashboard
+
+  // 🔹 Fetch del dashboard y perfil
   useEffect(() => {
+    // 💡 Define la variable fuera de las funciones internas
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+
     const fetchDashboard = async () => {
       try {
-        const API_BASE =
-          process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
-
         const res = await fetch(`${API_BASE}/api/dashboard`, {
           credentials: "include",
         });
@@ -36,8 +38,25 @@ export default function DashboardPage() {
       }
     };
 
+    // 👇 Agrega el fetch del perfil
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/profile`, {
+          credentials: "include",
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setPerfil(data);
+        }
+      } catch (err) {
+        console.error("Error cargando perfil:", err);
+      }
+    };
+
     fetchDashboard();
+    fetchProfile(); // <- Llamada al perfil
   }, []);
+
 
   const handleLogout = async () => {
     const API_BASE =
@@ -90,9 +109,28 @@ export default function DashboardPage() {
             </Link>
 
             <div className="profile" style={{ position: "relative" }}>
-              <span className="badge">
-                {usuario.charAt(0).toUpperCase()}
-              </span>
+              <div
+                className="badge"
+                style={{
+                  overflow: "hidden",
+                  padding: 0,
+                  background: "none",
+                  border: "2px solid #5F676D",
+                }}
+              >
+                <Image
+                  src={
+                    perfil?.profile_picture
+                      ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                      : "/assets/img/img_perfil/default-user.jpg"
+                  }
+                  alt="Foto de perfil"
+                  width={50}
+                  height={50}
+                  style={{ objectFit: "cover", borderRadius: "50%" }}
+                  unoptimized
+                />
+              </div>
 
               {/* 🔽 Flecha interactiva */}
               <button

@@ -61,3 +61,43 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ error: "Error del servidor" });
   }
 };
+
+export const uploadProfilePicture = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ error: "No autenticado" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const filePath = `/uploads/${req.file.filename}`;
+
+    await pool.query(
+      "UPDATE profiles SET profile_picture = ? WHERE user_id = ?",
+      [filePath, decoded.id]
+    );
+
+    res.json({ profile_picture: filePath });
+  } catch (err) {
+    console.error("❌ Error al actualizar imagen de perfil:", err);
+    res.status(500).json({ error: "Error al actualizar imagen de perfil" });
+  }
+};
+
+export const uploadCoverPhoto = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ error: "No autenticado" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const filePath = `/uploads/${req.file.filename}`;
+
+    await pool.query(
+      "UPDATE profiles SET cover_photo = ? WHERE user_id = ?",
+      [filePath, decoded.id]
+    );
+
+    res.json({ cover_photo: filePath });
+  } catch (err) {
+    console.error("❌ Error al actualizar foto de portada:", err);
+    res.status(500).json({ error: "Error al actualizar foto de portada" });
+  }
+};
