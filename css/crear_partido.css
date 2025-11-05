@@ -1,0 +1,276 @@
+:root{
+  --green:#25C50E;
+  --bg:#141517;
+  --top:#2B2F2A;
+  --stroke:#5F676D;
+  --text:#FAFAFA;
+  --yellow:#F7D41D;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", sans-serif;
+}
+
+.container{ width:min(1240px,92vw); margin:0 auto; }
+
+.topbar{ background:var(--top); height:90px; display:flex; align-items:center; }
+.topbar .container{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.brand{ font-family:"Squada One", system-ui, sans-serif; font-size:64px; letter-spacing:.05em; }
+.top-actions{ display:flex; align-items:center; gap:18px; }
+.pill{
+  display:inline-flex; align-items:center; gap:10px; height:48px; padding:0 22px;
+  background:rgba(255,255,255,.9); color:#000; border-radius:10px; text-decoration:none; font-weight:600; font-size:17px;
+}
+.pill img{ width:20px; height:20px; }
+.pill-solid{ background:rgba(37,197,14,.91); color:#fff; }
+.profile{ display:flex; align-items:center; gap:10px; }
+.profile .badge{ width:50px; height:50px; display:grid; place-items:center; border-radius:50%; background:#fff; color:var(--green); font-weight:800; font-size:25px; }
+.profile .caret{ width:18px; height:18px; }
+
+.page{ padding:34px 0 80px; }
+
+.intro{ display:flex; align-items:center; gap:16px; margin:20px 0 16px; }
+.intro-icon{ width:60px; height:60px; border-radius:6px; background:var(--green); display:grid; place-items:center; }
+.intro-icon img{ width:30px; height:30px; }
+.intro-copy h1{ margin:0 0 4px; font-weight:800; font-size:30px; }
+.intro-copy p{ margin:0; font-family:"Noto Sans", sans-serif; font-weight:700; color:#A9A9A9; font-size:19px; }
+
+.panel{
+  border:2px solid var(--stroke);
+  border-radius:8px;
+  background:transparent;
+  box-shadow:0 4px 5px rgba(0,0,0,.25);
+}
+
+.progress-panel{ padding:16px 18px 12px; margin-top:8px; }
+.progress-head{ display:flex; align-items:center; justify-content:space-between; font-family:"Noto Sans", sans-serif; font-weight:600; font-size:17px; }
+.progress-track{
+  height:10px;
+  border-radius:24px;
+  background: transparent;
+  position:relative;
+  margin:12px 0 10px;
+}
+.progress-bar{
+  position:absolute; left:0; top:0; bottom:0;
+  width:0%;
+  background: var(--yellow);
+  border-radius:24px;
+  transition: width .35s ease;
+}
+
+.progress-steps{ display:grid; grid-template-columns: repeat(6,1fr); text-align:center; font-family:"Noto Sans"; font-weight:700; font-size:15px; }
+.progress-steps .dot{ width:25px; height:25px; border-radius:50%; background:#ECECEC; display:block; margin:8px auto 6px; }
+.progress-steps .dot.is-done{
+  background: var(--yellow);
+}
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:100px; margin:22px 0; }
+.field-label{ display:block; margin:14px 0 8px; font-family:"Noto Sans", sans-serif; font-weight:700; font-size:17px; }
+
+
+.input, 
+.textarea{
+  display:flex; align-items:center; gap:10px;
+  border:2px solid var(--stroke); border-radius:8px; background:transparent; padding:0 12px; height:47px;
+}
+.select select{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 42px 0 12px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FAFAFA;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.select select::-ms-expand{ display:none; }
+
+.input input{ width:100%; height:100%; background:transparent; border:none; outline:none; color:#FAFAFA; }
+.select select option, 
+.input input::placeholder{ color:#737D84; }
+.select{
+  position: relative;
+  display: block;
+  height: 47px;
+  border: 2px solid var(--stroke);
+  border-radius: 8px;
+  background: transparent;
+  padding: 0;
+}
+.select-caret{
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  opacity: .7;
+  pointer-events: none;
+}
+
+.textarea{ height:auto; padding:8px 12px; }
+.textarea textarea{ width:100%; min-height:120px; border:none; outline:none; background:transparent; color:#FAFAFA; resize:vertical; }
+.chars{ text-align:right; margin-top:6px; font-family:"Noto Sans"; font-weight:700; }
+
+.map-wrap{
+  width:100%;
+  height:341px;
+  border-radius:8px;
+  position:relative;
+  overflow:hidden;
+}
+#map{
+  height:100%;
+  width:100%;
+  display:block;
+  border:0;
+}
+.map-search{
+  position:absolute;
+  left:12px;
+  right:12px;
+  top:12px;
+  height:40px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:0 8px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:6px;
+  background:rgba(0,0,0,.35);
+  backdrop-filter: blur(2px);
+  z-index:1000;
+}
+.map-search input{
+  flex:1;
+  height:100%;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:#FAFAFA;
+}
+.map-search input::placeholder{ color:#C4C8CC; }
+.map-search button{
+  width:40px; height:30px;
+  border:none; background:transparent; cursor:pointer;
+  display:grid; place-items:center;
+}
+.map-search button{ width:40px; height:30px; border:none; background:transparent; cursor:pointer; }
+.map-search img{ width:20px; height:20px; filter:invert(1); opacity:.85; }
+#map .leaflet-top.leaflet-left{ top:64px; }
+/* Fecha / hora */
+.datetime-row{ display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:16px; }
+.dt-item small.muted{ color:#5F676D; }
+
+/* Apuesta */
+.bet-row{ display:grid; grid-template-columns:80px 80px 1fr; gap:12px; align-items:center; }
+.bet-btn{
+  height:78px; border-radius:8px; border:2px solid var(--stroke);
+  background:transparent; color:#FAFAFA; font-weight:700; cursor:pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bet-btn:hover {
+  background: #2b2f2a;
+}
+.bet-btn.active{
+  background: var(--green);
+  color: #141517;
+  border-color: var(--green);
+}
+.bet-amount{ height:78px; }
+.bet-btn:focus {
+  background: var(--green);
+  color: #141517;
+  border-color: var(--green);
+}
+
+.tips{ display:flex; gap:16px; padding:14px; margin-top:14px; }
+.tips img{ width:30px; height:30px; }
+.tips ul{ list-style: none;
+  margin: 6px 0 0 8px;
+  padding: 0; }
+.tips li{
+  position: relative;
+  padding-left: 34px;
+  margin: 10px 0;
+  line-height: 1.5;
+  word-spacing: 1.5px;
+}
+.tips li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  background: url("../assets/img/img_index/check2.png") no-repeat center / contain;
+
+}
+.actions { display:flex; justify-content:space-between; gap:40px; margin-top:26px; }
+
+.btn-outline{
+  height:59px; padding:0 18px; border:1px solid var(--stroke); border-radius:8px; background:transparent; color:var(--text);
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+}
+.btn-outline img{ width:25px; height:25px; }
+.btn-primary{ height:59px; padding:0 24px; border-radius:8px; border:none; background:var(--green); color:var(--text); font-weight:600; font-size:20px;cursor:pointer;user-select:none; }
+.actions .btn-outline,
+.actions .btn-primary{
+  width:100%;
+  display:flex; justify-content:center; align-items:center;
+  height:59px; padding:0 24px; border-radius:8px;
+  border:1px solid var(--stroke);
+  background:transparent;
+  color:var(--text);
+  font-weight:600; font-size:20px;
+  cursor:pointer; user-select:none;
+  text-decoration:none;
+  transition: background .2s ease, color .2s ease, transform .06s;
+}
+.actions .btn-outline:hover,
+.actions .btn-primary:hover{
+  background: var(--green);
+}
+.actions .btn-outline:active,
+.actions .btn-primary:active{
+  transform: scale(0.995);
+}
+@media (max-width:1100px){
+  .form-grid{ grid-template-columns:1fr; }
+  .datetime-row{ grid-template-columns:1fr; }
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+.custom-date, .custom-time {
+  position: relative;
+}
+.custom-date img, .custom-time img {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  filter: invert(1);
+}
+
+.custom-date img, .custom-time img {
+  pointer-events: none;
+}

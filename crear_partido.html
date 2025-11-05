@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crear Partido — VersusMe</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Inter:wght@500;600;700;800;900&family=Noto+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="css/crear_partido.css">
+</head>
+<body>
+  <!-- Header (coherente con dashboard) -->
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">VersusMe</div>
+      <nav class="top-actions">
+        <a class="pill" href="dashboard_principal.html">
+          <img src="assets/img/img_crear_partida/casa_negro_icono.png" alt="">
+          DASHBOARDS
+        </a>
+        <a class="pill pill-solid" href="#">
+          <img src="assets/img/img_dashboard_principal/suma_icono.png" alt="">
+          CREAR PARTIDO
+        </a>
+        <a class="pill" href="historial.html">
+          <img src="assets/img/img_dashboard_principal/reloj_negro_icono.png" alt="">
+          HISTORIAL
+        </a>
+        <div class="profile">
+          <span class="badge">A</span>
+          <img class="caret" src="assets/img/img_dashboard_principal/menor_que_gris_icono.png" alt="">
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      <!-- Título + intro -->
+      <section class="intro">
+        <div class="intro-icon">
+          <!-- (nuevo ícono) usa una ruta temporal; luego la cambias -->
+          <img src="assets/img/img_dashboard_principal/suma_icono.png" alt="">
+        </div>
+        <div class="intro-copy">
+          <h1>Crear Nuevo Partido</h1>
+          <p>Organiza un partido y conecta con otros jugadores en Lima</p>
+        </div>
+      </section>
+
+      <!-- Progreso estático (maquetado) -->
+      <section class="panel progress-panel">
+        <div class="progress-head">
+          <span>Progreso del formulario</span>
+          <span class="progress-count">0/6 completado</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:0%"></div></div>
+        <div class="progress-steps">
+          <div class="step"><span class="dot"></span><span>Deporte</span></div>
+          <div class="step"><span class="dot"></span><span>Ubicación</span></div>
+          <div class="step"><span class="dot"></span><span>Fecha y Hora</span></div>
+          <div class="step"><span class="dot"></span><span>Jugadores</span></div>
+          <div class="step"><span class="dot"></span><span>Apuesta</span></div>
+          <div class="step"><span class="dot"></span><span>Descripción</span></div>
+        </div>
+      </section>
+
+      <!-- Formulario (sin JS) -->
+      <section class="form-grid">
+        <!-- Columna izquierda -->
+        <div class="col">
+          <label class="field-label" for="sport">Deporte</label>
+          <div class="select">
+            <select id="sport">
+              <option value="">Elige un deporte...</option>
+              <option>Fútbol</option>
+              <option>Baloncesto</option>
+              <option>Vóleibol</option>
+              <option>Tenis</option>
+              <option>Pádel</option>
+            </select>
+            <img class="select-caret" src="assets/img/img_dashboard_principal/menor_que_gris_icono.png" alt="">
+          </div>
+
+          <label class="field-label" for="district">Distrito de Lima</label>
+          <div class="select">
+            <select id="district">
+              <option value="">Selecciona un distrito...</option>
+              <option>Miraflores</option>
+              <option>San Isidro</option>
+              <option>Barranco</option>
+              <option>Surco</option>
+              <option>La Molina</option>
+              <option>San Borja</option>
+            </select>
+            <img class="select-caret" src="assets/img/img_dashboard_principal/menor_que_gris_icono.png" alt="">
+          </div>
+          <label class="field-label">Ubicación donde se realizará el partido</label>
+          <div class="map-wrap">
+            <div class="map-search">
+              <input id="map-search" type="text" placeholder="Busca una dirección o lugar" />
+              <button type="button" id="search-btn">
+                <img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt="">
+              </button>
+            </div>
+            <div id="map"></div>
+          </div>
+
+
+          <!-- Fecha y hora -->
+          <div class="datetime-row">
+            <div class="dt-item">
+              <label class="field-label" for="date">Fecha del partido</label>
+              <div class="input custom-date">
+                <input id="date" type="date" placeholder="dd/mm/aaaa">
+                <img class="icon-date" src="assets/img/img_crear_partida/calendario_gris_icono.png" alt="">
+              </div>
+              <small class="muted">Selecciona cuándo se jugará</small>
+            </div>
+            <div class="dt-item">
+              <label class="field-label" for="time">Hora del partido</label>
+              <div class="input custom-time">
+                <input id="time" type="time" placeholder="--:--">
+                <img class="icon-time" src="assets/img/img_crear_partida/reloj_gris_icono.png" alt="">
+              </div>
+              <small class="muted">Hora de inicio del partido</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="col">
+          <label class="field-label" for="players">Número de jugadores</label>
+          <div class="input">
+            <input id="players" type="number" min="2" step="1" placeholder="Ej: 10">
+          </div>
+
+          <!-- Botones de apuesta -->
+          <label class="field-label">¿Quieres incluir una apuesta?</label>
+          <div class="bet-row">
+            <button type="button" class="bet-btn" id="bet-yes">Sí</button>
+            <button type="button" class="bet-btn" id="bet-no">No</button>
+            <div class="input bet-amount">
+              <input type="number" placeholder="Monto Ej: 100">
+            </div>
+          </div>
+
+          <label class="field-label" for="desc">Descripción del partido</label>
+          <div class="textarea">
+            <textarea id="desc" rows="6" maxlength="500" placeholder="Describe los detalles del partido: nivel requerido, equipamiento, reglas especiales, punto de encuentro..."></textarea>
+          </div>
+          <div class="chars">120 caracteres restantes</div>
+
+          <div class="tips">
+            <!-- (icono temporal) -->
+            <img src="assets/img/img_crear_partida/foco_mensaje_amarillo_icono.png" alt="">
+            <div>
+              <strong>Sugerencias para tu descripción</strong>
+              <ul>
+                <li>Nivel de juego requerido (principiante, intermedio, avanzado)</li>
+                <li>Equipamiento necesario (balones, redes, uniformes)</li>
+                <li>Reglas especiales o formato del partido</li>
+                <li>Referencia de Punto de encuentro</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botones -->
+      <section class="actions">
+        <a class="btn-outline" href="dashboard_principal.html">
+          <img src="assets/img/img_crear_partida/flecha_regresar_blanco_icono.png" alt="">
+          Volver a Dashboard
+        </a>
+        <button class="btn-primary">Vista Previa</button>
+      </section>
+
+    </div>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/crear_partido.js"></script>
+</body>
+</html>
