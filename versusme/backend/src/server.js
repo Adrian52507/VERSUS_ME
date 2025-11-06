@@ -59,9 +59,11 @@ app.put("/api/profile", updateProfile);
 app.post("/api/profile/picture", upload.single("profile_picture"), uploadProfilePicture);
 app.post("/api/profile/cover", upload.single("cover_photo"), uploadCoverPhoto);
 
-// 🚫 ❌ Quita esto para Vercel:
-// const PORT = process.env.PORT || 4000;
-// app.listen(PORT, () => console.log(`🚀 API lista en http://localhost:${PORT}`));
-
-// ✅ Exporta el app (para serverless)
+// 🧩 Exportamos app para usarla en Vercel
 export default app;
+
+// 🧩 Si se ejecuta localmente (no en Vercel), iniciar servidor
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => console.log(`🚀 API local lista en http://localhost:${PORT}`));
+}
