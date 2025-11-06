@@ -35,7 +35,7 @@ export const register = async (req, res) => {
     res.json({ message: "Usuario registrado. Código enviado al correo." });
   } catch (err) {
     console.error("Error en registro:", err);
-    res.status(500).json({ error: "Error en registro" });
+    return res.status(500).json({ error: "Error en registro" });
   }
 };
 
@@ -60,7 +60,7 @@ export const verifyCode = async (req, res) => {
     res.json({ message: "Cuenta verificada correctamente ✅" });
   } catch (err) {
     console.error("Error en verificación:", err);
-    res.status(500).json({ error: "Error en verificación" });
+    return res.status(500).json({ error: "Error en verificación" });
   }
 };
 
@@ -123,7 +123,7 @@ export const login = async (req, res) => {
     res.json({ message: "Inicio de sesión exitoso ✅" });
   } catch (err) {
     console.error("Error en login:", err);
-    res.status(500).json({ error: "Error en login" });
+    return res.status(500).json({ error: "Error en login" });
   }
 };
 
@@ -162,7 +162,7 @@ export const resendCode = async (req, res) => {
     res.json({ message: "Código reenviado correctamente ✅" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Error al reenviar código" });
+    return res.status(500).json({ error: "Error al reenviar código" });
   }
 };
 
@@ -170,9 +170,19 @@ export const resendCode = async (req, res) => {
  * Cerrar sesión
  */
 export const logout = async (req, res) => {
-  res.clearCookie("token");
-  res.json({ message: "Sesión cerrada correctamente" });
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+    return res.json({ message: "Sesión cerrada correctamente ✅" });
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    return res.status(500).json({ error: "Error al cerrar sesión" });
+  }
 };
+
 
 
 /**
@@ -221,7 +231,7 @@ export const forgotPassword = async (req, res) => {
     res.json({ message: "Correo de recuperación enviado si la cuenta existe ✅" });
   } catch (error) {
     console.error("Error en forgotPassword:", error);
-    res.status(500).json({ error: "Error al enviar correo" });
+    return res.status(500).json({ error: "Error al enviar correo" });
   }
 };
 
