@@ -1,0 +1,69 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+.mensajeria-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* --- Sidebar oscuro --- */
+.sidebar {
+  width: 300px;
+  background: #0f0f10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* --- Cuadro de búsqueda --- */
+.search-box {
+  margin-top: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background: #e0e0e0;
+  color: #111;
+  font-size: 15px;
+}
+
+/* --- Link inferior --- */
+.bottom-link {
+  margin-top: auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fafafa;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #25c50e;
+}
+
+/* --- Área principal clara --- */
+.main-view {
+  flex: 1;
+  background: linear-gradient(to bottom, #d9dede, #d9e9d8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-text {
+  color: #444;
+  font-size: 15px;
+  text-align: center;
+}

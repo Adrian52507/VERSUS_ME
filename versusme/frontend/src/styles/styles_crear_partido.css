@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* --- Fix para selects en modo oscuro --- */
 select, option {
   background-color: #141517; /* Fondo oscuro consistente con tu diseño */
@@ -11,6 +15,16 @@ select:focus {
 
 option:hover,
 option:checked {
-  background-color: #FAFAFA; /* Fondo verde al seleccionar */
+  background-color: #ffffff; /* Fondo verde al seleccionar */
   color: #141517;           /* Texto oscuro sobre verde */
+}
+
+/* 💡 Forzar que la lista de sugerencias se muestre sobre el mapa */
+.leaflet-container {
+  z-index: 0 !important;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  z-index: 10000 !important; /* Muy por encima del mapa */
 }
