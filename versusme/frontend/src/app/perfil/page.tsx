@@ -152,7 +152,9 @@ export default function PerfilPage() {
                 <Image
                   src={
                     perfil?.profile_picture
-                      ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                      ? perfil.profile_picture.startsWith("http")
+                        ? perfil.profile_picture
+                        : `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
                       : "/assets/img/img_perfil/default-user.jpg"
                   }
                   alt="Foto de perfil"
@@ -161,6 +163,7 @@ export default function PerfilPage() {
                   style={{ objectFit: "cover", borderRadius: "50%" }}
                   unoptimized
                 />
+
               </div>
 
 
@@ -252,7 +255,9 @@ export default function PerfilPage() {
           <Image
             src={
               perfil.cover_photo
-                ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.cover_photo.replace(/^\/+/, "")}`
+                ? perfil.cover_photo.startsWith("http")
+                  ? perfil.cover_photo
+                  : `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.cover_photo.replace(/^\/+/, "")}`
                 : "/assets/img/img_perfil/default-cover.jpg"
             }
             alt="Portada"
@@ -260,6 +265,7 @@ export default function PerfilPage() {
             className="cover-image"
             unoptimized
           />
+
           <label className="edit-cover-btn">
             ✏️ Editar portada
             <input type="file" accept="image/*" hidden onChange={handleChangeCoverPhoto} />
@@ -270,7 +276,9 @@ export default function PerfilPage() {
               <Image
                 src={
                   perfil.profile_picture
-                    ? `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                    ? perfil.profile_picture.startsWith("http")
+                      ? perfil.profile_picture
+                      : `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
                     : "/assets/img/img_perfil/default-user.jpg"
                 }
                 alt="Perfil"

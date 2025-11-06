@@ -11,6 +11,7 @@ export default function Topbar() {
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
 
+  // 🔹 Cargar perfil al montar
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -29,6 +30,7 @@ export default function Topbar() {
     fetchProfile();
   }, []);
 
+  // 🔹 Cerrar sesión
   const handleLogout = async () => {
     await fetch(`${API_BASE}/api/logout`, {
       method: "POST",
@@ -73,6 +75,7 @@ export default function Topbar() {
             HISTORIAL
           </Link>
 
+          {/* 🔹 Imagen de perfil del usuario */}
           <div className="profile" style={{ position: "relative" }}>
             <div
               className="badge"
@@ -81,12 +84,17 @@ export default function Topbar() {
                 padding: 0,
                 background: "none",
                 border: "2px solid #5F676D",
+                borderRadius: "50%",
+                width: "50px",
+                height: "50px",
               }}
             >
               <Image
                 src={
                   perfil?.profile_picture
-                    ? `${API_BASE}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                    ? perfil.profile_picture.startsWith("http")
+                      ? perfil.profile_picture
+                      : `${API_BASE}/${perfil.profile_picture.replace(/^\/+/, "")}`
                     : "/assets/img/img_perfil/default-user.jpg"
                 }
                 alt="Foto de perfil"
@@ -97,6 +105,7 @@ export default function Topbar() {
               />
             </div>
 
+            {/* 🔹 Botón de menú desplegable */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
@@ -115,6 +124,7 @@ export default function Topbar() {
               />
             </button>
 
+            {/* 🔹 Menú desplegable */}
             {menuOpen && (
               <div
                 className="profile-menu"
@@ -166,6 +176,7 @@ export default function Topbar() {
                       cursor: "pointer",
                       padding: "0.7em 20px",
                       textAlign: "left",
+                      background: "none",
                     }}
                   >
                     Cerrar sesión

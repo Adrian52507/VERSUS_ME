@@ -2,16 +2,29 @@ import dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
-import multer from "multer";
-import path from "path";
-import fs from "fs";
-import { register, login, dashboard, logout, verifyCode, resendCode, forgotPassword, resetPassword } from "./auth.js";
-import { getProfile, updateProfile, uploadProfilePicture, uploadCoverPhoto } from "./profile.js";
+import {
+  register,
+  login,
+  dashboard,
+  logout,
+  verifyCode,
+  resendCode,
+  forgotPassword,
+  resetPassword,
+} from "./auth.js";
+import {
+  getProfile,
+  updateProfile,
+  uploadProfilePicture,
+  uploadCoverPhoto,
+  upload, // 👈 importamos multer-cloudinary desde profile.js
+} from "./profile.js";
 
 dotenv.config();
 
 const app = express();
 
+// ✅ Configuración general
 app.use(
   cors({
     origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
@@ -21,26 +34,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Carpeta donde se guardarán las imágenes
-const uploadDir = path.resolve("uploads");
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
-
-// ✅ Configuración de Multer
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, `${Date.now()}-${file.fieldname}${ext}`);
-  },
-});
-const upload = multer({ storage });
-
-// ✅ Servir archivos estáticos
-app.use("/uploads", express.static(uploadDir));
-
-// ✅ Rutas
+// ✅ Rutas principales
 app.get("/", (_, res) => res.send("Servidor funcionando ✅"));
 app.post("/api/register", register);
 app.post("/api/login", login);
@@ -55,16 +49,17 @@ app.post("/api/reset-password", resetPassword);
 app.get("/api/profile", getProfile);
 app.put("/api/profile", updateProfile);
 
-// ✅ Subida de imágenes
+// ✅ Subida de imágenes a Cloudinary
 app.post("/api/profile/picture", upload.single("profile_picture"), uploadProfilePicture);
 app.post("/api/profile/cover", upload.single("cover_photo"), uploadCoverPhoto);
 
-
-// 🧩 Si se ejecuta localmente (no en Vercel), iniciar servidor
+// 🧩 Si se ejecuta localmente, iniciar servidor
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 4000;
-  app.listen(PORT, () => console.log(`🚀 API local lista en http://localhost:${PORT}`));
+  app.listen(PORT, () =>
+    console.log(`🚀 API local lista en http://localhost:${PORT}`)
+  );
 }
 
-// 🧩 Exportamos app para usarla en Vercel
+// 🧩 Exportamos app para Vercel
 export default app;
