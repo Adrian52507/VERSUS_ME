@@ -1,0 +1,16 @@
+/* --- Fix para selects en modo oscuro --- */
+select, option {
+  background-color: #141517; /* Fondo oscuro consistente con tu diseño */
+  color: #FAFAFA;           /* Texto blanco para contraste */
+}
+
+select:focus {
+  outline: none;
+  border-color: #FAFAFA; /* Verde VersusMe al enfocar */
+}
+
+option:hover,
+option:checked {
+  background-color: #FAFAFA; /* Fondo verde al seleccionar */
+  color: #141517;           /* Texto oscuro sobre verde */
+}

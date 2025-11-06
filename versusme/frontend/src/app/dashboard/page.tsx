@@ -88,7 +88,7 @@ export default function DashboardPage() {
               DASHBOARDS
             </Link>
 
-            <Link className="pill" href="#">
+            <Link className="pill" href="/crear_partido">
               <Image
                 src="/assets/img/img_dashboard_principal/suma_negro_icono.png"
                 alt=""
@@ -98,7 +98,7 @@ export default function DashboardPage() {
               CREAR PARTIDO
             </Link>
 
-            <Link className="pill" href="#">
+            <Link className="pill" href="/historial">
               <Image
                 src="/assets/img/img_dashboard_principal/reloj_negro_icono.png"
                 alt=""

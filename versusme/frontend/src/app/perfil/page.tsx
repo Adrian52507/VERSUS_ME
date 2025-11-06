@@ -119,7 +119,7 @@ export default function PerfilPage() {
               DASHBOARDS
             </Link>
 
-            <Link className="pill" href="/crear-partido">
+            <Link className="pill" href="/crear_partido">
               <Image
                 src="/assets/img/img_dashboard_principal/suma_negro_icono.png"
                 alt=""
