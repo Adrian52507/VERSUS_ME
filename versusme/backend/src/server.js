@@ -64,7 +64,7 @@ app.put("/api/profile", updateProfile);
 app.post("/api/profile/picture", upload.single("profile_picture"), uploadProfilePicture);
 app.post("/api/profile/cover", upload.single("cover_photo"), uploadCoverPhoto);
 
-// 🧩 Solo iniciar servidor localmente
+// 🚀 Si estás local, levantar servidor normalmente
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () =>
@@ -72,5 +72,8 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-// 🧩 Exportar app para Vercel
-export default app;
+// ✅ Exportar correctamente para Vercel
+// Vercel necesita una función (req, res), no solo el app
+export default function handler(req, res) {
+  return app(req, res);
+}
