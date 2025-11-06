@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_API_BASE: isDev
       ? "http://localhost:4000"
-      : "https://tu-backend-en-vercel.vercel.app", // ⚠️ cambia este dominio al real
+      : "https://versusme-frontend.vercel.app/", // ⚠️ cambia este dominio al real
   },
 };
 
