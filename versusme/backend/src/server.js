@@ -72,8 +72,4 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-// ✅ Exportar correctamente para Vercel
-// Vercel necesita una función (req, res), no solo el app
-export default function handler(req, res) {
-  return app(req, res);
-}
+export default app; // 👈 ya no exportas el handler directamente aquí
