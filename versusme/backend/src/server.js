@@ -72,4 +72,5 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-export default app; // 👈 ya no exportas el handler directamente aquí
+// 👇 Exporta solo app (sin handler)
+export default app;
