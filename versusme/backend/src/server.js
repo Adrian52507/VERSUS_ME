@@ -64,5 +64,3 @@ app.put("/api/profile", updateProfile);
 app.post("/api/profile/picture", upload.single("profile_picture"), uploadProfilePicture);
 app.post("/api/profile/cover", upload.single("cover_photo"), uploadCoverPhoto);
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`🚀 API lista en http://localhost:${PORT}`));
