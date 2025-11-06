@@ -22,3 +22,17 @@ dropdown.classList.remove("show");
 navLinks.classList.remove("show");
 menuToggle.classList.remove("active");
 });
+// --- Validar campo CVC ---
+const cvcInput = document.querySelector('.iconcvc');
+
+if (cvcInput) {
+  cvcInput.addEventListener('input', () => {
+    // Eliminar todo lo que no sea número
+    cvcInput.value = cvcInput.value.replace(/\D/g, '');
+
+    // Limitar a máximo 3 dígitos
+    if (cvcInput.value.length > 3) {
+      cvcInput.value = cvcInput.value.slice(0, 3);
+    }
+  });
+}
