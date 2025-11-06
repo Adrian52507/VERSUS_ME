@@ -1,0 +1,346 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #111411;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+/* ======= EQUIPOS ======= */
+.equipos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* Tarjeta grande del equipo */
+.equipo-card {
+  background-color: #142414;
+  border: 2px solid #2ecc71;
+  border-radius: 16px;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.equipo-card h2 {
+  color: #d0d0d0;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Jugadores dentro de cada equipo */
+.jugadores-grupo {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.jugador-card {
+  background-color: #183018;
+  border: 2px solid #2ecc71;
+  border-radius: 12px;
+  padding: 50px 70px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jugador-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(46, 46, 204, 0.3);
+}
+
+.jugador-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 2px solid #2ecc71;
+  margin-bottom: 10px;
+}
+
+.jugador-card h3 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Botón votar general */
+.btn-votar {
+  background-color: #2ecc71;
+  border: none;
+  padding: 12px 0;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-votar:hover {
+  background-color: #27ae60;
+}
+
+/* Contador de votos fuera de las cajas */
+.contador-votos {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  margin-top: 20px;
+}
+
+.contador-votos p {
+  color: #ccc;
+  font-size: 1rem;
+}
+
+/* ======= MENSAJES Y BOTONES ======= */
+.mensaje-advertencia {
+  color: #f44336;
+  margin: 30px 0 15px;
+  font-size: 0.9rem;
+}
+
+.btn-empate {
+  background-color: #b08f26;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+
+.btn-empate:hover {
+  background-color: #9c761f;
+}
+
+/* ======= SECCIÓN DE INCONVENIENTES ======= */
+.inconvenientes {
+  background-color: #1a1f1a;
+  border-radius: 12px;
+  padding: 30px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.inconvenientes h3 {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.opcion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222922;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-top: 15px;
+}
+
+.opcion p {
+  color: #ccc;
+  text-align: left;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.btn-seleccionar {
+  background-color: #2ecc71;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-seleccionar:hover {
+  background-color: #27ae60;
+}
+
+/* ======= MODALES ======= */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #183018;
+  border: 2px solid #2ecc71;
+  border-radius: 12px;
+  padding: 30px 40px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.modal-content p {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* Jugadores en fila dentro del modal */
+.jugadores-fila {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.jugador-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #1b2b1b;
+  border: 2px solid #2ecc71;
+  border-radius: 10px;
+  padding: 8px 10px;
+  width: 120px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.85rem;
+}
+
+.jugador-mini img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #2ecc71;
+}
+
+/* Adjuntos del modal */
+.adjuntos {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: nowrap;
+}
+
+.caja-video {
+  background-color: #163816;
+  border: 2px solid #2ecc71;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.caja-video:hover {
+  background-color: #1e4a1e;
+  transform: scale(1.05);
+}
+
+.icono-camara {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.caja-video p {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+.caja-descripcion {
+  background-color: #2ecc71;
+  border: 2px solid #27ae60;
+  border-radius: 10px;
+  padding: 10px;
+  width: 200px;
+}
+
+.caja-descripcion label {
+  display: block;
+  color: #fff;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.caja-descripcion textarea {
+  width: 100%;
+  height: 100px;
+  border-radius: 6px;
+  border: none;
+  padding: 6px;
+  background-color: #27ae60;
+  color: #111;
+  resize: none;
+  font-size: 0.85rem;
+}
+
+.mensaje-aviso {
+  color: #ff4444;
+  font-size: 0.85rem;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.botones-final {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-enviar-final,
+.modal-content .cerrar-btn {
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 8px 0 8px 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-enviar-final {
+  background-color: #2ecc71;
+}
+
+.btn-enviar-final:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px) scale(1.05);
+}
+
+.modal-content .cerrar-btn {
+  background-color: #b08f26;
+}
+
+.modal-content .cerrar-btn:hover {
+  background-color: #9c761f;
+  transform: translateY(-2px) scale(1.05);
+}
