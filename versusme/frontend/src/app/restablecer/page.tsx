@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "@/styles/styles_login.css";
 
-export default function RestablecerPage() {
+function RestablecerContent() {
   const [password, setPassword] = useState("");
   const [mostrarPass, setMostrarPass] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -29,7 +29,6 @@ export default function RestablecerPage() {
 
       if (res.ok) {
         setMensaje("Contraseña actualizada ✅");
-        // 🔹 Espera 2 segundos y redirige al login
         setTimeout(() => {
           window.location.href = "/login";
         }, 2000);
@@ -106,5 +105,14 @@ export default function RestablecerPage() {
         </form>
       </div>
     </section>
+  );
+}
+
+// ✅ Envolvemos el contenido dentro de Suspense
+export default function RestablecerPage() {
+  return (
+    <Suspense fallback={<p className="text-gray-300 p-6 text-center">Cargando...</p>}>
+      <RestablecerContent />
+    </Suspense>
   );
 }
