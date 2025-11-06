@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "@/styles/styles_login.css";
@@ -47,7 +47,9 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    console.log("🔍 NEXT_PUBLIC_API_BASE =", process.env.NEXT_PUBLIC_API_BASE);
+  }, []);
   return (
     <section className="login">
       <div
