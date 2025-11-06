@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Crear Partido — VersusMe</title>
 
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Inter:wght@500;600;700;800;900&family=Noto+Sans:wght@600;700&display=swap" rel="stylesheet">
@@ -14,7 +13,6 @@
   <link rel="stylesheet" href="css/crear_partido.css">
 </head>
 <body>
-  <!-- Header (coherente con dashboard) -->
   <header class="topbar">
     <div class="container">
       <div class="brand">VersusMe</div>
@@ -41,11 +39,8 @@
 
   <main class="page">
     <div class="container">
-
-      <!-- Título + intro -->
       <section class="intro">
         <div class="intro-icon">
-          <!-- (nuevo ícono) usa una ruta temporal; luego la cambias -->
           <img src="assets/img/img_dashboard_principal/suma_icono.png" alt="">
         </div>
         <div class="intro-copy">
@@ -54,7 +49,6 @@
         </div>
       </section>
 
-      <!-- Progreso estático (maquetado) -->
       <section class="panel progress-panel">
         <div class="progress-head">
           <span>Progreso del formulario</span>
@@ -71,16 +65,15 @@
         </div>
       </section>
 
-      <!-- Formulario (sin JS) -->
       <section class="form-grid">
-        <!-- Columna izquierda -->
         <div class="col">
           <label class="field-label" for="sport">Deporte</label>
           <div class="select">
             <select id="sport">
               <option value="">Elige un deporte...</option>
-              <option>Fútbol</option>
               <option>Baloncesto</option>
+              <option>Fútbol</option>
+              <option>Natación</option>
               <option>Vóleibol</option>
               <option>Tenis</option>
               <option>Pádel</option>
@@ -112,8 +105,6 @@
             <div id="map"></div>
           </div>
 
-
-          <!-- Fecha y hora -->
           <div class="datetime-row">
             <div class="dt-item">
               <label class="field-label" for="date">Fecha del partido</label>
@@ -133,15 +124,12 @@
             </div>
           </div>
         </div>
-
-        <!-- Columna derecha -->
         <div class="col">
           <label class="field-label" for="players">Número de jugadores</label>
           <div class="input">
             <input id="players" type="number" min="2" step="1" placeholder="Ej: 10">
           </div>
 
-          <!-- Botones de apuesta -->
           <label class="field-label">¿Quieres incluir una apuesta?</label>
           <div class="bet-row">
             <button type="button" class="bet-btn" id="bet-yes">Sí</button>
@@ -153,12 +141,11 @@
 
           <label class="field-label" for="desc">Descripción del partido</label>
           <div class="textarea">
-            <textarea id="desc" rows="6" maxlength="500" placeholder="Describe los detalles del partido: nivel requerido, equipamiento, reglas especiales, punto de encuentro..."></textarea>
+            <textarea id="desc" rows="6" maxlength="100" placeholder="Describe los detalles del partido: nivel requerido, equipamiento, reglas especiales, punto de encuentro..."></textarea>
           </div>
-          <div class="chars">120 caracteres restantes</div>
+          <div class="chars">100 caracteres restantes</div>
 
           <div class="tips">
-            <!-- (icono temporal) -->
             <img src="assets/img/img_crear_partida/foco_mensaje_amarillo_icono.png" alt="">
             <div>
               <strong>Sugerencias para tu descripción</strong>
@@ -173,7 +160,6 @@
         </div>
       </section>
 
-      <!-- Botones -->
       <section class="actions">
         <a class="btn-outline" href="dashboard_principal.html">
           <img src="assets/img/img_crear_partida/flecha_regresar_blanco_icono.png" alt="">

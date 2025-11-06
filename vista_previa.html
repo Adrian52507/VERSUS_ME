@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vista Previa — VersusMe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Inter:wght@500;600;700;800;900&family=Noto+Sans:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles_vista_previa.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">VersusMe</div>
+      <nav class="top-actions">
+        <a class="pill" href="dashboard_principal.html">
+          <img src="assets/img/img_crear_partida/casa_negro_icono.png" alt="">
+          DASHBOARDS
+        </a>
+        <a class="pill pill-solid" href="crear_partido.html">
+          <img src="assets/img/img_dashboard_principal/suma_icono.png" alt="">
+          CREAR PARTIDO
+        </a>
+        <a class="pill" href="historial.html">
+          <img src="assets/img/img_dashboard_principal/reloj_negro_icono.png" alt="">
+          HISTORIAL
+        </a>
+        <div class="profile">
+          <span class="badge">A</span>
+          <img class="caret" src="assets/img/img_dashboard_principal/menor_que_gris_icono.png" alt="">
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      <section class="intro">
+        <div class="intro-icon">
+          <img src="assets/img/img_dashboard_principal/suma_icono.png" alt="">
+        </div>
+        <div class="intro-copy">
+          <h1>Crear Nuevo Partido</h1>
+          <p>Organiza un partido y conecta con otros jugadores en Lima</p>
+        </div>
+      </section>
+      <h3 class="section-mini">
+        <img src="assets/img/img_dashboard_principal/calendario_verde_icono.png" alt="">
+        Vista previa del partido
+      </h3>
+
+      <article class="card preview" data-max="11">
+        <header class="card-head">
+          <div class="left">
+            <img class="sport" id="pv-sport-icon" src="" alt="">
+            <span class="sport-name" id="pv-sport-name">Fútbol</span>
+
+            <span class="chip" id="pv-chip-apuesta">Apuesta</span>
+            <span class="monto-apuesta" id="pv-monto-apuesta">S/ 0</span>
+          </div>
+          <span class="estado disponible">Disponible</span>
+        </header>
+
+        <div class="meta">
+          <span><img src="assets/img/img_dashboard_principal/ubicacion_blanco_icono.png" alt=""><span id="pv-distrito">Miraflores</span></span>
+          <span><img src="assets/img/img_dashboard_principal/calendario_blanco_icono.png" alt=""><span id="pv-fecha">sáb, 11 ene.</span></span>
+          <span><img src="assets/img/img_dashboard_principal/reloj_blanco_icono.png" alt=""><span id="pv-hora">06:00 p.m.</span></span>
+        </div>
+
+        <p class="desc" id="pv-desc">Partido amistoso…</p>
+
+        <div class="creator">
+          <span class="avatar">A</span>
+          <div>
+            <div class="name">Antonio Lopez</div>
+            <div class="muted">1 partido</div>
+          </div>
+        </div>
+
+        <div class="cupos">
+          <img src="assets/img/img_dashboard_principal/jugadores_gris_icono.png" alt="">
+          <span><b class="cur">1</b>/<span class="max" id="pv-jugadores">11</span> jugadores</span>
+        </div>
+
+        <div class="progress"><span class="bar" id="pv-bar" style="--pct: 9%"></span></div>
+
+        <button class="btn-unirse" disabled>
+          <img src="assets/img/img_dashboard_principal/usuario_blanco_icono.png" alt="">
+          Unirse al Partido
+        </button>
+      </article>
+
+      <div class="ready">
+        <div class="ic">!</div>
+        <div>
+          <div class="ready-title">¿Todo listo?</div>
+          <div class="ready-text">
+            Tu partido será visible para otros jugadores en Lima. Podrás editarlo o cancelarlo después de publicarlo.
+          </div>
+        </div>
+      </div>
+
+      <section class="actions">
+        <a class="btn-outline" href="crear_partido.html">
+          <img src="assets/img/img_crear_partida/flecha_regresar_blanco_icono.png" alt="">
+          Volver a crear
+        </a>
+        <button class="btn-primary" id="btn-publicar">Publicar Partido</button>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/vista_previa.js"></script>
+</body>
+</html>
