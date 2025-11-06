@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import Link from "next/link";
@@ -10,6 +11,9 @@ import "leaflet/dist/leaflet.css";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
+// 🔹 Import dinámico del mapa sin SSR
+const MapComponent = dynamic(() => import("./MapComponent"), { ssr: false });
+
 export default function CrearPartidoPage() {
 
   const DefaultIcon = L.icon({
@@ -18,7 +22,7 @@ export default function CrearPartidoPage() {
   });
 
   L.Marker.prototype.options.icon = DefaultIcon;
-
+  const [location, setLocation] = useState("");
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const mapRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
@@ -301,7 +305,7 @@ export default function CrearPartidoPage() {
                 )}
               </div>
 
-              <div id="map" className="h-[340px] rounded-lg border border-gray-600"></div>
+              <MapComponent />
 
 
               <div className="grid grid-cols-2 gap-4 mt-4">
