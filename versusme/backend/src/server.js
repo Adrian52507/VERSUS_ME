@@ -24,13 +24,24 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Configuración general
+// ✅ Configuración CORS reforzada
 app.use(
   cors({
-    origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
+    origin: [
+      process.env.ORIGIN_FRONTEND || "http://localhost:3000", // dominio del frontend
+    ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ← incluye OPTIONS
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   })
 );
+
+// ✅ Manejar preflight requests manualmente (muy importante para Vercel)
+app.options(/.*/, cors({
+  origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -49,11 +60,11 @@ app.post("/api/reset-password", resetPassword);
 app.get("/api/profile", getProfile);
 app.put("/api/profile", updateProfile);
 
-// ✅ Subida de imágenes a Cloudinary
+// ✅ Subida de imágenes (Cloudinary)
 app.post("/api/profile/picture", upload.single("profile_picture"), uploadProfilePicture);
 app.post("/api/profile/cover", upload.single("cover_photo"), uploadCoverPhoto);
 
-// 🧩 Si se ejecuta localmente, iniciar servidor
+// 🧩 Solo iniciar servidor localmente
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () =>
@@ -61,5 +72,5 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-// 🧩 Exportamos app para Vercel
+// 🧩 Exportar app para Vercel
 export default app;
