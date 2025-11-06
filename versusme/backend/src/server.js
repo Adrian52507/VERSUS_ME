@@ -6,8 +6,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { register, login, dashboard, logout, verifyCode, resendCode, forgotPassword, resetPassword } from "./auth.js";
-import { getProfile, updateProfile } from "./profile.js";
-import { uploadProfilePicture, uploadCoverPhoto } from "./profile.js";
+import { getProfile, updateProfile, uploadProfilePicture, uploadCoverPhoto } from "./profile.js";
 
 dotenv.config();
 
@@ -21,10 +20,6 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-
-
-
-
 
 // ✅ Carpeta donde se guardarán las imágenes
 const uploadDir = path.resolve("uploads");
@@ -45,7 +40,7 @@ const upload = multer({ storage });
 // ✅ Servir archivos estáticos
 app.use("/uploads", express.static(uploadDir));
 
-// Rutas
+// ✅ Rutas
 app.get("/", (_, res) => res.send("Servidor funcionando ✅"));
 app.post("/api/register", register);
 app.post("/api/login", login);
@@ -56,11 +51,17 @@ app.post("/api/resend", resendCode);
 app.post("/api/forgot-password", forgotPassword);
 app.post("/api/reset-password", resetPassword);
 
-// Perfil de usuario
+// ✅ Perfil de usuario
 app.get("/api/profile", getProfile);
 app.put("/api/profile", updateProfile);
 
-// 🔹 Endpoints de subida de imágenes
+// ✅ Subida de imágenes
 app.post("/api/profile/picture", upload.single("profile_picture"), uploadProfilePicture);
 app.post("/api/profile/cover", upload.single("cover_photo"), uploadCoverPhoto);
 
+// 🚫 ❌ Quita esto para Vercel:
+// const PORT = process.env.PORT || 4000;
+// app.listen(PORT, () => console.log(`🚀 API lista en http://localhost:${PORT}`));
+
+// ✅ Exporta el app (para serverless)
+export default app;
