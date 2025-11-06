@@ -27,14 +27,13 @@ const app = express();
 // ✅ Configuración CORS reforzada
 app.use(
   cors({
-    origin: [
-      process.env.ORIGIN_FRONTEND || "http://localhost:3000", // dominio del frontend
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ← incluye OPTIONS
+    origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
+    credentials: true, // 🔥 importante para enviar cookies cross-domain
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   })
 );
+
 
 // ✅ Manejar preflight requests manualmente (muy importante para Vercel)
 app.options(/.*/, cors({
