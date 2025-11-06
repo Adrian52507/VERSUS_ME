@@ -1,4 +1,7 @@
-import serverlessExpress from "@vendia/serverless-express";
 import app from "../src/server.js";
 
-export const handler = serverlessExpress({ app });
+// Vercel exige exportar una función handler, no un objeto o servidor iniciado.
+export default function handler(req, res) {
+  // Vercel usará esta función como el entrypoint.
+  return app(req, res);
+}
