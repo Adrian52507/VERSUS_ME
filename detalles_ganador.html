@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles de Ganador — VersusMe</title>
+  <link rel="stylesheet" href="css/styles_detalles_ganador.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="contenedor">
+    <h1>¿Listos para escoger<br>al equipo ganador?</h1>
+
+    <div class="equipos">
+      <!-- EQUIPO 1 -->
+      <div class="equipo-card">
+        <h2>EQUIPO 1</h2>
+        <div class="jugadores-grupo">
+          <div class="jugador-card">
+            <img src="assets/img/img_detallesWIN/Adrian.png" alt="Adrián">
+            <h3>Adrián</h3>
+          </div>
+
+          <div class="jugador-card">
+            <img src="assets/img/img_detallesWIN/Diego.png" alt="Diego">
+            <h3>Diego</h3>
+          </div>
+        </div>
+
+        <!-- Botón votar general del equipo -->
+        <button class="btn-votar">VOTAR</button>
+      </div>
+
+      <!-- EQUIPO 2 -->
+      <div class="equipo-card">
+        <h2>EQUIPO 2</h2>
+        <div class="jugadores-grupo">
+          <div class="jugador-card">
+            <img src="assets/img/img_detallesWIN/Antonio.png" alt="Antonio">
+            <h3>Antonio</h3>
+          </div>
+
+          <div class="jugador-card">
+            <img src="assets/img/img_detallesWIN/Andy.png" alt="Andy">
+            <h3>Andy</h3>
+          </div>
+        </div>
+
+        <!-- Botón votar general del equipo -->
+        <button class="btn-votar">VOTAR</button>
+      </div>
+    </div>
+
+    <!-- Votos fuera de las cajas grandes -->
+    <div class="contador-votos">
+      <p>★ Votos Equipo : </p>
+      <p>★ Votos Equipo : </p>
+    </div>
+
+    <p class="mensaje-advertencia">¡Uy! Parece que esto es un empate. ¿Es cierto? Si no es así, selecciona una de las opciones de abajo.</p>
+    <button class="btn-empate">Sí, fue un empate</button>
+
+    <section class="inconvenientes">
+      <h3>¿Tuvieron algún inconveniente?</h3>
+      <p>Escoge una de las opciones de abajo para intentar solucionar el problema:</p>
+
+      <div class="opcion">
+        <p>No hubo ganador y queremos que el dinero se devuelva a cada participante.</p>
+        <button class="btn-seleccionar">SELECCIONAR</button>
+      </div>
+
+      <div class="opcion">
+        <p>Uno o más jugadores no están de acuerdo con el resultado y no quieren votar para no perder la apuesta.</p>
+        <button class="btn-seleccionar">SELECCIONAR</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para devolución de dinero -->
+  <div id="modal-devolucion" class="modal">
+    <div class="modal-content">
+      <p>OK. Lamentamos el inconveniente. El dinero que cada uno depositó será devuelto a cada cuenta en un plazo de 24h-48h.</p>
+      <button class="cerrar-btn">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Modal para desacuerdo / formulario -->
+  <div id="modal-desacuerdo" class="modal">
+    <div class="modal-content">
+      <h3>Formulario de Desacuerdo</h3>
+      <p>Selecciona qué jugador o jugadores no estuvieron de acuerdo con el ganador:</p>
+
+      <div class="jugadores-fila">
+        <div class="jugador-mini">
+          <img src="assets/img/img_detallesWIN/Adrian.png" alt="Adrián">
+          <span>Adrián</span>
+        </div>
+        <div class="jugador-mini">
+          <img src="assets/img/img_detallesWIN/Diego.png" alt="Diego">
+          <span>Diego</span>
+        </div>
+        <div class="jugador-mini">
+          <img src="assets/img/img_detallesWIN/Antonio.png" alt="Antonio">
+          <span>Antonio</span>
+        </div>
+        <div class="jugador-mini">
+          <img src="assets/img/img_detallesWIN/Andy.png" alt="Andy">
+          <span>Andy</span>
+        </div>
+      </div>
+
+      <h4>Adjuntar elementos para la selección del equipo ganador</h4>
+      <div class="adjuntos">
+        <div class="caja-video" id="cajaVideo">
+          <div class="icono-camara">📷</div>
+          <p>Grabar un video con una descripción adjunta<br>para que nuestro equipo delimite el ganador</p>
+          <input type="file" accept="video/*" id="inputVideo" style="display:none;">
+        </div>
+
+        <div class="caja-descripcion">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" placeholder="Escribe aquí la descripción..."></textarea>
+        </div>
+      </div>
+
+      <p class="mensaje-aviso">
+        Una vez subida la información, nuestro equipo delimitará el ganador.<br>
+        Si esto no se logra, se devolverá el dinero a cada participante.
+      </p>
+
+      <button class="btn-enviar-final">Enviar</button>
+      <button class="cerrar-btn">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="js/detalles_ganador.js"></script>
+</body>
+</html>
