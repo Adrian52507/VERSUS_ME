@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VersusMe · Historial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;600;800&family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- Iconos de Google (puedes cambiarlos luego) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0" />
+<link rel="stylesheet" href="css/styles_historial.css" />
+</head>
+<body>
+<!-- HEADER -->
+<header class="header">
+<div class="container nav">
+<div class="brand">
+<span class="logo-dot"></span>
+<span class="brand-name">VersusMe</span>
+</div>
+<nav class="main-actions">
+<a class="btn ghost" href="dashboard_principal.html">
+<span class="material-symbols-outlined">home</span>
+<span>Dashboards</span>
+</a>
+<a class="btn ghost" href="crear_partido.html">
+<span class="material-symbols-outlined">add</span>
+<span>Crear Partido</span>
+</a>
+<a class="btn primary" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>Historial</span>
+</a>
+</nav>
+<div class="user">
+<button class="icon-btn">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="avatar">A</div>
+<button class="icon-btn">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</header>
+
+
+
+<main class="container page">
+<header class="page-head">
+<div>
+<h1>Historial de Partidos</h1>
+<p>Revisa tu actividad deportiva y conecta con tu comunidad</p>
+</div>
+<button class="icon-btn ghost">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</header>
+
+
+<!-- PANEL 1: RESUMEN -->
+<section class="panel">
+<div class="panel-head">
+<div class="title">
+<span class="material-symbols-outlined">insights</span>
+<h2>Resumen de Actividad</h2>
+</div>
+</div>
+
+
+<div class="stats-grid">
+<article class="stat">
+<div class="stat-icon"><span class="material-symbols-outlined">monitoring</span></div>
+<div class="stat-value">6</div>
+<div class="stat-label">Total Partidos</div>
+</article>
+<article class="stat">
+<div class="stat-icon"><span class="material-symbols-outlined">check_circle</span></div>
+<div class="stat-value">4</div>
+<div class="stat-label">Partidos Jugados</div>
+</article>
+<article class="stat">
+<div class="stat-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
+<div class="stat-value">2</div>
+<div class="stat-label">Como Organizador</div>
+</article>
+<article class="stat fav">
+<div class="stat-icon"><span class="material-symbols-outlined">sports_soccer</span></div>
+<div class="stat-fav">Fútbol</div>
+<div class="stat-label">Deporte Favorito</div>
+</article>
+</div>
+
+<div class="split two">
+<!-- Tendencias -->
+<div>
+<div class="subhead">
+<span class="material-symbols-outlined">trending_up</span>
+<h3>Tendencias de Participación</h3>
+</div>
+<div class="trend">
+<span>Este mes</span>
+<div class="bar"><span style="--w: 70%"></span></div>
+<span class="trend-value">3</span>
+</div>
+<div class="trend">
+<span>Esta semana</span>
+<div class="bar"><span style="--w: 35%"></span></div>
+<span class="trend-value">1</span>
+</div>
+</div>
+<!-- Deportes practicados -->
+<div>
+<div class="subhead">
+<span class="material-symbols-outlined">sports</span>
+<h3>Deportes Practicados</h3>
+</div>
+<ul class="legend">
+<li><i class="dot orange"></i>Fútbol <em>1</em></li>
+<li><i class="dot sky"></i>Baloncesto <em>1</em></li>
+<li><i class="dot yellow"></i>Tenis <em>1</em></li>
+<li><i class="dot green"></i>Voleibol <em>1</em></li>
+<li><i class="dot red"></i>Pádel <em>1</em></li>
+<li><i class="dot purple"></i>Natación <em>1</em></li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- PANEL 2: FILTROS -->
+<section class="panel">
+<div class="panel-head">
+<div class="title">
+<span class="material-symbols-outlined">filter_alt</span>
+<h2>Filtrar Partidos</h2>
+</div>
+</button>
+</div>
+
+
+<form class="filters">
+<div class="field">
+<label>Fecha desde</label>
+<input type="date" placeholder="dd/mm/aaaa" />
+</div>
+<div class="field">
+<label>Fecha hasta</label>
+<input type="date" placeholder="dd/mm/aaaa" />
+</div>
+<div class="field">
+<label>Deporte</label>
+<select>
+<option value="">Seleccionar deporte</option>
+<option>Fútbol</option>
+<option>Baloncesto</option>
+<option>Tenis</option>
+<option>Voleibol</option>
+<option>Pádel</option>
+<option>Natación</option>
+</select>
+</div>
+<div class="field">
+<label>Apuesta</label>
+<select>
+<option value="">Seleccionar existencia de apuesta</option>
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+<div class="field">
+<label>Mi rol</label>
+<select>
+<option value="">Seleccionar rol</option>
+<option>Organizador</option>
+<option>Participante</option>
+</select>
+</div>
+<div class="field">
+<label>Distrito</label>
+<select>
+<option value="">Seleccionar distrito</option>
+<option>Miraflores</option>
+<option>Barranco</option>
+<option>San Isidro</option>
+<option>Surco</option>
+</select>
+</div>
+</form>
+</section>
+
+<!-- LISTA -->
+<section class="list-head">
+<h3>Todos los partidos</h3>
+<div class="right">
+<button class="icon-btn"><span class="material-symbols-outlined">swap_vert</span></button>
+<button class="btn outline small">
+<span class="material-symbols-outlined">schedule</span>
+<span>Más recientes</span>
+</button>
+</div>
+</section>
+
+
+<section class="cards">
+<!-- Card 1: Futbol Jugado -->
+<article class="card">
+<header class="card-head">
+<div class="left">
+<span class="sport-icon">⚽</span>
+<div>
+<h4>Fútbol</h4>
+<span class="meta">Miraflores</span>
+</div>
+</div>
+<div class="right">
+<span class="chip success"><span class="material-symbols-outlined">check_circle</span> Jugado</span>
+</div>
+</header>
+<div class="card-body">
+<ul class="facts">
+<li><span class="material-symbols-outlined">event</span> 07/01/2025</li>
+<li><span class="material-symbols-outlined">schedule</span> 18:00</li>
+<li><span class="material-symbols-outlined">military_tech</span> Organizador</li>
+<li><span class="material-symbols-outlined">group</span> 10/10 jugadores</li>
+</ul>
+<p>Partido amistoso en el parque Kennedy. Nivel intermedio, ambiente relajado y divertido.</p>
+</div>
+<footer class="card-actions">
+<button class="btn outline"><span class="material-symbols-outlined">group</span> Ver participantes</button>
+</footer>
+</article>
+
+
+
+<!-- Card 3: Baloncesto Jugado + participantes -->
+<article class="card large">
+<header class="card-head">
+<div class="left">
+<span class="sport-icon">🏀</span>
+<div>
+<h4>Baloncesto</h4>
+<span class="meta">San Isidro</span>
+</div>
+</div>
+<div class="right">
+<span class="chip success"><span class="material-symbols-outlined">check_circle</span> Jugado</span>
+</div>
+</header>
+<div class="card-body">
+<ul class="facts">
+<li><span class="material-symbols-outlined">event</span> 04/01/2025</li>
+<li><span class="material-symbols-outlined">schedule</span> 16:30</li>
+<li><span class="material-symbols-outlined">workspace_premium</span> Participante</li>
+<li><span class="material-symbols-outlined">group</span> 6/8 jugadores</li>
+</ul>
+<p>Básquet 3x3 en cancha techada. Buen nivel, se busca mejorar técnica individual.</p>
+<div class="card-actions between">
+<button class="btn outline"><span class="material-symbols-outlined">visibility_off</span> Ocultar</button>
+</div>
+<hr/>
+<div class="participants">
+<h5><span class="material-symbols-outlined">group</span> Participantes (6)</h5>
+<ul class="grid-people">
+<li class="person"><span class="avatar sm">M</span><span>Miguel Santos</span></li>
+<li class="person"><span class="avatar sm">P</span><span>Pedro Ramírez</span></li>
+<li class="person"><span class="avatar sm">D</span><span>Fernando Díaz</span></li>
+<li class="person"><span class="avatar sm">C</span><span>Carlos Mendoza</span></li>
+<li class="person"><span class="avatar sm">J</span><span>Juan Carlos</span></li>
+<li class="person"><span class="avatar sm">R</span><span>Ricardo Vega</span></li>
+</ul>
+</div>
+</div>
+</article>
+
+<!-- Card 4: Voleibol Cancelado -->
+<article class="card">
+<header class="card-head">
+<div class="left">
+<span class="sport-icon">🏐</span>
+<div>
+<h4>Voleibol</h4>
+<span class="meta">Surco</span>
+</div>
+</div>
+<div class="right">
+<span class="chip danger"><span class="material-symbols-outlined">cancel</span> Cancelado</span>
+</div>
+</header>
+<div class="card-body">
+<ul class="facts">
+<li><span class="material-symbols-outlined">event</span> 09/01/2025</li>
+<li><span class="material-symbols-outlined">schedule</span> 19:00</li>
+<li><span class="material-symbols-outlined">military_tech</span> Organizador</li>
+<li><span class="material-symbols-outlined">group</span> 8/12 jugadores</li>
+</ul>
+<p>Voleibol en la playa de Chorrillos. Nivel principiante-intermedio, ambiente relajado.</p>
+</div>
+<footer class="card-actions">
+<button class="btn outline"><span class="material-symbols-outlined">group</span> Ver participantes</button>
+</footer>
+</article>
+</section>
+</main>
+</body>
+</html>
