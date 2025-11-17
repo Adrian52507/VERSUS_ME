@@ -6,10 +6,12 @@ import Link from "next/link";
 import Image from "next/image";
 import "@/styles/styles_crear_partido.css";
 import Topbar from "@/components/Topbar";
+import { useRouter } from "next/navigation";
 
 const MapWrapper = dynamic(() => import("./MapWrapper"), { ssr: false });
 
 export default function CrearPartidoPage() {
+  const router = useRouter();
 
   const [location, setLocation] = useState("");
   const [suggestions, setSuggestions] = useState<any[]>([]);
@@ -298,10 +300,27 @@ export default function CrearPartidoPage() {
               Volver al Dashboard
             </Link>
             <button
-              onClick={handleSubmit}
+              onClick={() => {
+                const params = new URLSearchParams({
+                  sport: form.sport,
+                  district: form.district,
+                  locationText: form.locationText,
+                  lat: String(form.lat),
+                  lng: String(form.lng),
+                  date: form.date,
+                  time: form.time,
+                  players: form.players,
+                  hasBet: String(form.hasBet),
+                  betAmount: form.betAmount,
+                  desc: form.desc,
+                });
+
+                router.push("/vista_previa?" + params.toString());
+              }}
+
               className="flex-1 bg-green-600 rounded py-3 font-semibold hover:bg-green-700 transition"
             >
-              Vista Previa / Crear Partido
+              Vista Previa
             </button>
           </div>
         </div>
