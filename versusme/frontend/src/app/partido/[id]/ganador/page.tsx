@@ -23,7 +23,7 @@ function Loader() {
           border: "6px solid rgba(37, 197, 14, 0.15)",
           borderTopColor: "#25c50e",
           borderRadius: "50%",
-          animation: "spin 0.7s linear infinite",
+          animation: "spin 1s linear infinite",
           boxShadow: "0 0 12px #25c50e70",
         }}
       />

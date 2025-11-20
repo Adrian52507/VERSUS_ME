@@ -5,6 +5,52 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/styles/styles_perfil.css";
 
+function Loader() {
+  return (
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "1.2rem",
+      }}
+    >
+      <div
+        style={{
+          width: "52px",
+          height: "52px",
+          border: "6px solid rgba(37, 197, 14, 0.15)",
+          borderTopColor: "#25c50e",
+          borderRadius: "50%",
+          animation: "spin 1s linear infinite",
+          boxShadow: "0 0 12px #25c50e70",
+        }}
+      />
+
+      <p
+        style={{
+          color: "#bfbfbf",
+          fontSize: "1.1rem",
+          letterSpacing: "0.6px",
+          opacity: 0.9,
+        }}
+      >
+        Cargando perfil...
+      </p>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+
 export default function PerfilPage() {
   const [perfil, setPerfil] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -97,7 +143,7 @@ export default function PerfilPage() {
     }
   };
 
-  if (loading) return <p>Cargando perfil...</p>;
+  if (loading) return <Loader />;
   if (!perfil) return <p>No se pudo cargar tu perfil.</p>;
 
   return (

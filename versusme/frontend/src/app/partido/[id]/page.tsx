@@ -6,6 +6,51 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/styles/styles_partido.css";
 
+function Loader() {
+  return (
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "1.2rem",
+      }}
+    >
+      <div
+        style={{
+          width: "52px",
+          height: "52px",
+          border: "6px solid rgba(37, 197, 14, 0.15)",
+          borderTopColor: "#25c50e",
+          borderRadius: "50%",
+          animation: "spin 1s linear infinite",
+          boxShadow: "0 0 12px #25c50e70",
+        }}
+      />
+
+      <p
+        style={{
+          color: "#bfbfbf",
+          fontSize: "1.1rem",
+          letterSpacing: "0.6px",
+          opacity: 0.9,
+        }}
+      >
+        Cargando partido...
+      </p>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 const SPORT_ICONS: any = {
   "Fútbol": "/assets/img/img_dashboard_principal/balon_futbol_verde_icono.png",
   "Baloncesto": "/assets/img/img_dashboard_principal/balon_basquet_verde_icono.png",
@@ -57,7 +102,7 @@ export default function PartidoDetallePage() {
     fetchMatch();
   };
 
-  if (loading) return <p>Cargando partido...</p>;
+  if (loading) return <Loader />;
   if (!match) return <p>Error cargando partido</p>;
 
   return (
