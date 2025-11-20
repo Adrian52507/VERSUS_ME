@@ -23,11 +23,19 @@ export const register = async (req, res) => {
     // Generar código de 6 dígitos
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Insertar usuario
-    await pool.query(
+    // Insertar usuario y obtener ID
+    const [result] = await pool.query(
       "INSERT INTO users (name, email, password_hash, verification_code, verified) VALUES (?, ?, ?, ?, ?)",
       [name, email, hashedPassword, code, false]
     );
+
+    const userId = result.insertId; // 🔥 AHORA SÍ EXISTE
+
+    // Crear perfil vacío
+    await pool.query(`
+      INSERT INTO profiles (user_id, description, district, favorite_sport, level)
+      VALUES (?, '', '', '', '')
+    `, [userId]);
 
     // Enviar correo
     await sendVerificationEmail(email, code);
@@ -38,6 +46,7 @@ export const register = async (req, res) => {
     return res.status(500).json({ error: "Error en registro" });
   }
 };
+
 
 export const verifyCode = async (req, res) => {
   try {
@@ -124,6 +133,23 @@ export const login = async (req, res) => {
     return res.status(500).json({ error: "Error en login" });
   }
 };
+
+export function authMiddleware(req, res, next) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ error: "Token no encontrado" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // ahora tienes req.user.id
+    next();
+  } catch {
+    return res.status(401).json({ error: "Token inválido" });
+  }
+}
+
 
 /**
  * Verificación de sesión (ruta protegida)

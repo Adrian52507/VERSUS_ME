@@ -38,6 +38,34 @@ export default function Topbar() {
     });
     window.location.href = "/login";
   };
+  const goToMensajeria = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/chat/rooms`, {
+        credentials: "include"
+      });
+
+      if (!res.ok) {
+        window.location.href = "/mensajeria";
+        return;
+      }
+
+      const rooms = await res.json();
+
+      if (!rooms || rooms.length === 0) {
+        // No tiene salas → ir a la ruta estática
+        window.location.href = "/mensajeria";
+        return;
+      }
+
+      // Tomamos la primera sala (normalmente será la última ordenada)
+      const room = rooms[0];
+
+      window.location.href = `/mensajeria/${room.room_id}`;
+    } catch (e) {
+      console.error("Error cargando salas:", e);
+      window.location.href = "/mensajeria";
+    }
+  };
 
   return (
     <header className="topbar">
@@ -154,18 +182,22 @@ export default function Topbar() {
                     Perfil del jugador
                   </Link>
 
-                  <Link
-                    href="/mensajeria"
+                  <button
+                    onClick={goToMensajeria}
                     style={{
                       padding: "0.7em 20px",
                       color: "#fff",
                       textDecoration: "none",
                       fontWeight: 500,
-                      borderBottom: "1px solid #5F676D",
+                      background: "none",
+                      border: "none",
+                      textAlign: "left",
+                      cursor: "pointer"
                     }}
                   >
                     Mensajería
-                  </Link>
+                  </button>
+
 
                   <button
                     onClick={handleLogout}
@@ -174,6 +206,7 @@ export default function Topbar() {
                       color: "#ff6b6b",
                       fontWeight: 600,
                       cursor: "pointer",
+                      borderTop: "1px solid #5F676D",
                       padding: "0.7em 20px",
                       textAlign: "left",
                       background: "none",
