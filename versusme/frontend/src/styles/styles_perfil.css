@@ -233,3 +233,15 @@
   padding: 10px 20px;
   border-radius: 10px;
 }
+
+/* 🔹 Hover del menú desplegable del perfil */
+.profile-menu nav a,
+.profile-menu nav button {
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.profile-menu nav a:hover,
+.profile-menu nav button:hover {
+  background: var(--green);
+  background-color: #4b4e4b !important;
+}

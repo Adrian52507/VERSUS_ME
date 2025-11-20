@@ -82,9 +82,8 @@ function formatDate(date: string) {
     "dic",
   ];
 
-  return `${dias[d.getDay()]}, ${d.getDate().toString().padStart(2, "0")} ${
-    meses[d.getMonth()]
-  }.`;
+  return `${dias[d.getDay()]}, ${d.getDate().toString().padStart(2, "0")} ${meses[d.getMonth()]
+    }.`;
 }
 
 function formatTime(time: string) {
@@ -234,8 +233,8 @@ export default function DashboardPage() {
       filterBet === "si"
         ? p.has_bet === 1
         : filterBet === "no"
-        ? p.has_bet === 0
-        : true;
+          ? p.has_bet === 0
+          : true;
 
     const matchDate = filterDate ? p.match_date === filterDate : true;
 
@@ -260,7 +259,7 @@ export default function DashboardPage() {
             <div className="kpi-grid">
               <div className="kpi">
                 <div className="num green">{kpiPlayed}</div>
-                <div className="label">Partidos jugados</div>
+                <div className="label">Partidos unidos</div>
               </div>
 
               <div className="kpi">
@@ -406,17 +405,21 @@ export default function DashboardPage() {
                             className="sport"
                           />
                           <span className="sport-name">{p.sport}</span>
-                          {p.has_bet && <span className="chip">Apuesta</span>}
+                          {p.has_bet === 1 || p.has_bet === true ? (
+                            <span className="chip">Apuesta</span>
+                          ) : (
+                            <span className="chip no-bet">Sin apuesta</span>
+                          )}
+
                         </div>
 
                         <span
-                          className={`estado ${
-                            full
+                          className={`estado ${full
                               ? "completo"
                               : p.joined
-                              ? "bloqueada"
-                              : "disponible"
-                          }`}
+                                ? "bloqueada"
+                                : "disponible"
+                            }`}
                         >
                           {full ? "Completo" : p.joined ? "Bloqueada" : "Disponible"}
                         </span>
@@ -464,9 +467,9 @@ export default function DashboardPage() {
                                 p.creator_photo.startsWith("http")
                                   ? p.creator_photo
                                   : `${API_BASE}/${p.creator_photo.replace(
-                                      /^\/+/,
-                                      ""
-                                    )}`
+                                    /^\/+/,
+                                    ""
+                                  )}`
                               }
                               width={38}
                               height={38}
