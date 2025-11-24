@@ -120,10 +120,12 @@ export const login = async (req, res) => {
     // Enviar cookie HTTP-only
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "none", // 🔥 necesario si backend y frontend están en dominios distintos
-      secure: true, // 🔥 obligatorio en producción (HTTPS)
+      sameSite: "none",
+      secure: true,
+      path: "/",     // 👈 FALTABA ESTO
       maxAge: 24 * 60 * 60 * 1000,
     });
+
 
     console.log("✅ Cookie seteada correctamente");
 
@@ -197,9 +199,11 @@ export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      sameSite: "none", // 🔥 Necesario para cross-domain
-      secure: true,     // 🔒 Obligatorio en HTTPS (Vercel)
+      sameSite: "none",
+      secure: true,
+      path: "/",   // 👈 También necesario
     });
+
     return res.json({ message: "Sesión cerrada correctamente ✅" });
   } catch (error) {
     console.error("Error al cerrar sesión:", error);
