@@ -62,6 +62,9 @@ export default function RegistroPage() {
 
       setSuccess("Cuenta creada 🎉");
 
+      // 🔥 Guardar el correo del usuario para la verificación
+      localStorage.setItem("correoUsuario", form.email);
+
       setTimeout(() => {
         window.location.href = "/verificacion";
       }, 700);
