@@ -104,15 +104,15 @@ export default function LoginPage() {
                 placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black/20 border border-white/20 text-white rounded-lg px-4 py-3 outline-none focus:border-[#25C50E]"
+                className="w-full bg-black/20 border border-white/20 text-white rounded-lg px-4 py-2 outline-none focus:border-[#25C50E]"
                 required
               />
 
               <Image
                 src={
                   showPass
-                    ? "/assets/img/img_login/cerrar_ojo.png"
-                    : "/assets/img/img_login/ojo.png"
+                    ? "/assets/img/img_login/cerrar_ojo_2.png"
+                    : "/assets/img/img_login/ojo2.png"
                 }
                 width={20}
                 height={20}

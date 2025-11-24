@@ -159,7 +159,7 @@ export default function RegistroPage() {
                 required
               />
               <Image
-                src={showPass ? "/assets/img/img_login/cerrar_ojo.png" : "/assets/img/img_login/ojo.png"}
+                src={showPass ? "/assets/img/img_login/cerrar_ojo_2.png" : "/assets/img/img_login/ojo2.png"}
                 width={20}
                 height={20}
                 alt="toggle"
@@ -195,7 +195,7 @@ export default function RegistroPage() {
               />
 
               <Image
-                src={showConfirm ? "/assets/img/img_login/cerrar_ojo.png" : "/assets/img/img_login/ojo.png"}
+                src={showConfirm ? "/assets/img/img_login/cerrar_ojo_2.png" : "/assets/img/img_login/ojo2.png"}
                 width={20}
                 height={20}
                 alt="toggle"
