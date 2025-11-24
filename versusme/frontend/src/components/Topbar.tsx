@@ -22,7 +22,7 @@ export default function Topbar() {
           const data = await res.json();
           setPerfil(data);
         }
-      } catch (_) {}
+      } catch (_) { }
     };
     fetchProfile();
   }, []);
@@ -223,6 +223,14 @@ export default function Topbar() {
               className="px-4 py-3 bg-white/20 text-white rounded-lg text-lg font-semibold hover:bg-white/30 hover:text-green-300 transition"
             >
               Dashboard
+            </Link>
+            
+            <Link
+              href="/perfil"
+              onClick={() => setMobileOpen(false)}
+              className="px-4 py-3 bg-white/20 text-white rounded-lg text-lg font-semibold hover:bg-white/30 hover:text-green-300 transition"
+            >
+              Perfil del jugador
             </Link>
 
             <Link
