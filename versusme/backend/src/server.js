@@ -27,13 +27,15 @@ import {
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1);
+  
 
 /* ─────────────────────────────────────────────
    🔐 CORS CONFIG
 ────────────────────────────────────────────── */
 app.use(
   cors({
-    origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
+    origin: process.env.ORIGIN_FRONTEND,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Sec-Fetch-Mode", "Sec-Fetch-Site", "Sec-Fetch-Dest"],
@@ -43,7 +45,7 @@ app.use(
 
 // Preflight manual para Vercel
 app.options(/.*/, cors({
-  origin: process.env.ORIGIN_FRONTEND || "http://localhost:3000",
+  origin: process.env.ORIGIN_FRONTEND,
   credentials: true,
 }));
 
@@ -56,7 +58,7 @@ app.use(cookieParser());
 app.get("/", (_, res) => res.send("Servidor funcionando ✅"));
 app.post("/api/register", register);
 app.post("/api/login", login);
-app.get("/api/dashboard", authMiddleware,dashboard);
+app.get("/api/dashboard", authMiddleware, dashboard);
 app.post("/api/logout", logout);
 app.post("/api/verify", verifyCode);
 app.post("/api/resend", resendCode);
