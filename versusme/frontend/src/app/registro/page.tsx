@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "@/styles/styles_registro.css";
 
 export default function RegistroPage() {
   const [form, setForm] = useState({
@@ -12,10 +11,13 @@ export default function RegistroPage() {
     password: "",
     confirmPassword: "",
   });
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
   const [rules, setRules] = useState({
     len: false,
     upper: false,
@@ -25,7 +27,6 @@ export default function RegistroPage() {
     nospace: true,
   });
 
-  // 🔍 Valida contraseña en tiempo real
   useEffect(() => {
     const v = form.password;
     setRules({
@@ -43,17 +44,11 @@ export default function RegistroPage() {
     setError("");
     setSuccess("");
 
-    // Validaciones
-    const allOk = Object.values(rules).every(Boolean);
-    if (!allOk) {
-      setError("La contraseña no cumple con todos los requisitos");
-      return;
-    }
+    if (!Object.values(rules).every(Boolean))
+      return setError("La contraseña no cumple los requisitos");
 
-    if (form.password !== form.confirmPassword) {
-      setError("Las contraseñas no coinciden");
-      return;
-    }
+    if (form.password !== form.confirmPassword)
+      return setError("Las contraseñas no coinciden");
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/register`, {
@@ -63,181 +58,166 @@ export default function RegistroPage() {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Error al registrar usuario");
+      if (!res.ok) throw new Error(data.error);
 
-      setSuccess("Cuenta creada exitosamente 🎉");
-      localStorage.setItem("correoUsuario", form.email);
+      setSuccess("Cuenta creada 🎉");
 
       setTimeout(() => {
         window.location.href = "/verificacion";
-      }, 1000);
+      }, 700);
     } catch (err: any) {
       setError(err.message);
     }
   }
 
   return (
-    <main className="login">
+    <section className="relative min-h-screen grid place-items-center text-white overflow-hidden">
+
+      {/* Fondo */}
       <div
-        className="login-bg"
-        style={{ backgroundImage: "url('/assets/img/img_index/fondof2.png')" }}
+        className="absolute inset-0 opacity-10 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/assets/img/img_index/fondof2.png')",
+        }}
       ></div>
-      <div className="login-overlay" aria-hidden="true"></div>
 
-      <section className="login-card" role="region" aria-labelledby="titulo">
-        <div className="marca">VersusMe</div>
+      {/* Overlay IGUAL AL LOGIN */}
+      <div className="absolute inset-0 -z-10 bg-black/80 backdrop-blur-sm"></div>
 
-        <h1 className="titulo" id="titulo">
-          ¡Únete a VersusMe!
+      {/* CARD — MISMO TAMAÑO QUE LOGIN */}
+      <div className="
+        w-[90%]
+        max-w-[480px]
+        bg-white/10
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-xl
+        p-10
+        text-white
+      ">
+
+        <h1 className="text-4xl font-bold text-center mb-6">
+          <Link href="/">
+            <span>Versus</span>
+            <span className="text-[#25C50E]">Me</span>
+          </Link>
         </h1>
 
-        <p className="desc">
-          Crea tu cuenta y comienza a descubrir retos deportivos en Lima
+        <p className="text-center text-gray-300 mb-6">
+          Crea tu cuenta y comienza a disfrutar del<p>deporte en Lima.</p>
         </p>
-        <p className="alternativa">
+
+        <p className="text-center text-gray-300 mb-6">
           ¿Ya tienes cuenta?{" "}
-          <Link className="link" href="/login">
-            Iniciar Sesión
+          <Link href="/login" className="text-[#25C50E] font-semibold">
+            Inicia sesión
           </Link>
         </p>
 
-        <form className="formulario" onSubmit={handleSubmit}>
+        {/* FORM */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+
           {/* Nombre */}
-          <label className="label" htmlFor="reg-nombre">
-            Nombre completo
-          </label>
-          <input
-            className="input"
-            id="reg-nombre"
-            name="name"
-            type="text"
-            placeholder="Nombre y apellidos"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            required
-          />
-
-          {/* Email */}
-          <label className="label" htmlFor="reg-email">
-            Correo electrónico
-          </label>
-          <input
-            className="input"
-            id="reg-email"
-            name="email"
-            type="email"
-            placeholder="tu@correo.com"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            required
-          />
-
-          {/* Contraseña */}
-          <label className="label" htmlFor="reg-pass">
-            Contraseña
-          </label>
-          <div className="input-wrap">
+          <div>
+            <label className="font-semibold text-sm">Nombre completo</label>
             <input
-              className="input"
-              id="reg-pass"
-              name="password"
-              type={showPass ? "text" : "password"}
-              placeholder="********"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              type="text"
+              className="w-full h-11 mt-1 px-4 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-[#25C50E]"
+              placeholder="Nombre y apellidos"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
-            />
-            <Image
-              className="ojo"
-              src={
-                showPass
-                  ? "/assets/img/img_login/cerrar_ojo.png"
-                  : "/assets/img/img_login/ojo.png"
-              }
-              width={20}
-              height={20}
-              alt="Mostrar u ocultar contraseña"
-              onClick={() => setShowPass(!showPass)}
             />
           </div>
 
-          {/* Reglas de contraseña */}
-          <ul className="pw-rules" id="pw-rules">
-            <li className={rules.len ? "ok" : ""}>Mínimo 8 caracteres</li>
-            <li className={rules.upper ? "ok" : ""}>
-              Al menos 1 letra mayúscula (A-Z)
-            </li>
-            <li className={rules.lower ? "ok" : ""}>
-              Al menos 1 letra minúscula (a-z)
-            </li>
-            <li className={rules.digit ? "ok" : ""}>Al menos 1 número (0-9)</li>
-            <li className={rules.symbol ? "ok" : ""}>
-              Al menos 1 símbolo (!@#…)
-            </li>
-            <li className={rules.nospace ? "ok" : ""}>Sin espacios</li>
+          {/* Email */}
+          <div>
+            <label className="font-semibold text-sm">Correo electrónico</label>
+            <input
+              type="email"
+              className="w-full h-11 mt-1 px-4 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-[#25C50E]"
+              placeholder="tu@correo.com"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
+          </div>
+
+          {/* Contraseña */}
+          <div>
+            <label className="font-semibold text-sm">Contraseña</label>
+            <div className="relative">
+              <input
+                type={showPass ? "text" : "password"}
+                className="w-full h-11 mt-1 px-4 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-[#25C50E]"
+                placeholder="********"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                required
+              />
+              <Image
+                src={showPass ? "/assets/img/img_login/cerrar_ojo.png" : "/assets/img/img_login/ojo.png"}
+                width={20}
+                height={20}
+                alt="toggle"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer opacity-80"
+                onClick={() => setShowPass(!showPass)}
+              />
+            </div>
+          </div>
+
+          {/* Reglas */}
+          <ul className="text-xs text-gray-300 space-y-1 pl-1 mt-1">
+            <li className={rules.len ? "text-[#25C50E]" : ""}>Mínimo 8 caracteres</li>
+            <li className={rules.upper ? "text-[#25C50E]" : ""}>Al menos 1 mayúscula</li>
+            <li className={rules.lower ? "text-[#25C50E]" : ""}>Al menos 1 minúscula</li>
+            <li className={rules.digit ? "text-[#25C50E]" : ""}>Al menos 1 número</li>
+            <li className={rules.symbol ? "text-[#25C50E]" : ""}>Al menos 1 símbolo</li>
+            <li className={rules.nospace ? "text-[#25C50E]" : ""}>Sin espacios</li>
           </ul>
 
           {/* Confirmar contraseña */}
-          <label className="label" htmlFor="reg-pass2">
-            Confirmar contraseña
-          </label>
-          <div className="input-wrap">
-            <input
-              className="input"
-              id="reg-pass2"
-              name="confirmPassword"
-              type={showConfirm ? "text" : "password"}
-              placeholder="********"
-              value={form.confirmPassword}
-              onChange={(e) =>
-                setForm({ ...form, confirmPassword: e.target.value })
-              }
-              required
-            />
-            <Image
-              className="ojo"
-              src={
-                showConfirm
-                  ? "/assets/img/img_login/cerrar_ojo.png"
-                  : "/assets/img/img_login/ojo.png"
-              }
-              width={20}
-              height={20}
-              alt="Mostrar u ocultar contraseña"
-              onClick={() => setShowConfirm(!showConfirm)}
-            />
+          <div>
+            <label className="font-semibold text-sm">Confirmar contraseña</label>
+            <div className="relative">
+              <input
+                type={showConfirm ? "text" : "password"}
+                className="w-full h-11 mt-1 px-4 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-[#25C50E]"
+                placeholder="********"
+                value={form.confirmPassword}
+                onChange={(e) =>
+                  setForm({ ...form, confirmPassword: e.target.value })
+                }
+                required
+              />
+
+              <Image
+                src={showConfirm ? "/assets/img/img_login/cerrar_ojo.png" : "/assets/img/img_login/ojo.png"}
+                width={20}
+                height={20}
+                alt="toggle"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer opacity-80"
+                onClick={() => setShowConfirm(!showConfirm)}
+              />
+            </div>
           </div>
 
-          {/* Estado */}
-          {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
-          {success && (
-            <p style={{ color: "green", marginTop: "10px" }}>{success}</p>
-          )}
+          {/* Mensajes */}
+          {error && <p className="text-red-400 text-sm">{error}</p>}
+          {success && <p className="text-green-400 text-sm">{success}</p>}
 
+          {/* Botón */}
           <button
-            className="btn-submit"
             type="submit"
-            disabled={!Object.values(rules).every(Boolean)}
-            style={{
-              opacity: Object.values(rules).every(Boolean) ? "1" : ".6",
-              cursor: Object.values(rules).every(Boolean)
-                ? "pointer"
-                : "not-allowed",
-            }}
+            className={`w-full h-11 rounded-lg font-bold bg-[#25C50E] text-black mt-4 
+              ${Object.values(rules).every(Boolean) ? "" : "opacity-40 cursor-not-allowed"}
+            `}
           >
             Crear cuenta
           </button>
-
-          <hr className="linea" />
-
-          <p className="nota">
-            Al crear una cuenta, aceptas nuestros{" "}
-            <a className="link" href="#">
-              Términos de Servicio y Condiciones
-            </a>
-          </p>
         </form>
-      </section>
-    </main>
+
+      </div>
+    </section>
   );
 }

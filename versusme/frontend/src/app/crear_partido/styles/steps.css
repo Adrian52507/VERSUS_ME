@@ -1,0 +1,236 @@
+/* ===============================
+   Estilos generales de los steps
+================================ */
+
+.step-card {
+  width: min(540px, 100vw);
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 28px 34px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+  color: #000;
+}
+
+/* Títulos */
+.step-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+/* ===============================
+   LISTA DE OPCIONES
+================================ */
+
+.step-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.step-option {
+  padding: 14px 18px;
+  background: #fafafa;
+  border: 2px solid #dddddd;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.step-option:hover {
+  border-color: #25c50e;
+  background: #f3fff1;
+  transform: scale(1.015);
+}
+
+/* Seleccionado */
+.step-option.selected {
+  border-color: #25c50e;
+  background: #d9ffd1;
+}
+
+/* ===============================
+   INPUTS
+================================ */
+
+.step-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #fafafa;
+  border: 2px solid #cccccc;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.step-input:focus {
+  border-color: #25c50e;
+  outline: none;
+  background: #f9fff7;
+}
+
+/* Textarea */
+
+.step-textarea {
+  width: 100%;
+  padding: 14px;
+  background: #fafafa;
+  border: 2px solid #cccccc;
+  border-radius: 10px;
+  font-size: 16px;
+  resize: none;
+  margin-top: 6px;
+}
+
+.step-textarea:focus {
+  border-color: #25c50e;
+  outline: none;
+  background: #f9fff7;
+}
+
+/* ===============================
+   GRUPOS
+================================ */
+
+.step-group {
+  margin-bottom: 22px;
+}
+
+/* ===============================
+   ERRORES
+================================ */
+
+.step-error {
+  font-size: 14px;
+  color: #d30000;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ===============================
+   BOTONES DE RADIO (deporte/distrito)
+================================ */
+
+.step-radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-radio-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #fafafa;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.step-radio-item:hover {
+  border-color: #25c50e;
+  background: #f3fff1;
+  transform: scale(1.015);
+}
+
+.step-radio-item.selected {
+  border-color: #25c50e;
+  background: #d9ffd1;
+}
+
+/* Punto indicador */
+.step-radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #666;
+}
+
+.step-radio-item.selected .step-radio-dot {
+  background: #25c50e;
+  border-color: #25c50e;
+}
+
+/* ===============================
+   UBICACIÓN (mapa)
+================================ */
+
+.map-container {
+  margin-top: 14px;
+  border: 3px solid #25c50e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ===============================
+   BOTONES DE APUESTA
+================================ */
+
+.bet-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bet-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.bet-btn:hover {
+  border-color: #25c50e;
+  background: #f3fff1;
+  transform: scale(1.02);
+}
+
+.bet-btn.active {
+  border-color: #25c50e;
+  background: #caffc2;
+}
+
+/* ===============================
+   INPUT DE APUESTA
+================================ */
+
+.bet-input {
+  margin-left: 12px;
+  padding: 10px 12px;
+  width: 140px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background: #fafafa;
+}
+
+.bet-input:focus {
+  border-color: #25c50e;
+  background: #f9fff7;
+  outline: none;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 480px) {
+  .step-card {
+    padding: 22px;
+    width: min(540px, 90vw);
+  }
+
+  .step-option,
+  .step-radio-item {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+}

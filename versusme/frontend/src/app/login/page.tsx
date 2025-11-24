@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "@/styles/styles_login.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -13,7 +12,6 @@ export default function LoginPage() {
   const [success, setSuccess] = useState("");
   const [showPass, setShowPass] = useState(false);
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -21,23 +19,19 @@ export default function LoginPage() {
     setSuccess("");
 
     try {
-      // 👇 Si tienes .env con NEXT_PUBLIC_API_BASE, úsalo. Si no, usa el localhost fijo:
       const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
 
       const res = await fetch(`${API_BASE}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // <-- permite recibir cookie del backend
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data?.error || "Error al iniciar sesión");
 
       setSuccess("Inicio de sesión exitoso ✅");
-
-      // ✅ Redirige al dashboard tras un pequeño delay
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 800);
@@ -47,104 +41,119 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    console.log("🔍 NEXT_PUBLIC_API_BASE =", process.env.NEXT_PUBLIC_API_BASE);
-  }, []);
+
   return (
-    <section className="login">
+    <section className="relative min-h-screen bg-black flex items-center justify-center px-6">
+
+      {/* Fondo */}
       <div
-        className="login-bg"
+        className="absolute inset-0 opacity-10 bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/img/img_index/fondof2.png')" }}
       ></div>
-      <div className="login-overlay"></div>
 
-      <div className="login-card">
-        <div className="marca">VersusMe</div>
-        <h1 className="titulo">
-          ¡Inicia Sesión en
-          <br />
-          VersusMe!
+      {/* Tarjeta login */}
+      <div className="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-10">
+
+        {/* Marca */}
+        <h1 className="text-center text-4xl font-bold text-[#25C50E]">
+          <Link href="/">
+            <span className="text-white">Versus</span>Me
+          </Link>
         </h1>
 
-        <p className="desc">Sigue descubriendo retos deportivos en Lima</p>
+        {/* Título */}
+        <h2 className="text-center text-white text-2xl font-semibold mt-6">
+          Inicia Sesión
+        </h2>
 
-        <p className="alternativa">
+        <p className="text-center text-gray-400 text-sm mt-2">
+          Sigue descubriendo retos deportivos en Lima
+        </p>
+
+        {/* Alternativa */}
+        <p className="text-center text-gray-300 text-sm mt-4">
           ¿No tienes cuenta?{" "}
-          <Link href="/registro" className="link">
+          <Link href="/registro" className="text-[#25C50E] hover:underline">
             Regístrate
           </Link>
         </p>
 
-        <form className="formulario" onSubmit={handleSubmit}>
-          <label className="label" htmlFor="email">
-            Correo Electrónico
-          </label>
-          <input
-            className="input"
-            id="email"
-            name="email"
-            type="email"
-            placeholder="tu@correo.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            autoComplete="username"
-          />
+        {/* Formulario */}
+        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
 
-          <label className="label" htmlFor="pass">
-            Contraseña
-          </label>
-          <div className="input-wrap">
+          {/* Email */}
+          <div>
+            <label className="block text-white font-medium mb-1">Correo Electrónico</label>
             <input
-              className="input"
-              id="pass"
-              name="password"
-              type={showPass ? "text" : "password"}
-              placeholder="********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="email"
+              placeholder="tu@correo.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-black/20 border border-white/20 text-white rounded-lg px-4 py-3 outline-none focus:border-[#25C50E]"
               required
-              autoComplete="current-password"
-            />
-            <Image
-              className="ojo"
-              src={
-                showPass
-                  ? "/assets/img/img_login/cerrar_ojo.png"
-                  : "/assets/img/img_login/ojo.png"
-              }
-              width={20}
-              height={20}
-              alt="Mostrar u ocultar contraseña"
-              onClick={() => setShowPass(!showPass)}
             />
           </div>
 
-          <p className="recuperar">
-            <Link href="/recuperar" className="link">
-              ¿Olvidaste tu contraseña?
-            </Link>
-          </p>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          {success && <p style={{ color: "green" }}>{success}</p>}
+          {/* Password */}
+          <div>
+            <label className="block text-white font-medium mb-1">Contraseña</label>
 
-          <button className="btn-submit" type="submit" disabled={loading}>
+            <div className="relative">
+              <input
+                type={showPass ? "text" : "password"}
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-black/20 border border-white/20 text-white rounded-lg px-4 py-3 outline-none focus:border-[#25C50E]"
+                required
+              />
+
+              <Image
+                src={
+                  showPass
+                    ? "/assets/img/img_login/cerrar_ojo.png"
+                    : "/assets/img/img_login/ojo.png"
+                }
+                width={20}
+                height={20}
+                alt="Mostrar u ocultar contraseña"
+                className="absolute right-3 top-3 cursor-pointer opacity-80"
+                onClick={() => setShowPass(!showPass)}
+              />
+            </div>
+
+            <div className="text-right mt-1">
+              <Link href="/recuperar" className="text-gray-400 text-sm hover:underline">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
+          </div>
+
+          {/* Mensajes */}
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+          {success && <p className="text-green-500 text-sm mt-2">{success}</p>}
+
+          {/* Botón */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#25C50E] text-black font-semibold py-3 rounded-lg hover:bg-[#1ea90c] transition"
+          >
             {loading ? "Iniciando..." : "Iniciar Sesión"}
           </button>
+
         </form>
 
-        <hr className="linea" />
+        {/* Línea */}
+        <div className="w-full h-px bg-white/10 my-8"></div>
 
-        <p className="nota">
-          Al iniciar sesión, indicas tu consentimiento con nuestros{" "}
-          <a href="#" className="link">
-            Términos de Servicio
-          </a>{" "}
-          y{" "}
-          <a href="#" className="link">
-            Condiciones
-          </a>
+        {/* Nota */}
+        <p className="text-center text-gray-400 text-sm">
+          Al iniciar sesión, aceptas nuestros{" "}
+          <a className="text-[#25C50E] underline cursor-pointer">Términos</a> y{" "}
+          <a className="text-[#25C50E] underline cursor-pointer">Condiciones</a>.
         </p>
+
       </div>
     </section>
   );

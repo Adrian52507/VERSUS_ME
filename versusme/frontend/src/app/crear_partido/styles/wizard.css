@@ -1,0 +1,100 @@
+/* =============================== */
+/*   ESTILOS BASE DEL LAYOUT       */
+/* =============================== */
+
+/* Fondo del wizard */
+.wizard-main {
+  min-height: 100vh;
+  background: #141517;
+  color: #fff;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Wrapper centrado para que el step NO flote pegado arriba */
+.wizard-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Tarjeta principal del wizard */
+.wizard-card {
+  width: min(540px, 100vw);
+  background: #141517;
+  color: #000;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.20);
+  margin-bottom: 30px;
+}
+
+/* Indicador de pasos (dots) */
+.wizard-steps-indicator {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.wizard-step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #555;
+  transition: 0.25s ease;
+}
+
+.wizard-step-dot.active {
+  background: #25C50E;
+}
+
+/* =============================== */
+/* BOTONES DE NAVEGACIÓN          */
+/* =============================== */
+
+.wizard-nav {
+  display: flex;
+  justify-content: space-between;
+  width: min(540px, 92vw);
+  margin-top: 20px;
+}
+
+.wizard-nav-btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  border: none;
+}
+
+.wizard-nav-prev {
+  background: #2b2f2a;
+  color: #fff;
+}
+
+.wizard-nav-next {
+  background: #25c50e;
+  color: #141517;
+}
+
+.wizard-nav-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.wizard-nav-btn:active {
+  transform: scale(0.97);
+}
+
+
+
+/* Aseguramos que todo esté centrado y fluido */
+@media (max-width: 480px) {
+  .wizard-card {
+    margin-right: 5em;
+    margin-left: 5em;
+  }
+}

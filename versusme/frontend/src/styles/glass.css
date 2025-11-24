@@ -1,0 +1,99 @@
+/* ========================================================================= */
+/*  ⭐ THEME GLASS PARA VERSUSME – Dashboard                                */
+/* ========================================================================= */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.09);   /* Fondo semi-transparente */
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --glass-blur: blur(10px);
+}
+
+/* Panel general glass */
+.panel {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Tabs */
+.tabs {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+.tab.active {
+  background: rgba(37, 197, 14, 0.22);
+  backdrop-filter: blur(12px);
+}
+
+/* Filtros */
+.filters {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+}
+
+/* Inputs glass */
+.search,
+.select {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Tarjetas – disponibles */
+.cards .card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.cards .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* Accepted list */
+.accepted-item {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  transition: transform .2s ease;
+}
+
+.accepted-item:hover {
+  transform: scale(1.02);
+}
+
+/* Botones */
+.btn-unirse,
+.accepted-item .mini,
+.btn-outline {
+  backdrop-filter: blur(8px);
+  background: rgba(37, 197, 14, 0.22);
+  border: 1px solid rgba(37, 197, 14, 0.4);
+  color: #fff;
+}
+
+.btn-unirse:hover {
+  background: rgba(37, 197, 14, 0.32);
+}
+
+/* KPI cards */
+.kpi {
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+.kpi .kpi-icon {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--glass-border);
+}   

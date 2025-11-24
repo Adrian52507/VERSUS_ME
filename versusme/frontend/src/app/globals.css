@@ -1,9 +1,35 @@
 @import "tailwindcss";
 
+/* ==============================
+   VARIABLES GLOBALES (THEME)
+   ============================== */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Paleta VersusMe (moderna, deportiva) */
+  --primary: #2563eb;        /* Azul dinámico */
+  --primary-dark: #1e3a8a;
+  --secondary: #06b6d4;      /* Turquesa energético */
+  --accent: #f43f5e;         /* Rojo competencia */
+  --gray: #64748b;
+
+  /* Diseño */
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --section-padding: 1.5rem;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+}
+
+
+
 
 @theme inline {
   --color-background: var(--background);
@@ -19,8 +45,76 @@
   }
 }
 
+/* ==============================
+   ESTILOS GLOBALES DEL BODY
+   ============================== */
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar moderno */
+::-webkit-scrollbar {
+  width: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+.animate-slide-in {
+  animation: slideInRight 0.25s ease-out forwards;
+}
+
+.animate-slide-out {
+  animation: slideOutRight 0.25s ease-in forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.7s ease-out forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
 }

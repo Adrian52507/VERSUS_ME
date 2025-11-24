@@ -2,391 +2,186 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import "@/styles/styles_perfil.css";
+import Topbar from "@/components/Topbar";
 
-function Loader() {
-  return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "1.2rem",
-      }}
-    >
-      <div
-        style={{
-          width: "52px",
-          height: "52px",
-          border: "6px solid rgba(37, 197, 14, 0.15)",
-          borderTopColor: "#25c50e",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-          boxShadow: "0 0 12px #25c50e70",
-        }}
-      />
-
-      <p
-        style={{
-          color: "#bfbfbf",
-          fontSize: "1.1rem",
-          letterSpacing: "0.6px",
-          opacity: 0.9,
-        }}
-      >
-        Cargando perfil...
-      </p>
-
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
-    </div>
-  );
-}
-
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
 
 export default function PerfilPage() {
   const [perfil, setPerfil] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [editando, setEditando] = useState(false);
-  const [mensaje, setMensaje] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [usuario, setUsuario] = useState("");
+  const [edit, setEdit] = useState(false);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    const fetchPerfil = async () => {
-      const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+    (async () => {
       const res = await fetch(`${API_BASE}/api/profile`, { credentials: "include" });
       const data = await res.json();
       setPerfil(data);
-      setUsuario(data.name || "U");
       setLoading(false);
-    };
-    fetchPerfil();
+    })();
   }, []);
 
-  const handleLogout = async () => {
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
-    await fetch(`${API_BASE}/api/logout`, {
-      method: "POST",
-      credentials: "include",
-    });
-    window.location.href = "/login";
-  };
-
-  const handleInputChange = (e: any) => {
+  const updateField = (e: any) => {
     setPerfil({ ...perfil, [e.target.name]: e.target.value });
   };
 
-  const handleGuardarCambios = async () => {
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+  const saveChanges = async () => {
     const res = await fetch(`${API_BASE}/api/profile`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(perfil),
     });
-    if (res.ok) setMensaje("✅ Los cambios han sido guardados correctamente.");
-    else setMensaje("❌ Error al guardar los cambios.");
-    setEditando(false);
+
+    res.ok
+      ? setMsg("Cambios guardados correctamente 🎉")
+      : setMsg("Error al guardar ❌");
+
+    setEdit(false);
   };
 
-  const handleChangeProfilePicture = async (e: any) => {
-    const file = e.target.files[0];
+  const uploadImage = async (e: any, type: "profile" | "cover") => {
+    const file = e.target.files?.[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append("profile_picture", file);
+    const form = new FormData();
+    form.append(type === "profile" ? "profile_picture" : "cover_photo", file);
 
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
-    const res = await fetch(`${API_BASE}/api/profile/picture`, {
+    const endpoint = type === "profile" ? "picture" : "cover";
+
+    const res = await fetch(`${API_BASE}/api/profile/${endpoint}`, {
       method: "POST",
       credentials: "include",
-      body: formData,
+      body: form,
     });
 
-    if (res.ok) {
-      const updated = await res.json();
-      setPerfil({ ...perfil, profile_picture: updated.profile_picture });
-      setMensaje("🖼️ Imagen de perfil actualizada con éxito.");
-    } else {
-      setMensaje("❌ Error al actualizar la imagen de perfil.");
-    }
-  };
+    if (!res.ok) return setMsg("Error al subir imagen ❌");
 
-  const handleChangeCoverPhoto = async (e: any) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("cover_photo", file);
-
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
-    const res = await fetch(`${API_BASE}/api/profile/cover`, {
-      method: "POST",
-      credentials: "include",
-      body: formData,
+    const updated = await res.json();
+    setPerfil({
+      ...perfil,
+      [type === "profile" ? "profile_picture" : "cover_photo"]:
+        updated[type === "profile" ? "profile_picture" : "cover_photo"],
     });
-
-    if (res.ok) {
-      const updated = await res.json();
-      setPerfil({ ...perfil, cover_photo: updated.cover_photo });
-      setMensaje("🖼️ Foto de portada actualizada con éxito.");
-    } else {
-      setMensaje("❌ Error al actualizar la foto de portada.");
-    }
   };
 
-  if (loading) return <Loader />;
-  if (!perfil) return <p>No se pudo cargar tu perfil.</p>;
+  if (loading)
+    return (
+      <div className="h-screen flex flex-col items-center justify-center text-gray-300">
+        <div className="w-12 h-12 border-4 border-green-500/20 border-t-green-500 rounded-full animate-spin mb-3" />
+        Cargando perfil...
+      </div>
+    );
 
   return (
-    <>
-      {/* 🔹 Top Navigation */}
-      <div className="topbar">
-        <div className="container">
-          <Link href="/">
-            <h1 className="brand">VersusMe</h1>
-          </Link>
-          <nav className="top-actions">
-            <Link className="pill" href="/dashboard">
-              <Image
-                src="/assets/img/img_dashboard_principal/casa_negro_icono.png"
-                alt=""
-                width={16}
-                height={16}
-              />
-              DASHBOARDS
-            </Link>
+    <div className="min-h-screen bg-[#141517] text-white">
 
-            <Link className="pill" href="/crear_partido">
-              <Image
-                src="/assets/img/img_dashboard_principal/suma_negro_icono.png"
-                alt=""
-                width={16}
-                height={16}
-              />
-              CREAR PARTIDO
-            </Link>
+      {/* ✔ Topbar REAL del sistema */}
+      <Topbar />
 
-            <Link className="pill" href="/historial">
-              <Image
-                src="/assets/img/img_dashboard_principal/reloj_negro_icono.png"
-                alt=""
-                width={16}
-                height={16}
-              />
-              HISTORIAL
-            </Link>
+      {/* ----------- PORTADA ----------- */}
+      <section className="relative w-full h-72">
+        <Image
+          src={
+            perfil.cover_photo
+              ? perfil.cover_photo.startsWith("http")
+                ? perfil.cover_photo
+                : `${API_BASE}/${perfil.cover_photo.replace(/^\/+/, "")}`
+              : "/assets/img/img_perfil/default-cover.jpg"
+          }
+          alt="cover"
+          fill
+          className="object-cover opacity-90"
+        />
 
-            <div className="profile" style={{ position: "relative" }}>
-              <div
-                className="badge"
-                style={{
-                  overflow: "hidden",
-                  padding: 0,
-                  background: "none",
-                  border: "2px solid #5F676D",
-                }}
-              >
-                <Image
-                  src={
-                    perfil?.profile_picture
-                      ? perfil.profile_picture.startsWith("http")
-                        ? perfil.profile_picture
-                        : `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
-                      : "/assets/img/img_perfil/default-user.jpg"
-                  }
-                  alt="Foto de perfil"
-                  width={50}
-                  height={50}
-                  style={{ objectFit: "cover", borderRadius: "50%" }}
-                  unoptimized
-                />
+        {/* Botón cambiar portada */}
+        <label className="absolute bottom-3 right-5 bg-white/20 backdrop-blur-xl px-4 py-2 rounded-xl text-sm cursor-pointer hover:bg-white/30 transition">
+          Cambiar portada
+          <input type="file" hidden onChange={(e) => uploadImage(e, "cover")} />
+        </label>
 
-              </div>
+        {/* ----------- FOTO PERFIL ----------- */}
+        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2">
+          <label className="relative cursor-pointer group">
+            <Image
+              src={
+                perfil.profile_picture
+                  ? perfil.profile_picture.startsWith("http")
+                    ? perfil.profile_picture
+                    : `${API_BASE}/${perfil.profile_picture.replace(/^\/+/, "")}`
+                  : "/assets/img/img_perfil/default-user.jpg"
+              }
+              width={140}
+              height={140}
+              alt="profile"
+              className="rounded-full border-4 border-white/20 shadow-xl object-cover group-hover:brightness-75 transition"
+            />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex justify-center items-center text-2xl rounded-full transition">
+              ✏️
+            </div>
+            <input type="file" hidden onChange={(e) => uploadImage(e, "profile")} />
+          </label>
+        </div>
+      </section>
 
+      {/* CONTENEDOR GENERAL */}
+      <main className="max-w-5xl mx-auto pt-24 px-6 flex flex-col md:flex-row gap-10 ">
+
+        {/* ----------- INFO USUARIO ----------- */}
+        <div className="w-full md:w-2/3 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl mb-10">
+          <h2 className="text-3xl font-bold mb-5">Información del jugador</h2>
+
+          {!edit ? (
+            <div className="space-y-3 text-gray-300">
+              <p><b>Nombre:</b> {perfil.name}</p>
+              <p><b>Email:</b> {perfil.email}</p>
+              <p><b>Descripción:</b> {perfil.description || "Sin descripción"}</p>
+              <p><b>Distrito:</b> {perfil.district}</p>
+              <p><b>Deporte favorito:</b> {perfil.favorite_sport}</p>
+              <p><b>Nivel:</b> {perfil.level}</p>
 
               <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  transform: menuOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.2s ease",
-                }}
+                onClick={() => setEdit(true)}
+                className="mt-4 bg-[#25C50E] text-black rounded-xl px-6 py-2 font-semibold hover:bg-green-500 transition"
               >
-                <Image
-                  src="/assets/img/img_dashboard_principal/menor_que_gris_icono.png"
-                  alt="toggle menu"
-                  width={18}
-                  height={18}
-                />
+                Editar perfil
               </button>
-
-              {menuOpen && (
-                <div
-                  className="profile-menu"
-                  style={{
-                    position: "absolute",
-                    top: "60px",
-                    right: 0,
-                    background: "#2B2F2A",
-                    border: "1px solid #5F676D",
-                    borderRadius: "8px",
-                    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-                    zIndex: 10,
-                    minWidth: "180px",
-                  }}
-                >
-                  <nav style={{ display: "flex", flexDirection: "column" }}>
-                    <Link
-                      href="/perfil"
-                      style={{
-                        padding: "0.7em 20px",
-                        color: "#fff",
-                        textDecoration: "none",
-                        fontWeight: 500,
-                        borderBottom: "1px solid #5F676D",
-                      }}
-                    >
-                      Perfil del jugador
-                    </Link>
-
-                    <Link
-                      href="/mensajeria"
-                      style={{
-                        padding: "0.7em 20px",
-                        color: "#fff",
-                        textDecoration: "none",
-                        fontWeight: 500,
-                        borderBottom: "1px solid #5F676D",
-                      }}
-                    >
-                      Mensajería
-                    </Link>
-
-                    <button
-                      onClick={handleLogout}
-                      style={{
-                        border: "none",
-                        color: "#ff6b6b",
-                        fontWeight: 600,
-                        cursor: "pointer",
-                        padding: "0.7em 20px",
-                        textAlign: "left",
-                        background: "none",
-                      }}
-                    >
-                      Cerrar sesión
-                    </button>
-                  </nav>
-                </div>
-              )}
             </div>
-          </nav>
-        </div>
-      </div>
+          ) : (
+            <div className="space-y-3">
+              <input className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2" name="name" value={perfil.name} onChange={updateField} />
+              <textarea className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2" name="description" value={perfil.description || ""} onChange={updateField} />
+              <input className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2" name="email" value={perfil.email} onChange={updateField} />
+              <input className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2" name="district" value={perfil.district || ""} onChange={updateField} />
+              <input className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2" name="favorite_sport" value={perfil.favorite_sport || ""} onChange={updateField} />
+              <input className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2" name="level" value={perfil.level || ""} onChange={updateField} />
 
-      {/* 🔹 Perfil principal */}
-      <div className="perfil-container">
-        <div className="perfil-portada">
-          <Image
-            src={
-              perfil.cover_photo
-                ? perfil.cover_photo.startsWith("http")
-                  ? perfil.cover_photo
-                  : `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.cover_photo.replace(/^\/+/, "")}`
-                : "/assets/img/img_perfil/default-cover.jpg"
-            }
-            alt="Portada"
-            fill
-            className="cover-image"
-            unoptimized
-          />
-
-          <label className="edit-cover-btn">
-            ✏️ Editar portada
-            <input type="file" accept="image/*" hidden onChange={handleChangeCoverPhoto} />
-          </label>
-
-          <div className="perfil-foto">
-            <label className="foto-hover">
-              <Image
-                src={
-                  perfil.profile_picture
-                    ? perfil.profile_picture.startsWith("http")
-                      ? perfil.profile_picture
-                      : `${process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000"}/${perfil.profile_picture.replace(/^\/+/, "")}`
-                    : "/assets/img/img_perfil/default-user.jpg"
-                }
-                alt="Perfil"
-                width={120}
-                height={120}
-                className="foto-img"
-                unoptimized
-              />
-              <div className="hover-overlay">✏️</div>
-              <input type="file" accept="image/*" hidden onChange={handleChangeProfilePicture} />
-            </label>
-          </div>
-        </div>
-
-        <div className="perfil-main">
-          <div className="perfil-info">
-            <h2>Información del usuario</h2>
-            {editando ? (
-              <>
-                <input name="name" value={perfil.name} onChange={handleInputChange} />
-                <textarea
-                  name="description"
-                  value={perfil.description || ""}
-                  onChange={handleInputChange}
-                />
-                <input name="email" value={perfil.email} onChange={handleInputChange} />
-                <input name="district" value={perfil.district || ""} onChange={handleInputChange} />
-                <input
-                  name="favorite_sport"
-                  value={perfil.favorite_sport || ""}
-                  onChange={handleInputChange}
-                />
-                <input name="level" value={perfil.level || ""} onChange={handleInputChange} />
-                <button onClick={handleGuardarCambios} className="btn-guardar">
-                  Guardar cambios
-                </button>
-              </>
-            ) : (
-              <>
-                <p><b>Nombre:</b> {perfil.name}</p>
-                <p><b>Descripción:</b> {perfil.description || "Sin descripción"}</p>
-                <p><b>Correo:</b> {perfil.email}</p>
-                <p><b>Distrito:</b> {perfil.district}</p>
-                <p><b>Deporte favorito:</b> {perfil.favorite_sport}</p>
-                <p><b>Nivel:</b> {perfil.level}</p>
-                <button onClick={() => setEditando(true)} className="btn-editar">
-                  ✏️ Editar perfil
-                </button>
-              </>
-            )}
-          </div>
-
-          <div className="perfil-insignias">
-            <h3>Insignias del jugador</h3>
-            <div className="insignias-grid">
-              <Image src="/assets/img/img_insignias/insignia_creacion.png" alt="Creación" width={60} height={60} />
+              <button
+                onClick={saveChanges}
+                className="mt-4 bg-green-600 text-white rounded-xl px-6 py-2 font-semibold hover:bg-green-700 transition"
+              >
+                Guardar cambios
+              </button>
             </div>
+          )}
+        </div>
+
+        {/* ----------- INSIGNIAS ----------- */}
+        <div className="w-full md:w-1/3 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl mb-10">
+          <h3 className="text-2xl font-bold mb-5">Insignias</h3>
+
+          <div className="flex gap-4">
+            <Image src="/assets/img/img_insignias/insignia_creacion.png" width={70} height={70} alt="insignia" />
           </div>
         </div>
 
-        {mensaje && <p className="mensaje">{mensaje}</p>}
-      </div>
-    </>
+      </main>
+
+      {msg && (
+        <p className="mt-10 text-center bg-white/10 inline-block mx-auto px-6 py-3 rounded-xl">
+          {msg}
+        </p>
+      )}
+    </div>
   );
 }
