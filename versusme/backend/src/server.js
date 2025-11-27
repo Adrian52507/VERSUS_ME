@@ -24,6 +24,9 @@ import {
   upload, // multer-cloudinary
 } from "./profile.js";
 
+import aiRoutes from "./routes/ai.js";
+
+
 dotenv.config();
 
 const app = express();
@@ -51,6 +54,10 @@ app.options(/.*/, cors({
 
 app.use(express.json());
 app.use(cookieParser());
+
+
+//ai routes
+app.use("/api/ai", aiRoutes);
 
 /* ─────────────────────────────────────────────
    🌐 AUTH + PROFILE
