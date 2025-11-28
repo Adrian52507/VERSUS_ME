@@ -36,21 +36,34 @@ app.set("trust proxy", 1);
 /* ─────────────────────────────────────────────
    🔐 CORS CONFIG
 ────────────────────────────────────────────── */
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  process.env.ORIGIN_FRONTEND
+].filter(Boolean); // limpia null
+
 app.use(
   cors({
-    origin: process.env.ORIGIN_FRONTEND,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Sec-Fetch-Mode", "Sec-Fetch-Site", "Sec-Fetch-Dest"],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
 
+      console.warn("🚫 CORS bloqueado para:", origin);
+      return callback(new Error("No permitido por CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept"
+    ]
   })
 );
 
-// Preflight manual para Vercel
-app.options(/.*/, cors({
-  origin: process.env.ORIGIN_FRONTEND,
-  credentials: true,
-}));
+
+
 
 app.use(express.json());
 app.use(cookieParser());

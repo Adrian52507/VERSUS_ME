@@ -1,32 +1,54 @@
 import express from "express";
-import { spawn } from "child_process";
+import { PythonShell } from "python-shell";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const router = express.Router();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-router.post("/predict_full", (req, res) => {
-  const py = spawn("C:/Users/Adrian/Miniconda3/envs/versusme-ia/python.exe", ["./ai/recommend_full.py"]);
+const PYTHON_PATH = "C:/Users/Adrian/Miniconda3/envs/versusme-ia/python.exe";
 
-  py.stdin.write(JSON.stringify(req.body));
-  py.stdin.end();
+router.post("/predict_full", async (req, res) => {
+  console.log("🔥 LLEGÓ la petición a /predict_full");
+  console.log("📤 Enviando a Python:", req.body);
 
-  let output = "";
+  const pyPath = path.join(__dirname, "../../ai/run_recommender.py");
 
-  py.stdout.on("data", (data) => {
-    output += data.toString();
+  const pyshell = new PythonShell(pyPath, {
+    pythonPath: PYTHON_PATH,
+    mode: "text",
+    pythonOptions: ["-u"],
   });
 
-  py.stderr.on("data", (data) => {
-    console.error("PYTHON ERROR:", data.toString());
-  });
+  // Enviar el JSON correctamente
+  pyshell.send(JSON.stringify(req.body));
+  pyshell.end();
 
-  py.on("close", () => {
+
+  pyshell.on("message", (msg) => {
+    console.log("🐍 PY STDOUT:", msg);
+
     try {
-      res.json(JSON.parse(output));
+      const parsed = JSON.parse(msg);
+      return res.json(parsed);
     } catch (err) {
-      console.error("JSON ERROR:", err);
-      res.status(500).json({ error: "Python returned invalid output" });
+      console.error("❌ ERROR PARSEANDO PYTHON:", err, msg);
     }
+  });
+
+  pyshell.on("stderr", (stderr) => {
+    console.error("🐍 PY STDERR:", stderr);
+  });
+
+  pyshell.on("error", (err) => {
+    console.error("⛔ PYTHON ERROR:", err);
+    res.status(500).json({ error: "Error ejecutando IA" });
+  });
+
+  pyshell.on("close", () => {
+    console.log("🐍 Python finalizó");
   });
 });
 
+// ✨ IMPORTANTE ✨
 export default router;
