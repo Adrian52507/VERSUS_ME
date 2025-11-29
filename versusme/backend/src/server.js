@@ -83,48 +83,54 @@ app.put("/api/profile", authMiddleware, updateProfile);
 app.post(
   "/api/profile/picture",
   authMiddleware,
-  upload.single("profile_picture"),
   async (req, res, next) => {
+    const user = req.user;
 
-    const user = req.user; // viene del JWT
+    // Para leer el mimetype ANTES del upload, usamos multer por campo
+    upload.single("profile_picture")(req, res, (err) => {
+      if (err) return res.status(500).json({ error: "Error en el servidor" });
 
-    const mimetype = req.file?.mimetype || "";
+      const mimetype = req.file?.mimetype || "";
 
-    const allowedBasic = ["image/jpeg", "image/jpg", "image/png"];
+      const allowedBasic = ["image/jpeg", "image/jpg", "image/png"];
 
-    // Si NO es PRO y NO está en formatos permitidos → bloquear
-    if (!user.is_pro && !allowedBasic.includes(mimetype)) {
-      return res.status(403).json({
-        error: "Solo usuarios PRO pueden subir GIFs, WebP animado o videos.",
-      });
-    }
+      if (!user.is_pro && !allowedBasic.includes(mimetype)) {
+        return res.status(403).json({
+          error: "Debes ser usuario PRO para subir GIFs, WebP animados o videos."
+        });
+      }
 
-    next(); // permitir handler original
+      next();
+    });
   },
   uploadProfilePicture
 );
+
 app.post(
   "/api/profile/cover",
   authMiddleware,
-  upload.single("cover_photo"),
   async (req, res, next) => {
-
     const user = req.user;
 
-    const mimetype = req.file?.mimetype || "";
+    upload.single("cover_photo")(req, res, (err) => {
+      if (err) return res.status(500).json({ error: "Error en el servidor" });
 
-    const allowedBasic = ["image/jpeg", "image/jpg", "image/png"];
+      const mimetype = req.file?.mimetype || "";
 
-    if (!user.is_pro && !allowedBasic.includes(mimetype)) {
-      return res.status(403).json({
-        error: "Necesitas VersusMe PRO para subir videos o imágenes animadas.",
-      });
-    }
+      const allowedBasic = ["image/jpeg", "image/jpg", "image/png"];
 
-    next();
+      if (!user.is_pro && !allowedBasic.includes(mimetype)) {
+        return res.status(403).json({
+          error: "Debes ser usuario PRO para subir GIFs, WebP animados o videos."
+        });
+      }
+
+      next();
+    });
   },
   uploadCoverPhoto
 );
+
 
 /* ─────────────────────────────────────────────
    💳 STRIPE: CREAR CHECKOUT SESSION
@@ -231,10 +237,22 @@ app.post("/api/matches", authMiddleware, async (req, res) => {
     );
 
     if (count.created >= 1) {
+      // Calcular próximo lunes
+      const now = new Date();
+      const day = now.getDay(); // 0=domingo, 1=lunes...
+      const daysUntilMonday = (8 - day) % 7;
+      const nextMonday = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + daysUntilMonday
+      );
+
       return res.status(403).json({
-        error: "Solo puedes crear 1 partido por semana con el plan Básico."
+        error: "Solo puedes crear 1 partido por semana con el plan Básico.",
+        nextAvailable: nextMonday.toISOString().slice(0, 10)
       });
     }
+
   }
 
 
@@ -307,7 +325,7 @@ app.post("/api/matches", authMiddleware, async (req, res) => {
 });
 
 /* ─────────────────────────────────────────────
-   📌 PARTIDOS: LISTA GENERAL
+   📌 PARTIDOS: LISTA GENERAL (versión segura)
 ────────────────────────────────────────────── */
 app.get("/api/matches/all", async (req, res) => {
   try {
@@ -341,11 +359,15 @@ app.get("/api/matches/all", async (req, res) => {
     `;
 
     const [rows] = await pool.execute(sql);
-    res.json(rows);
+
+    // 🚀 SIEMPRE devolver array
+    return res.json(rows || []);
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error obteniendo partidos" });
+    console.error("❌ Error en /api/matches/all:", err);
+
+    // 🚀 IMPORTANTE: devolver SIEMPRE array vacío, nunca error
+    return res.json([]);
   }
 });
 
@@ -375,11 +397,25 @@ app.post("/api/matches/join/:id", authMiddleware, async (req, res) => {
     );
 
     if (count.joined >= 1) {
+
+      // Calcular próximo lunes (inicio de nueva semana ISO)
+      const now = new Date();
+      const day = now.getDay(); // 0 = domingo
+      const daysUntilMonday = (8 - day) % 7;
+
+      const nextMonday = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + daysUntilMonday
+      );
+
       return res.status(403).json({
-        error: "Solo puedes unirte a 1 partido por semana con el Plan Básico."
+        error: "Solo puedes unirte a 1 partido por semana con el Plan Básico.",
+        nextAvailable: nextMonday.toISOString().slice(0, 10)
       });
     }
   }
+
 
 
   try {

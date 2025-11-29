@@ -30,6 +30,14 @@ function formatTime(time: string) {
   return `${h12}:${m} ${suf}`;
 }
 
+async function safeJson(res: Response) {
+  try {
+    return await res.json();
+  } catch {
+    return {};
+  }
+}
+
 export default function DashboardPage() {
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
 
@@ -47,6 +55,11 @@ export default function DashboardPage() {
     date: "",
   });
 
+  useEffect(() => {
+    console.log("🔥 useEffect ejecutado → cargando dashboard...");
+    fetchDashboard();
+  }, []);
+
   async function fetchDashboard() {
     try {
       setLoading(true);
@@ -58,28 +71,41 @@ export default function DashboardPage() {
         fetch(`${API_BASE}/api/user/stats`, { credentials: "include" }),
       ]);
 
-      const profile = await profileRes.json();
-      const all = await matchesRes.json();
-      const accepted = await acceptedRes.json();
-      const statsData = await statsRes.json();
+      const profile = await safeJson(profileRes);
+      const all = await safeJson(matchesRes);
+      const accepted = await safeJson(acceptedRes);
+      const statsData = await safeJson(statsRes);
 
-      const acceptedIds = new Set(accepted.map((p: any) => p.id));
+      /* 👇 AGREGAR ESTO PARA DEBUG */
+      console.log(">>> PROFILE:", profile);
+      console.log(">>> ALL MATCHES:", all);
+      console.log(">>> ACCEPTED MATCHES:", accepted);
+      console.log(">>> USER STATS:", statsData);
+      console.log(">>> FILTERS STATE:", filters);
+
+      // Blindaje total
+      const allList = Array.isArray(all) ? all : [];
+      const acceptedList = Array.isArray(accepted) ? accepted : [];
+
+      // Crear set para búsqueda rápida
+      const acceptedIds = new Set(acceptedList.map((p: any) => p.id));
 
       setUsuario(profile.name || "Usuario");
-      setStats(statsData);
+      setStats(statsData || { played: 0, created: 0, rating: 0 });
 
       setPartidos(
-        all.map((p: any) => ({
+        allList.map((p: any) => ({
           ...p,
           joined: acceptedIds.has(p.id),
         }))
       );
     } catch (e) {
-      console.error(e);
+      console.error("dashboard error", e);
     } finally {
       setLoading(false);
     }
   }
+
 
   async function joinMatch(id: number) {
     try {
@@ -88,18 +114,79 @@ export default function DashboardPage() {
         credentials: "include",
       });
 
+      // SI OK → recargar dashboard
       if (res.ok) {
         await fetchDashboard();
         setTab("aceptados");
+        return;
       }
-    } catch (e) {
-      console.error("join error:", e);
+
+      // SI FALLA, PERO SIN ROMPER
+      let text = await res.text();
+      let data: any;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { error: text };
+      }
+
+      let message = "❌ No se pudo unir al partido.";
+      let nextAvailable = data?.nextAvailable;
+
+      if (data?.error?.includes("1 partido por semana")) {
+        if (nextAvailable) {
+          const fecha = new Date(nextAvailable);
+          const formato = fecha.toLocaleDateString("es-PE", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+          });
+
+          message = `❌ Límite semanal del Plan Básico alcanzado.\n📅 Podrás unirte nuevamente el: ${formato}`;
+        } else {
+          message =
+            "❌ Solo puedes unirte a 1 partido por semana con el Plan Básico.";
+        }
+      }
+
+      // TOAST
+      const toast = document.createElement("div");
+      toast.innerText = message;
+      toast.style.position = "fixed";
+      toast.style.bottom = "30px";
+      toast.style.left = "50%";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.background = "#222";
+      toast.style.color = "#fff";
+      toast.style.padding = "14px 22px";
+      toast.style.borderRadius = "12px";
+      toast.style.fontWeight = "600";
+      toast.style.fontSize = "15px";
+      toast.style.whiteSpace = "pre-line";
+      toast.style.border = "1px solid rgba(255,255,255,.12)";
+      toast.style.boxShadow = "0 4px 14px rgba(0,0,0,0.3)";
+      toast.style.zIndex = "9999";
+      toast.style.opacity = "0";
+      toast.style.transition = "opacity .3s ease";
+
+      document.body.appendChild(toast);
+      setTimeout(() => (toast.style.opacity = "1"), 50);
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+
+      // ❗ Importante: NO cargar dashboard aquí
+      return;
+
+    } catch (err) {
+      console.error("join error:", err);
+
+      // Prevenir loading infinito
+      await fetchDashboard();
     }
   }
-
-  useEffect(() => {
-    fetchDashboard();
-  }, []);
 
   if (loading)
     return (
@@ -119,7 +206,10 @@ export default function DashboardPage() {
         : filters.bet === "no"
           ? p.has_bet === 0
           : true;
-    const da = filters.date ? p.match_date === filters.date : true;
+    const da = filters.date
+      ? p.match_date.slice(0, 10) === filters.date
+      : true;
+
 
     return c && s && d && b && da;
   });

@@ -152,12 +152,66 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             body: JSON.stringify(body)
         });
 
+        /* ==========================
+           ERROR → TOAST
+        =========================== */
         if (!res.ok) {
-            console.error(await res.text());
+            let data: any = null;
+            try {
+                data = await res.json();
+            } catch (_) { }
+
+            let errorMessage = "❌ Error al crear partido";
+
+            if (data?.error?.includes("1 partido por semana")) {
+                if (data?.nextAvailable) {
+                    const fecha = new Date(data.nextAvailable);
+                    const formato = fecha.toLocaleDateString("es-PE", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                    });
+
+                    errorMessage = `❌ Solo puedes crear 1 partido por semana.\n📅 Podrás crear otro desde: ${formato}`;
+                } else {
+                    errorMessage = "❌ Solo puedes crear 1 partido por semana con el Plan Básico.";
+                }
+            }
+
+
+            const toast = document.createElement("div");
+            toast.innerText = errorMessage;
+            toast.style.position = "fixed";
+            toast.style.bottom = "30px";
+            toast.style.left = "50%";
+            toast.style.transform = "translateX(-50%)";
+            toast.style.background = "#222";
+            toast.style.color = "#fff";
+            toast.style.padding = "12px 20px";
+            toast.style.borderRadius = "12px";
+            toast.style.fontWeight = "600";
+            toast.style.fontSize = "16px";
+            toast.style.border = "1px solid rgba(255,255,255,.12)";
+            toast.style.boxShadow = "0 4px 14px rgba(0,0,0,0.3)";
+            toast.style.zIndex = "9999";
+            toast.style.opacity = "0";
+            toast.style.transition = "opacity .3s ease";
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => (toast.style.opacity = "1"), 50);
+
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+
             return false;
         }
 
-        // 🎉 MENSAJE BONITO
+        /* ==========================
+           ÉXITO → TOAST
+        =========================== */
         const toast = document.createElement("div");
         toast.innerText = "✔️ Partido creado con éxito";
         toast.style.position = "fixed";
@@ -177,22 +231,15 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
 
         document.body.appendChild(toast);
 
-        // Animación
-        setTimeout(() => {
-            toast.style.opacity = "1";
-        }, 50);
+        setTimeout(() => (toast.style.opacity = "1"), 50);
 
-        // ⏳ Esperar 1.5 segundos antes de redirigir
         setTimeout(() => {
             toast.style.opacity = "0";
-            setTimeout(() => {
-                router.push("/dashboard");
-            }, 300);
+            setTimeout(() => router.push("/dashboard"), 300);
         }, 1500);
 
         return true;
     };
-
 
     /* ==========================
        CONTEXTO
@@ -207,7 +254,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                 totalSteps,
                 errors,
                 validateStep,
-                sendToBackend,
+                sendToBackend
             }}
         >
             {children}

@@ -21,6 +21,13 @@ export default function PerfilPage() {
     })();
   }, []);
 
+  useEffect(() => {
+    if (!msg) return;
+    const timer = setTimeout(() => setMsg(""), 3000);
+    return () => clearTimeout(timer);
+  }, [msg]);
+
+
   const updateField = (e: any) => {
     setPerfil({ ...perfil, [e.target.name]: e.target.value });
   };
@@ -55,7 +62,16 @@ export default function PerfilPage() {
       body: form,
     });
 
-    if (!res.ok) return setMsg("Error al subir imagen ❌");
+    if (!res.ok) {
+      const error = await res.json().catch(() => null);
+
+      if (error?.error?.includes("PRO")) {
+        return setMsg(error.error);
+      }
+
+      return setMsg("Error al subir imagen ❌");
+    }
+
 
     const updated = await res.json();
     setPerfil({
@@ -178,10 +194,17 @@ export default function PerfilPage() {
       </main>
 
       {msg && (
-        <p className="mt-10 text-center bg-white/10 inline-block mx-auto px-6 py-3 rounded-xl">
+        <div className="
+          fixed bottom-6 left-1/2 -translate-x-1/2
+          bg-[#222]/90 text-white px-6 py-3
+          rounded-xl shadow-lg backdrop-blur-md
+          border border-white/10
+          text-center animate-fade-in
+        ">
           {msg}
-        </p>
+        </div>
       )}
+
     </div>
   );
 }

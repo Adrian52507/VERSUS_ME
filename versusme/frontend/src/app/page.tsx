@@ -339,9 +339,10 @@ export default function Home() {
             {/* Features */}
             <ul className="text-gray-300 space-y-3 mb-10">
               {[
-                "Hasta 2 partidos por semana",
-                "Acceso a deportes básicos",
-                "Perfil de jugador",
+                "Crea 1 partido por semana",
+                "Únete a un partido por semana",
+                "Subida de imágenes como foto de perfil y portada",
+                "Funcionalidades estándar de la plataforma",
                 "Notificaciones por email",
                 "Soporte por chat",
               ].map((t, i) => (
@@ -373,22 +374,20 @@ export default function Home() {
 
             {/* Precio */}
             <div className="text-white mb-2">
-              <span className="text-3xl font-semibold">S/</span>
-              <span className="text-5xl font-bold">5.00</span>
+              <span className="text-3xl font-semibold">$</span>
+              <span className="text-5xl font-bold"> 5.00</span>
             </div>
-            <p className="text-gray-500 mb-6">por mes • o S/ 50/año (ahorras S/ 10)</p>
+            <p className="text-gray-500 mb-6">por mes o $ 50 /año (ahorras $ 10)</p>
 
             {/* Features */}
             <ul className="text-gray-300 space-y-3 mb-10">
               {[
-                "Partidos ilimitados",
-                "Acceso a todos los deportes",
+                "Unión y creación a partidos ilimitados",
                 "Prioridad en partidos populares",
-                "Estadísticas avanzadas",
+                "Subir fotos, videos, GIFs y animaciones en tu perfil",
                 "Creación de grupos privados",
                 "Notificaciones push",
                 "Soporte prioritario 24/7",
-                "Descuentos en canchas afiliadas",
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="text-[#25C50E] font-bold">•</span>
