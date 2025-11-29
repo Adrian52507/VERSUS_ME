@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Topbar from "@/components/Topbar";
+import { color } from "framer-motion";
 
 export default function ProPage() {
   const [perfil, setPerfil] = useState<any>(null);
@@ -80,7 +81,7 @@ export default function ProPage() {
     <>
       <Topbar />
 
-      <div className="max-w-6xl mx-auto px-6 pt-10 pb-20">
+      <div className="max-w-6xl mx-auto px-6 pt-10 pb-20" style={{color:'#143e16ff'}}>
 
         {/* Título */}
         <h1 className="text-4xl md:text-5xl font-bold text-white text-center font-squada">
@@ -131,7 +132,7 @@ export default function ProPage() {
                 onClick={comprarPro}
                 className="mt-8 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl text-lg transition"
               >
-                Hazme PRO – $5 / mes
+                Hazme PRO - $5 / mes
               </button>
             )}
 
