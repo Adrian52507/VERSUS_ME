@@ -1,5 +1,4 @@
 import { pool } from "./db.js";
-import jwt from "jsonwebtoken";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
@@ -20,10 +19,16 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: (req, file) => ({
     folder: "versusme_profiles",
-    format: file.mimetype.split("/")[1], // jpg, png, etc.
-    public_id: `profile_${req.user.id}_${Date.now()}`
+
+    // ⭐ Permite GIFs, WebP animado y VIDEOS
+    resource_type: "auto",
+
+    // Deja que Cloudinary determine el formato real
+    // (NO forzar "jpg/png/etc", eso rompe animación)
+    public_id: `profile_${req.user?.id || "guest"}_${Date.now()}`
   })
 });
+
 
 
 export const upload = multer({ storage });
@@ -33,29 +38,38 @@ export const getProfile = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const [rows] = await pool.query(
-      `
-      SELECT u.name, u.email,
-             p.description, p.district, p.favorite_sport,
-             p.level, p.profile_picture, p.cover_photo
-      FROM users u
-      LEFT JOIN profiles p ON u.id = p.user_id
-      WHERE u.id = ?
-      `,
+    const [[user]] = await pool.query(
+      `SELECT 
+         u.id, 
+         u.name, 
+         u.email, 
+         u.is_pro,
+         u.pro_until,
+         u.stripe_customer_id,
+         p.profile_picture, 
+         p.cover_photo, 
+         p.description,
+         p.district,
+         p.favorite_sport,
+         p.level
+       FROM users u
+       LEFT JOIN profiles p ON p.user_id = u.id
+       WHERE u.id = ?`,
       [userId]
     );
 
-    if (rows.length === 0) {
-      return res.status(404).json({ error: "Perfil no encontrado" });
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    res.json(rows[0]);
+    res.json(user);
 
-  } catch (err) {
-    console.error("❌ Error al obtener perfil:", err);
-    res.status(500).json({ error: "Error del servidor" });
+  } catch (error) {
+    console.error("Error obteniendo perfil:", error);
+    res.status(500).json({ error: "Error obteniendo perfil" });
   }
 };
+
 
 /* ✏️ Actualizar perfil */
 export const updateProfile = async (req, res) => {

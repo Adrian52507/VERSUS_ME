@@ -136,21 +136,27 @@ export const login = async (req, res) => {
   }
 };
 
-export function authMiddleware(req, res, next) {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({ error: "Token no encontrado" });
-  }
-
+export const authMiddleware = async (req, res, next) => {
   try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ error: "No autenticado" });
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // ahora tienes req.user.id
+
+    const [[user]] = await pool.query(
+      "SELECT id, email, is_pro, pro_until FROM users WHERE id = ?",
+      [decoded.id]
+    );
+
+    if (!user) return res.status(401).json({ error: "Usuario no encontrado" });
+
+    req.user = user;
     next();
-  } catch {
+  } catch (err) {
     return res.status(401).json({ error: "Token inválido" });
   }
-}
+};
+
 
 
 /**

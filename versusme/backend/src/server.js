@@ -3,6 +3,14 @@ import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
 import { pool } from "./db.js";
+import paymentsRouter from "./payments.js";
+
+// STRIPE
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+import webhookRouter from "./webhook.js"; // lo crearás luego
+
 
 import {
   register,
@@ -28,7 +36,7 @@ dotenv.config();
 
 const app = express();
 app.set("trust proxy", 1);
-  
+
 
 /* ─────────────────────────────────────────────
    🔐 CORS CONFIG
@@ -49,8 +57,10 @@ app.options(/.*/, cors({
   credentials: true,
 }));
 
+app.use("/api/webhook", webhookRouter);
 app.use(express.json());
 app.use(cookieParser());
+app.use("/api/payments", paymentsRouter);
 
 /* ─────────────────────────────────────────────
    🌐 AUTH + PROFILE
@@ -70,14 +80,163 @@ app.get("/api/profile", authMiddleware, getProfile);
 app.put("/api/profile", authMiddleware, updateProfile);
 
 // Subida de imágenes
-app.post("/api/profile/picture", authMiddleware, upload.single("profile_picture"), uploadProfilePicture);
-app.post("/api/profile/cover", authMiddleware, upload.single("cover_photo"), uploadCoverPhoto);
+app.post(
+  "/api/profile/picture",
+  authMiddleware,
+  upload.single("profile_picture"),
+  async (req, res, next) => {
+
+    const user = req.user; // viene del JWT
+
+    const mimetype = req.file?.mimetype || "";
+
+    const allowedBasic = ["image/jpeg", "image/jpg", "image/png"];
+
+    // Si NO es PRO y NO está en formatos permitidos → bloquear
+    if (!user.is_pro && !allowedBasic.includes(mimetype)) {
+      return res.status(403).json({
+        error: "Solo usuarios PRO pueden subir GIFs, WebP animado o videos.",
+      });
+    }
+
+    next(); // permitir handler original
+  },
+  uploadProfilePicture
+);
+app.post(
+  "/api/profile/cover",
+  authMiddleware,
+  upload.single("cover_photo"),
+  async (req, res, next) => {
+
+    const user = req.user;
+
+    const mimetype = req.file?.mimetype || "";
+
+    const allowedBasic = ["image/jpeg", "image/jpg", "image/png"];
+
+    if (!user.is_pro && !allowedBasic.includes(mimetype)) {
+      return res.status(403).json({
+        error: "Necesitas VersusMe PRO para subir videos o imágenes animadas.",
+      });
+    }
+
+    next();
+  },
+  uploadCoverPhoto
+);
+
+/* ─────────────────────────────────────────────
+   💳 STRIPE: CREAR CHECKOUT SESSION
+────────────────────────────────────────────── */
+app.get("/api/payments/checkout", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Obtener email y stripe_customer_id
+    const [[user]] = await pool.query(
+      "SELECT email, stripe_customer_id FROM users WHERE id = ?",
+      [userId]
+    );
+
+    let customerId = user.stripe_customer_id;
+
+    // Crear customer si no existe
+    if (!customerId) {
+      const customer = await stripe.customers.create({
+        email: user.email,
+        metadata: { userId }
+      });
+
+      await pool.query(
+        "UPDATE users SET stripe_customer_id = ? WHERE id = ?",
+        [customer.id, userId]
+      );
+
+      customerId = customer.id;
+    }
+
+    // Crear sesion de pago
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      customer: customerId,
+      line_items: [
+        {
+          price: process.env.STRIPE_PRICE_PRO,
+          quantity: 1,
+        },
+      ],
+      success_url: `${process.env.ORIGIN_FRONTEND}/pro/success`,
+      cancel_url: `${process.env.ORIGIN_FRONTEND}/pro/cancel`,
+    });
+
+    res.json({ url: session.url });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error creando sesión de pago" });
+  }
+});
+
+/* ─────────────────────────────────────────────
+   ❌ STRIPE: CANCELAR SUSCRIPCIÓN
+────────────────────────────────────────────── */
+app.post("/api/payments/cancel", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const [[user]] = await pool.query(
+      "SELECT stripe_subscription_id FROM users WHERE id = ?",
+      [userId]
+    );
+
+    if (!user.stripe_subscription_id)
+      return res.status(400).json({ error: "No tienes suscripción activa" });
+
+    await stripe.subscriptions.update(user.stripe_subscription_id, {
+      cancel_at_period_end: true,
+    });
+
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error cancelando suscripción" });
+  }
+});
+
 
 /* ─────────────────────────────────────────────
    ⚽ CREAR PARTIDO
 ────────────────────────────────────────────── */
 app.post("/api/matches", authMiddleware, async (req, res) => {
   const userId = req.user.id;
+
+  // ===============================
+  //  LIMITES PARA PLAN BÁSICO
+  // ===============================
+  const [[user]] = await pool.query(
+    "SELECT is_pro FROM users WHERE id = ?",
+    [userId]
+  );
+
+  // Si no es PRO → limitar creación semanal
+  if (!user.is_pro) {
+    const [[count]] = await pool.query(
+      `SELECT COUNT(*) AS created
+     FROM matches
+     WHERE user_id = ?
+     AND YEARWEEK(created_at, 1) = YEARWEEK(NOW(), 1)`,
+      [userId]
+    );
+
+    if (count.created >= 1) {
+      return res.status(403).json({
+        error: "Solo puedes crear 1 partido por semana con el plan Básico."
+      });
+    }
+  }
+
 
   const {
     sport,
@@ -196,6 +355,32 @@ app.get("/api/matches/all", async (req, res) => {
 app.post("/api/matches/join/:id", authMiddleware, async (req, res) => {
   const matchId = req.params.id;
   const userId = req.user.id;
+
+  // ===============================
+  // LIMITES PARA PLAN BÁSICO
+  // ===============================
+  const [[user]] = await pool.query(
+    "SELECT is_pro FROM users WHERE id = ?",
+    [userId]
+  );
+
+  // Si no es PRO → limitar uniones por semana
+  if (!user.is_pro) {
+    const [[count]] = await pool.query(
+      `SELECT COUNT(*) AS joined
+     FROM match_players
+     WHERE user_id = ?
+     AND YEARWEEK(joined_at, 1) = YEARWEEK(NOW(), 1)`,
+      [userId]
+    );
+
+    if (count.joined >= 1) {
+      return res.status(403).json({
+        error: "Solo puedes unirte a 1 partido por semana con el Plan Básico."
+      });
+    }
+  }
+
 
   try {
     // Registrar unión

@@ -22,7 +22,7 @@ export default function Topbar() {
           const data = await res.json();
           setPerfil(data);
         }
-      } catch (_) { }
+      } catch (_) {}
     };
     fetchProfile();
   }, []);
@@ -90,7 +90,19 @@ export default function Topbar() {
             </Link>
 
             {/* PROFILE DROPDOWN */}
-            <div className="relative flex items-center gap-2">
+            <div className="relative flex items-center gap-3">
+
+              {/* BADGE PRO / BÁSICO */}
+              {perfil?.is_pro ? (
+                <span className="px-2 py-1 bg-yellow-500 text-black rounded-md text-xs font-bold">
+                  PRO
+                </span>
+              ) : (
+                <span className="px-2 py-1 bg-gray-600 text-white rounded-md text-xs font-semibold">
+                  Básico
+                </span>
+              )}
+
               <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 shadow-md">
                 <Image
                   src={
@@ -123,13 +135,21 @@ export default function Topbar() {
 
               {menuOpen && (
                 <div className="
-                  absolute top-14 right-0 w-52 rounded-lg shadow-xl
+                  absolute top-14 right-0 w-56 rounded-lg shadow-xl
                   bg-[#2B2F2A]/90 backdrop-blur-xl border border-white/10
                   overflow-hidden animate-fadeIn
                 ">
                   <nav className="flex flex-col text-sm font-medium">
+
                     <Link href="/perfil" className="px-5 py-3 text-white hover:bg-white/10">
                       Perfil del jugador
+                    </Link>
+
+                    <Link
+                      href="/pro"
+                      className="px-5 py-3 text-white hover:bg-white/10 border-t border-white/10"
+                    >
+                      Mi Plan
                     </Link>
 
                     <button
@@ -145,6 +165,7 @@ export default function Topbar() {
                     >
                       Cerrar sesión
                     </button>
+
                   </nav>
                 </div>
               )}
@@ -153,9 +174,19 @@ export default function Topbar() {
           </nav>
 
           {/* === MOBILE TOPBAR (FOTO + MENÚ) === */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-3">
 
-            {/* Foto de perfil SIEMPRE visible */}
+            {/* BADGE MOBILE */}
+            {perfil?.is_pro ? (
+              <span className="px-2 py-1 bg-yellow-500 text-black rounded-md text-xs font-bold">
+                PRO
+              </span>
+            ) : (
+              <span className="px-2 py-1 bg-gray-600 text-white rounded-md text-xs font-semibold">
+                Básico
+              </span>
+            )}
+
             <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20 shadow-md">
               <Image
                 src={
@@ -173,7 +204,6 @@ export default function Topbar() {
               />
             </div>
 
-            {/* Botón menú móvil */}
             <button
               className="md:hidden p-2 rounded-md hover:bg-white/10 transition"
               onClick={() => setMobileOpen(true)}
@@ -199,14 +229,11 @@ export default function Topbar() {
       {/* === MOBILE MENU === */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50">
-
-          {/* Overlay */}
           <div
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
 
-          {/* Panel */}
           <div
             className="
               absolute right-0 top-0 h-full w-72
@@ -216,7 +243,6 @@ export default function Topbar() {
               animate-slide-in
             "
           >
-
             <Link
               href="/dashboard"
               onClick={() => setMobileOpen(false)}
@@ -224,13 +250,21 @@ export default function Topbar() {
             >
               Dashboard
             </Link>
-            
+
             <Link
               href="/perfil"
               onClick={() => setMobileOpen(false)}
               className="px-4 py-3 bg-white/20 text-white rounded-lg text-lg font-semibold hover:bg-white/30 hover:text-green-300 transition"
             >
               Perfil del jugador
+            </Link>
+
+            <Link
+              href="/pro"
+              onClick={() => setMobileOpen(false)}
+              className="px-4 py-3 bg-white/20 text-white rounded-lg text-lg font-semibold hover:bg-white/30 hover:text-green-300 transition"
+            >
+              Mi Plan
             </Link>
 
             <Link
@@ -265,7 +299,6 @@ export default function Topbar() {
             >
               Cerrar sesión
             </button>
-
           </div>
         </div>
       )}
