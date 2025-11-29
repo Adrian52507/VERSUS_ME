@@ -31,14 +31,15 @@ export default function IA() {
 
         setLoading(true);
         try {
-            const res = await fetch(`${API_BASE}/api/ai/predict_full`, {
- 
+            const res = await fetch(`${API_BASE}/api/ai/recommend`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
             });
 
             const data = await res.json();
+            console.log("📩 Recibido desde backend:", data);
+
             setResult(data);
         } catch (err) {
             alert("Error al conectar con la IA.");
@@ -127,30 +128,40 @@ export default function IA() {
                         <div className="bg-[#16161a] p-6 rounded-2xl mt-8 shadow-lg border border-gray-700 text-white space-y-4 animate-fadeIn">
                             <h2 className="text-2xl font-bold">📊 Tu Plan Personalizado</h2>
 
-                            <div>
-                                <h3 className="text-xl font-semibold mb-1">🔥 Ejercicio</h3>
-                                <p><b>Intensidad:</b> {result.exercise.intensity}</p>
-                                <p className="text-gray-300 italic">{result.exercise.note}</p>
-                            </div>
+                            {/* 🛡 Protección: si el backend falla */}
+                            {!result.exercise ? (
+                                <div className="text-red-400">
+                                    ❌ No se pudo generar la recomendación.  
+                                    Verifica que la API de IA está funcionando.
+                                </div>
+                            ) : (
+                                <>
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-1">🔥 Ejercicio</h3>
+                                        <p><b>Intensidad:</b> {result.exercise.intensity}</p>
+                                        <p className="text-gray-300 italic">{result.exercise.note}</p>
+                                    </div>
 
-                            <div>
-                                <h3 className="text-xl font-semibold mb-1">🥗 Dieta</h3>
-                                <p><b>Tipo:</b> {result.diet.type}</p>
-                                <p><b>Calorías diarias:</b> {result.diet.calorie_target_kcal} kcal</p>
-                            </div>
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-1">🥗 Dieta</h3>
+                                        <p><b>Tipo:</b> {result.diet.type}</p>
+                                        <p><b>Calorías diarias:</b> {result.diet.calorie_target_kcal} kcal</p>
+                                    </div>
 
-                            <div>
-                                <h3 className="text-xl font-semibold mb-1">❤️ Salud cardiaca</h3>
-                                <p><b>Riesgo:</b> {result.heart_risk.bucket}</p>
-                                <p><b>Probabilidad:</b> {result.heart_risk.prob}</p>
-                            </div>
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-1">❤️ Salud cardiaca</h3>
+                                        <p><b>Riesgo:</b> {result.heart_risk.bucket}</p>
+                                        <p><b>Probabilidad:</b> {result.heart_risk.prob}</p>
+                                    </div>
 
-                            <div>
-                                <h3 className="text-xl font-semibold mb-1">📌 Datos corporales</h3>
-                                <p><b>BMI:</b> {result.body.bmi}</p>
-                                <p><b>BMR:</b> {result.body.bmr} kcal</p>
-                                <p><b>TDEE:</b> {result.body.tdee} kcal</p>
-                            </div>
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-1">📌 Datos corporales</h3>
+                                        <p><b>BMI:</b> {result.body.bmi}</p>
+                                        <p><b>BMR:</b> {result.body.bmr} kcal</p>
+                                        <p><b>TDEE:</b> {result.body.tdee} kcal</p>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     )}
 
@@ -159,22 +170,22 @@ export default function IA() {
 
             {/* styles */}
             <style jsx>{`
-        .field {
-          background: #1e1e22;
-          border: 1px solid #555;
-          color: white;
-          padding: 12px;
-          border-radius: 10px;
-          width: 100%;
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.4s ease-in-out;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+                .field {
+                    background: #1e1e22;
+                    border: 1px solid #555;
+                    color: white;
+                    padding: 12px;
+                    border-radius: 10px;
+                    width: 100%;
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.4s ease-in-out;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
         </>
     );
 }

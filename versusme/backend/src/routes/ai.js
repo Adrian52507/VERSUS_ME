@@ -1,54 +1,32 @@
+// src/routes/ai.js
 import express from "express";
-import { PythonShell } from "python-shell";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const router = express.Router();
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const PYTHON_PATH = "C:/Users/Adrian/Miniconda3/envs/versusme-ia/python.exe";
+// 🚀 Tu endpoint de IA en Railway
+const AI_API = process.env.AI_API_URL || "https://versusme-ai-service-production.up.railway.app";
 
-router.post("/predict_full", async (req, res) => {
-  console.log("🔥 LLEGÓ la petición a /predict_full");
-  console.log("📤 Enviando a Python:", req.body);
+router.post("/recommend", async (req, res) => {
+  try {
+    console.log("📩 Recibido desde frontend:", req.body);
 
-  const pyPath = path.join(__dirname, "../../ai/run_recommender.py");
+    const response = await fetch(`${AI_API}/recommend`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(req.body),
+    });
 
-  const pyshell = new PythonShell(pyPath, {
-    pythonPath: PYTHON_PATH,
-    mode: "text",
-    pythonOptions: ["-u"],
-  });
+    const data = await response.json();
 
-  // Enviar el JSON correctamente
-  pyshell.send(JSON.stringify(req.body));
-  pyshell.end();
+    console.log("🤖 Respuesta IA:", data);
 
-
-  pyshell.on("message", (msg) => {
-    console.log("🐍 PY STDOUT:", msg);
-
-    try {
-      const parsed = JSON.parse(msg);
-      return res.json(parsed);
-    } catch (err) {
-      console.error("❌ ERROR PARSEANDO PYTHON:", err, msg);
-    }
-  });
-
-  pyshell.on("stderr", (stderr) => {
-    console.error("🐍 PY STDERR:", stderr);
-  });
-
-  pyshell.on("error", (err) => {
-    console.error("⛔ PYTHON ERROR:", err);
-    res.status(500).json({ error: "Error ejecutando IA" });
-  });
-
-  pyshell.on("close", () => {
-    console.log("🐍 Python finalizó");
-  });
+    return res.json(data);
+  } catch (err) {
+    console.error("❌ Error comunicando con IA:", err);
+    return res.status(500).json({
+      error: "Error comunicando con el servicio de IA",
+    });
+  }
 });
 
-// ✨ IMPORTANTE ✨
 export default router;
