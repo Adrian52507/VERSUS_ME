@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Topbar from "@/components/Topbar";
+import HoverCard from "@/components/HoverCard";
 
 const SPORT_ICONS: any = {
   Fútbol: "/assets/img/img_dashboard_principal/balon_futbol_verde_icono.png",
@@ -211,6 +212,7 @@ export default function DashboardPage() {
       : true;
 
 
+
     return c && s && d && b && da;
   });
 
@@ -219,6 +221,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#141517] text-white">
       <Topbar />
+
 
       <main className="max-w-6xl mx-auto px-6 py-10">
         {/* ========================== KPIs ============================ */}
@@ -411,30 +414,73 @@ export default function DashboardPage() {
                   <p className="px-5 text-sm text-gray-300">{p.description}</p>
                   {/* CREATOR */}
                   <div className="px-5 py-4 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
-                      <Image
-                        src={
-                          p.creator_photo
-                            ? p.creator_photo.startsWith("http")
-                              ? p.creator_photo
-                              : `${API_BASE}/${p.creator_photo.replace(/^\/+/, "")}`
-                            : "/assets/img/img_perfil/default-user.jpg"
-                        }
-                        alt="Creador"
-                        width={40}
-                        height={40}
-                        className="object-cover w-full h-full"
-                        unoptimized
-                      />
-                    </div>
 
+                    {/* HOVERCARD EN LA FOTO DEL CREADOR */}
+                    <HoverCard
+                      content={
+                        <div className="text-center text-black">
+                          <img
+                            src={
+                              p.creator_photo
+                                ? p.creator_photo.startsWith("http")
+                                  ? p.creator_photo
+                                  : `${API_BASE}/${p.creator_photo.replace(/^\/+/, "")}`
+                                : "/assets/img/img_perfil/default-user.jpg"
+                            }
+                            className="w-20 h-20 rounded-full mx-auto mb-2 object-cover"
+                          />
+
+                          <h3 className="font-semibold text-lg">{p.creator_name}</h3>
+
+                          <p className="text-yellow-500 text-sm mb-1">
+                            ⭐ {p.creator_rating ? Number(p.creator_rating).toFixed(1) : "5.0"}
+                          </p>
+
+                          <p
+                            className={`text-xs font-bold mb-1 ${p.creator_is_pro ? "text-blue-600" : "text-gray-600"
+                              }`}
+                          >
+                            {p.creator_is_pro ? "Plan PRO" : "Plan Básico"}
+                          </p>
+
+                          <p className="text-gray-700 text-sm mb-1">
+                            {p.creator_description || "Sin descripción"}
+                          </p>
+
+                          <p className="text-gray-500 text-xs">
+                            {p.creator_email}
+                          </p>
+                        </div>
+                      }
+                    >
+                      <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20 cursor-pointer hover:ring-2 hover:ring-green-500">
+                        <Image
+                          src={
+                            p.creator_photo
+                              ? p.creator_photo.startsWith("http")
+                                ? p.creator_photo
+                                : `${API_BASE}/${p.creator_photo.replace(/^\/+/, "")}`
+                              : "/assets/img/img_perfil/default-user.jpg"
+                          }
+                          alt="Creador"
+                          width={40}
+                          height={40}
+                          className="object-cover w-full h-full"
+                          unoptimized
+                        />
+                      </div>
+                    </HoverCard>
+
+                    {/* Info al costado */}
                     <div className="flex flex-col">
                       <span className="font-semibold">{p.creator_name}</span>
                       <span className="text-sm text-gray-400">
                         {p.current_players} jugadores
                       </span>
                     </div>
+
                   </div>
+
 
                   {/* PROGRESO */}
                   <div className="px-5 mt-4 text-sm font-semibold flex items-center gap-2">

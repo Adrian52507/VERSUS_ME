@@ -347,8 +347,20 @@ app.get("/api/matches/all", async (req, res) => {
         m.created_at,
 
         ANY_VALUE(u.name) AS creator_name,
+        ANY_VALUE(u.email) AS creator_email,
+        ANY_VALUE(u.is_pro) AS creator_is_pro,
+
         ANY_VALUE(p.profile_picture) AS creator_photo,
+        ANY_VALUE(p.description) AS creator_description,
+
+        (
+          SELECT AVG(stars)
+          FROM player_ratings pr
+          WHERE pr.rated_player_id = u.id
+        ) AS creator_rating,
+
         COUNT(mp.id) AS current_players
+
 
       FROM matches m
       JOIN users u ON m.user_id = u.id
