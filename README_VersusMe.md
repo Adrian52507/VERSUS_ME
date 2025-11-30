@@ -85,12 +85,17 @@ EMAIL_PASS="dfiqrvrrmmyvyepv"
 CLOUDINARY_CLOUD_NAME=dq5ay5bhv
 CLOUDINARY_API_KEY=256284254615627
 CLOUDINARY_API_SECRET=y4IJ356XdfcjXdYQZrRS5Z4wyog
+STRIPE_PRICE_PRO=
+STRIPE_WEBHOOK_SECRET=
 ```
 
 #### Frontend `.env.local`
 ```bash
 NEXT_PUBLIC_API_BASE=http://localhost:4000
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY=
 ```
+
+Cabe recalcar que no compartimos las llaves relacionadas a STRIPE debido a motivos de seguridad financiera.
 
 ---
 
@@ -133,7 +138,7 @@ Cada *push* a la rama `main` ejecuta automáticamente la compilación y desplieg
 
 ## 🧪 Pruebas y Validación
 
-Se realizaron **10 pruebas funcionales** sobre las principales funcionalidades del sistema (registro, login, edición de perfil, carga de imágenes, logout, etc.) validando:
+Se realizaron más de **10 pruebas funcionales** sobre las principales funcionalidades del sistema (registro, login, edición de perfil, carga de imágenes, logout, etc.) validando:
 - Respuestas correctas del backend (`Status 200`, mensajes JSON).  
 - Persistencia de datos en la base TiDB Cloud.  
 - Correcta visualización de la interfaz tras cada acción.  
