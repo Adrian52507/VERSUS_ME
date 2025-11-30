@@ -870,7 +870,7 @@ app.get("/api/user/stats", authMiddleware, async (req, res) => {
     res.json({
       played: played.total,
       created: created.total,
-      rating: rating.avg ? Number(rating.avg).toFixed(2) : 0,
+      rating: rating.avg ? Number(rating.avg).toFixed(2) : 5.0,
     });
 
   } catch (err) {
