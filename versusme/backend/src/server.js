@@ -105,7 +105,6 @@ app.post(
   },
   uploadProfilePicture
 );
-
 app.post(
   "/api/profile/cover",
   authMiddleware,
@@ -130,8 +129,6 @@ app.post(
   },
   uploadCoverPhoto
 );
-
-
 /* ─────────────────────────────────────────────
    💳 STRIPE: CREAR CHECKOUT SESSION
 ────────────────────────────────────────────── */
